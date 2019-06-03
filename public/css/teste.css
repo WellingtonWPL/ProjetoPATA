@@ -28,6 +28,7 @@ fieldset {
   
   /* Fieldset Cores */
   #cores{
+    float: right;
     margin: 20px;
     margin-top: -12%;
     padding: 10px;
