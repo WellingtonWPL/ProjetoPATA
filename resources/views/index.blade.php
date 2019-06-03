@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
 
@@ -8,10 +8,16 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>One Page Wonder - Start Bootstrap Template</title>
+  <title>Projeto - PATA</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/teste.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-grid.css" rel="stylesheet">
+  <link href="css/bootstrap-grid.min.css" rel="stylesheet">
+  <link href="css/bootstrap-reboot.css" rel="stylesheet">
+  <link href="css/bootstrap-reboot.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -20,7 +26,7 @@
   <!-- Custom styles for this template -->
   <link href="css/one-page-wonder.min.css" rel="stylesheet">
 
-</head>
+</head> 
 
 <body>
 
@@ -34,30 +40,36 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
+            <a class="nav-link" href="#">Cadastrar-se</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log In</a>
+            <a class="nav-link" href="#">Entrar</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
+  
   <header class="masthead text-center text-white">
     <div class="masthead-content">
       <div class="container">
-        <h1 class="masthead-heading mb-0">One Page Wonder</h1>
-        <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2>
-        <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a>
+          <fieldset id="cores">
+              <button type="button" id="botao" class="btn btn-info" style="color: blue"></button>
+              <button type="button" id="botao" class="btn btn-success"></button>
+              <button type="button" id="botao" class="btn btn-danger"></button>
+              <button type="button" id="botao" class="btn btn-warning"></button>
+          </fieldset>
+        {{-- <h1 class="masthead-heading mb-0">One Page Wonder</h1>--}}
+        <h2 class="masthead-subheading mb-0">Clique no botão abaixo e conheça os candidatos.</h2>
+        <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Explore!</a>
       </div>
     </div>
-    <div class="bg-circle-1 bg-circle"></div>
+    {{-- <div class="bg-circle-1 bg-circle"></div>
     <div class="bg-circle-2 bg-circle"></div>
     <div class="bg-circle-3 bg-circle"></div>
-    <div class="bg-circle-4 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div> --}}
   </header>
-
+{{-- 
   <section>
     <div class="container">
       <div class="row align-items-center">
@@ -110,12 +122,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <!-- Footer -->
   <footer class="py-5 bg-black">
     <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white small">Copyright &copy; ProjetoPATA 2019</p>
     </div>
     <!-- /.container -->
   </footer>
