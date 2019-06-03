@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('home');
 });
 Route::get('/cadastro', function(){
     return view('cadastro');
