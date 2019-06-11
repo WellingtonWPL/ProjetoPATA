@@ -1,7 +1,7 @@
 @extends('template')
 @section('conteudo')
 <header >
-        <div style="text-align:center; margin: auto; position: center;" >
+        <div style="text-align:center; margin-top: 20%; position: center;" >
           <div class="container">
             {{-- <h1 class="masthead-heading mb-0">One Page Wonder</h1>--}}
             <h2 class="masthead-subheading mb-0">Clique no botão abaixo e conheça os candidatos.</h2>
