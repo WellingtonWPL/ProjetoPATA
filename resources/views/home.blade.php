@@ -1,9 +1,8 @@
 @extends('template')
 @section('conteudo')
-<header class="masthead text-center text-white">
-        <div class="masthead-content">
+<header >
+        <div style="text-align:center; margin-top: 20%; position: center;" >
           <div class="container">
-              
             {{-- <h1 class="masthead-heading mb-0">One Page Wonder</h1>--}}
             <h2 class="masthead-subheading mb-0">Clique no botão abaixo e conheça os candidatos.</h2>
             <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Explore!</a>
@@ -14,9 +13,9 @@
         <div class="bg-circle-2 bg-circle"></div>
         <div class="bg-circle-3 bg-circle"></div>
         <div class="bg-circle-4 bg-circle"></div>  --}}
-      </header>
+</header>
       
-    {{-- 
+    <!--
       <section>
         <div class="container">
           <div class="row align-items-center">
@@ -69,5 +68,5 @@
             </div>
           </div>
         </div>
-      </section> --}}
+      </section> -->
 @endsection
