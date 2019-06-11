@@ -57,7 +57,7 @@
       </div>
     </div>
   </nav>
-  <div class="container" style="margin-top: 15%; align: center;" >
+  <div class="container" style="margin-top: 100px; margin-bottom: 100px; align: center;" >
     @yield('conteudo')
   </div>
 
