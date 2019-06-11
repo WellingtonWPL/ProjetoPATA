@@ -11,21 +11,24 @@
   <title>Projeto - PATA</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="css/teste.css" rel="stylesheet">
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/bootstrap-grid.css" rel="stylesheet">
-  <link href="css/bootstrap-grid.min.css" rel="stylesheet">
-  <link href="css/bootstrap-reboot.css" rel="stylesheet">
-  <link href="css/bootstrap-reboot.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/teste.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" >
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.min.css">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/one-page-wonder.min.css" rel="stylesheet">
+  <link href="css/one-page-wonder.css" rel="stylesheet">
 
+  <!-- Function JS -->
+  <script type="text/javascript" src="js/functions.js"></script>
+  
 </head> 
 
 <body>
@@ -40,7 +43,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Cadastrar-se</a>
+          <a class="nav-link" href="{{url('cadastro')}}">Cadastrar-se</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Entrar</a>
@@ -50,84 +53,21 @@
     </div>
   </nav>
   
-  <header class="masthead text-center text-white">
-    <div class="masthead-content">
-      <div class="container">
-          <fieldset id="cores">
-              <button type="button" id="botao" class="btn btn-info" style="color: blue"></button>
-              <button type="button" id="botao" class="btn btn-success"></button>
-              <button type="button" id="botao" class="btn btn-danger"></button>
-              <button type="button" id="botao" class="btn btn-warning"></button>
-          </fieldset>
-        {{-- <h1 class="masthead-heading mb-0">One Page Wonder</h1>--}}
-        <h2 class="masthead-subheading mb-0">Clique no botão abaixo e conheça os candidatos.</h2>
-        <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Explore!</a>
-      </div>
-    </div>
-    {{-- <div class="bg-circle-1 bg-circle"></div>
-    <div class="bg-circle-2 bg-circle"></div>
-    <div class="bg-circle-3 bg-circle"></div>
-    <div class="bg-circle-4 bg-circle"></div> --}}
-  </header>
-{{-- 
-  <section>
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-2">
-          <div class="p-5">
-            <img class="img-fluid rounded-circle" src="img/01.jpg" alt="">
-          </div>
-        </div>
-        <div class="col-lg-6 order-lg-1">
-          <div class="p-5">
-            <h2 class="display-4">For those about to rock...</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <div class="p-5">
-            <img class="img-fluid rounded-circle" src="img/02.jpg" alt="">
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="p-5">
-            <h2 class="display-4">We salute you!</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-2">
-          <div class="p-5">
-            <img class="img-fluid rounded-circle" src="img/03.jpg" alt="">
-          </div>
-        </div>
-        <div class="col-lg-6 order-lg-1">
-          <div class="p-5">
-            <h2 class="display-4">Let there be rock!</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
+  @yield('content');
+  
 
   <!-- Footer -->
   <footer class="py-5 bg-black">
+    <fieldset id="cores" style="margin-top: -45px">
+        <button type="button" id="botao" onclick="changeBG('#007bff')" class="btn btn-primary"></button>
+        <button type="button" id="botao" onclick="changeBG('#28a745')" class="btn btn-success"></button>
+        <button type="button" id="botao" onclick="changeBG('#dc3545')" class="btn btn-danger"></button>
+        <button type="button" id="botao" onclick="changeBG('#ffc107')" class="btn btn-warning"></button>
+        <button type="button" id="botao" onclick="changeBG('#6c757d')" class="btn btn-secondary"></button>
+    </fieldset>
     <div class="container">
       <p class="m-0 text-center text-white small">Copyright &copy; ProjetoPATA 2019</p>
+      
     </div>
     <!-- /.container -->
   </footer>

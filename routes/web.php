@@ -12,9 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('index');
-});
-Route::get('/cadastro', function(){
-    return view('cadastro');
+    return view('home');
 });
 
+Route::get('/entrar', function () {
+    return view('loginUsuario');
+});
+
+Route::get('/cadastro', function(){
+    return view('criarContaUsuario');
+});
+
+Route::get('/postagem/{cod_postagem}', function($cod_postagem){
+    return view('postagemAnimal', ['cod_postagem'=> $cod_postagem]);
+});
+
+Route::get('lista', function(){
+    return view('listaAnimais');
+
+});

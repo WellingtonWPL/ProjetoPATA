@@ -1,6 +1,7 @@
 @extends('template')
 
 @section('conteudo')
+
 <h1>Cadastro</h1>
 <form >
     <div class="form-group">
@@ -33,9 +34,8 @@
 
     </div>
     <div class="form-group">
-        Descrição
-        <textarea name="desc" class="form-control"  rows="5" > 
-        </textarea>    
+        Descrição pessoal
+        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5" ></textarea>    
 
     </div>
     
