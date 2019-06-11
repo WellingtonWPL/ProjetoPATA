@@ -11,23 +11,24 @@
   <title>Projeto - PATA</title>
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" type="text/css" href="css/teste.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" >
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/teste.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" >
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-reboot.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-reboot.min.css">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/one-page-wonder.css" rel="stylesheet">
+  <link href="/css/one-page-wonder.css" rel="stylesheet">
 
   <!-- Function JS -->
-  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript" src="/js/functions.js"></script>
+  @yield('css')
   
 </head> 
 
@@ -77,8 +78,8 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
