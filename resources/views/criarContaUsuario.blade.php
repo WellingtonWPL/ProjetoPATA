@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('conteudo')
-
+<div class="card" style="padding:5%;">
 <h1>Cadastro</h1>
 <form >
     <div class="form-group">
@@ -43,5 +43,5 @@
     <button type="submit" class="btn btn-primary">Cadastrar</button>
 
 </form>
-
+</div>
 @endsection
