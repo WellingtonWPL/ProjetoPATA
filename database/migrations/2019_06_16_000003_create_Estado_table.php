@@ -23,7 +23,9 @@ class CreateEstadoTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('cod_estado');
-            $table->string('nome', 50);
+            $table->string('nome_estado', 100);
+
+            $table->unique(["cod_estado"], 'cod_estado_UNIQUE');
         });
     }
 

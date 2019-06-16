@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMotivosDenunciaTable extends Migration
+class CreateCidadeTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Motivos_Denuncia';
+    public $tableName = 'Cidade';
 
     /**
      * Run the migrations.
-     * @table Motivos_Denuncia
+     * @table Cidade
      *
      * @return void
      */
@@ -22,8 +22,19 @@ class CreateMotivosDenunciaTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_motivo_denuncia');
-            $table->binary('descricao');
+            $table->increments('cod_cidade');
+            $table->string('nome_cidade', 100);
+            $table->unsignedInteger('cod_estado');
+
+            $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
+
+        });
+
+        Schema::table($this->tableName, function (Blueprint $table) {
+            $table->foreign('cod_estado')
+                ->references('cod_estado')->on('Estado');
+                //->onDelete('no action')
+                //->onUpdate('no action');
         });
     }
 

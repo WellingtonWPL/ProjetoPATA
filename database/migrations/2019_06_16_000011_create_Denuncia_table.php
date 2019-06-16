@@ -23,16 +23,18 @@ class CreateDenunciaTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('cod_denuncia');
-            $table->dateTime('data');
-            $table->unsignedInteger('cod_denunciante');
-            $table->unsignedInteger('cod_postagem');
+            $table->dateTime('data_denuncia');
+            $table->unsignedInteger('cod_usuario_denunciante');
+            $table->unsignedInteger('cod_postagem_denunciada');
             $table->unsignedInteger('cod_motivo_denuncia');
 
+
+            $table->unique(["cod_denuncia"], 'cod_denuncia_UNIQUE');
 
         });
 
         Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_denunciante')
+            $table->foreign('cod_usuario_denunciante')
                 ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
@@ -46,8 +48,8 @@ class CreateDenunciaTable extends Migration
         });
 
         Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_postagem')
-                ->references('cod_animal')->on('Postagem_do_animal')
+            $table->foreign('cod_postagem_denunciada')
+                ->references('cod_postagem')->on('Postagem_do_animal')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });
