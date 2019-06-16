@@ -35,13 +35,13 @@
 <body>
   <script>
     window.addEventListener('load', function() {
-        changeBG('#ffc107');
+        changeBG('#eeeeee');
     });
   </script>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Pata</a>
+    <a class="navbar-brand" href="{{url('/lista')}}">Pata</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,7 +51,7 @@
           <a class="nav-link" href="{{url('cadastro')}}">Cadastrar-se</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Entrar</a>
+          <a class="nav-link" href="{{url('entrar')}}">Entrar</a>
           </li>
         </ul>
       </div>
@@ -64,11 +64,11 @@
   <!-- Footer -->
   <footer class="py-3 bg-black fixed-bottom">
     <fieldset id="cores" style="margin-top: -10px">
-        <button type="button" id="botao" onclick="changeBG('#007bff')" class="btn btn-primary"></button>
-        <button type="button" id="botao" onclick="changeBG('#28a745')" class="btn btn-success"></button>
-        <button type="button" id="botao" onclick="changeBG('#dc3545')" class="btn btn-danger"></button>
-        <button type="button" id="botao" onclick="changeBG('#ffc107')" class="btn btn-warning"></button>
-        <button type="button" id="botao" onclick="changeBG('#6c757d')" class="btn btn-secondary"></button>
+        <button type="button" id="botao" onclick="changeBG('#B39DDB')" class="btn btn-primary"></button>
+        <button type="button" id="botao" onclick="changeBG('#E6EE9C')" class="btn btn-success"></button>
+        <button type="button" id="botao" onclick="changeBG('#ef9a9a')" class="btn btn-danger"></button>
+        <button type="button" id="botao" onclick="changeBG('#FFF59D')" class="btn btn-warning"></button>
+        <button type="button" id="botao" onclick="changeBG('#eeeeee')" class="btn btn-secondary"></button>
     </fieldset>
     <div class="container">
       <p class="m-0 text-center text-white small">Copyright &copy; ProjetoPATA 2019</p>
