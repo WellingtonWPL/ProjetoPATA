@@ -31,3 +31,8 @@ Route::get('lista', function(){
     return view('listaAnimais');
 
 });
+
+Route::get('/admin', function(){
+    return view('vizualizaDenunciaAdmin');
+
+});
