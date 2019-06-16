@@ -14,7 +14,7 @@ class CreateMoradiaUsuarioTable extends Migration
 
     /**
      * Run the migrations.
-     * @table moradia_usuario
+     * @table Moradia_usuario
      *
      * @return void
      */
@@ -22,24 +22,22 @@ class CreateMoradiaUsuarioTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedInteger('cod_morador');
             $table->unsignedInteger('cod_moradia');
-
+            $table->unsignedInteger('cod_usuario_morador');
 
         });
-
         Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_morador')
-                ->references('cod_usuario')->on('Usuario');
-                //->onDelete('no action')
-                //->onUpdate('no action');
+            $table->foreign('cod_usuario_morador')
+                ->references('cod_usuario')->on('Usuario')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
 
         Schema::table($this->tableName, function ($table) {
             $table->foreign('cod_moradia')
-                ->references('cod_moradia')->on('Moradia');
-               // ->onDelete('no action')
-               // ->onUpdate('no action');
+                ->references('cod_moradia')->on('Moradia')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 
