@@ -36,3 +36,8 @@ Route::get('/admin', function(){
     return view('vizualizaDenunciaAdmin');
 
 });
+
+Route::get('/perfil', function(){
+    return view('perfilUsuario');
+
+});
