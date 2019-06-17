@@ -43,7 +43,8 @@
         <img src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
 
     </div>
-    <div class="col-6 ">
+    <div class="col-6 " >
+        <br>
         <b>Nome:</b>  Totó <br>
         <b>Sexo:</b>  Macho <br>
         <b>Idade:</b> 4 meses <br>
