@@ -49,7 +49,7 @@
         <b>Idade:</b> 4 meses <br>
         <b>Porte:</b> Médio <br>
         <b>Dono da postagem: </b> <a href="#">João da Silva</a><br>
-        <b>Avaliação:</b> 
+        <b>Avaliação do dono da postagem:</b> 
         <i class="material-icons">pets</i>
         <i class="material-icons">pets</i>
         <i class="material-icons">pets</i>
@@ -58,14 +58,17 @@
         
         
         <br>
-        
-        <button class="btn btn-success">Solicitar adoção</button>
-        
-        <button class =" btn btn-danger"> Denunciar</button>    
+        <a href="{{url('postagem/'.$cod_postagem.'/solicitar')}}"> 
+            <button class="btn btn-success">Solicitar adoção</button>
+        </a>
+        <a href="{{url('postagem/'.$cod_postagem.'/denunciar')}}">
+            <button class =" btn btn-danger"> Denunciar</button>    
+        </a>
             
     </div>
 
 </div>
+
 <div class="row" id="campo">
     <div class="container-fluid">
         <h2>Descrição</h2>
