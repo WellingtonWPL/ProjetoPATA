@@ -24,9 +24,9 @@ class CreateFotoPostagemTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedInteger('cod_foto_postagem');
             $table->string('link_foto_postagem', 100);
-            $table->integer('cod_postagem')->nullable();
+            $table->unsignedInteger('cod_postagem')->nullable();
 
-            $table->index(["cod_postagem"], 'cod_postagem_idx');
+            // $table->index(["cod_postagem"], 'cod_postagem_idx');
 
 
             $table->foreign('cod_postagem', 'cod_postagem_idx')

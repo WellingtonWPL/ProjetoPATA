@@ -25,17 +25,17 @@ class CreateSolicitacaoTable extends Migration
             $table->unsignedInteger('cod_usuario_solicitante');
             $table->unsignedInteger('cod_postagem');
 
-            $table->index(["cod_usuario_solicitante"], 'cod_solicitante_idx');
+            // $table->index(["cod_usuario_solicitante"], 'cod_solicitante_idx');
 
-            $table->index(["cod_postagem"], 'cod_postagem_idx');
+            // $table->index(["cod_postagem"], 'cod_postagem_idx');
 
 
-            $table->foreign('cod_usuario_solicitante', 'cod_solicitante_idx')
+            $table->foreign('cod_usuario_solicitante')
                 ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('cod_postagem', 'cod_postagem_idx')
+            $table->foreign('cod_postagem')
                 ->references('cod_postagem')->on('Postagem_do_animal')
                 ->onDelete('no action')
                 ->onUpdate('no action');

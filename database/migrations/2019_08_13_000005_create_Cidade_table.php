@@ -24,14 +24,15 @@ class CreateCidadeTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('cod_cidade');
             $table->string('nome_cidade', 100);
-            $table->integer('cod_estado');
+
+            $table->unsignedInteger('cod_estado_cidade');
 
             // $table->index(["cod_estado"], 'cod_estado_idx');
 
-            $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
+            // $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
 
-            $table->foreign('cod_estado')
-                ->references('cod_estado')->on('Estado');
+            $table->foreign('cod_estado_cidade')
+                ->references('cod_estado')->on('Estado')->onDelete('cascade');
 
         });
 

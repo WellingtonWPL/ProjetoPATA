@@ -24,7 +24,7 @@ class CreatePostagemDoAnimalTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('cod_postagem');
             $table->string('nome_animal', 100)->default('Sem Nome');
-            $table->enum('sexo', ['macho', 'femea', 'indefinido'])->nullable()->default('F');
+            $table->enum('sexo', ['macho', 'femea', 'indefinido'])->nullable()->default('indefinido');
             $table->date('nascimento')->nullable();
             $table->text('descricao');
             $table->enum('castrado', ['sim', 'nao', 'indefinido'])->nullable();
@@ -32,17 +32,17 @@ class CreatePostagemDoAnimalTable extends Migration
             $table->enum('vermifugado', ['sim', 'nao', 'indefinido'])->nullable();
             $table->text('descricao_saude');
             $table->decimal('avaliacao', 3, 2)->nullable();
-            $table->integer('cod_usuario_adotante');
+            $table->unsignedInteger('cod_usuario_adotante');
             $table->unsignedInteger('cod_usuario_postagem');
             $table->unsignedInteger('cod_porte');
             $table->unsignedInteger('cod_especie');
             $table->enum('listagem_postagem', ['sim', 'nao']);
 
-            $table->index(["cod_especie"], 'cod_especie_idx');
+            // $table->index(["cod_especie"], 'cod_especie_idx');
 
-            $table->index(["cod_usuario_adotante"], 'cod_adotante_idx');
+            // $table->index(["cod_usuario_adotante"], 'cod_adotante_idx');
 
-            $table->index(["cod_usuario_postagem"], 'cod_dono_post_idx');
+            // $table->index(["cod_usuario_postagem"], 'cod_dono_post_idx');
 
             $table->unique(["cod_postagem"], 'cod_animal_UNIQUE');
 

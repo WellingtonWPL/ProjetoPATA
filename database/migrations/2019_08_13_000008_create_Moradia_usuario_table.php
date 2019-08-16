@@ -22,12 +22,12 @@ class CreateMoradiaUsuarioTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('cod_moradia');
-            $table->integer('cod_usuario_morador');
+            $table->unsignedInteger('cod_moradia');
+            $table->unsignedInteger('cod_usuario_morador');
 
-            $table->index(["cod_moradia"], 'cod_moradia_idx');
+            // $table->index(["cod_moradia"], 'cod_moradia_idx');
 
-            $table->index(["cod_usuario_morador"], 'cod_morador_idx');
+            // $table->index(["cod_usuario_morador"], 'cod_morador_idx');
 
 
             $table->foreign('cod_usuario_morador', 'cod_morador_idx')
