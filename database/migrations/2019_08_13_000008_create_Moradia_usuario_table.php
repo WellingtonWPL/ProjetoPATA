@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSolicitacaoTable extends Migration
+class CreateMoradiaUsuarioTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Solicitacao';
+    public $tableName = 'Moradia_usuario';
 
     /**
      * Run the migrations.
-     * @table Solicitacao
+     * @table Moradia_usuario
      *
      * @return void
      */
@@ -22,20 +22,21 @@ class CreateSolicitacaoTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedInteger('cod_usuario_solicitante');
-            $table->unsignedInteger('cod_postagem');
-        });
+            $table->unsignedInteger('cod_moradia');
+            $table->unsignedInteger('cod_usuario_morador');
 
-         Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_usuario_solicitante')
+            // $table->index(["cod_moradia"], 'cod_moradia_idx');
+
+            // $table->index(["cod_usuario_morador"], 'cod_morador_idx');
+
+
+            $table->foreign('cod_usuario_morador', 'cod_morador_idx')
                 ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
-        });
 
-        Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_postagem')
-                ->references('cod_postagem')->on('Postagem_do_animal')
+            $table->foreign('cod_moradia', 'cod_moradia_idx')
+                ->references('cod_moradia')->on('Moradia')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

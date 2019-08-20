@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFotoPostagemTable extends Migration
+class CreateFotoUsuarioTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Foto_postagem';
+    public $tableName = 'Foto_usuario';
 
     /**
      * Run the migrations.
-     * @table Foto_postagem
+     * @table Foto_usuario
      *
      * @return void
      */
@@ -22,16 +22,15 @@ class CreateFotoPostagemTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_foto_postagem');
-            $table->unsignedInteger('cod_postagem');
-            $table->string('link_foto_postagem', 100);
+            $table->unsignedInteger('cod_usuario');
+            $table->string('link_foto_usuario', 100);
+            $table->increments('cod_foto_usuario');
 
-            $table->unique(["cod_foto_postagem"], 'cod_foto_postagem_UNIQUE');
-        });
+            $table->index(["cod_usuario"], 'cod_usuario_idx');
 
-        Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_postagem')
-                ->references('cod_postagem')->on('Postagem_do_animal')
+
+            $table->foreign('cod_usuario', 'cod_usuario_idx')
+                ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

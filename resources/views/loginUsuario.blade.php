@@ -15,6 +15,10 @@
             <input type="password" class="form-control" id="senha1" placeholder="senha" required>
             <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
         </div>
+        <small>
+            <a href="">Esqueci minha senha </a><br>
+        </small> 
+
         <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
 </div>
