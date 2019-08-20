@@ -27,7 +27,6 @@ class CreatePostagemDoAnimalTable extends Migration
             $table->char('sexo', 1)->nullable()->default('F');
             $table->date('nascimento')->nullable();
             $table->binary('descricao_saude');
-            $table->string('login_dono_postagem', 30);
             $table->decimal('avaliacao', 3, 2)->nullable();
             $table->char('adocao_finalizada', 3);
             $table->unsignedInteger('cod_usuario_adotante')->nullable();
@@ -38,7 +37,6 @@ class CreatePostagemDoAnimalTable extends Migration
 
 
             $table->unique(["cod_postagem"], 'cod_animal_UNIQUE');
-            $table->unique(["cod_porte"], 'cod_teste_UNIQUE');
 
 
         });
