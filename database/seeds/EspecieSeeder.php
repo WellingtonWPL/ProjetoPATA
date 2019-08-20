@@ -11,6 +11,11 @@ class EspecieSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('Especie')->insert(
+            [
+            'nome_especie'=> 'Outro',
+            ]
+        );   
         //mamiferos
         DB::table('Especie')->insert(
             [
