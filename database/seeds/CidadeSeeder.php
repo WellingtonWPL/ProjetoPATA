@@ -48,6 +48,13 @@ class CidadeSeeder extends Seeder
             ]
 
         );
+        DB::table('Estado')->insert(
+            [
+            "nome_cidade" => "Fortaleza",
+            "cod_estado_cidade" => codEstado('BA'),
+            ]
+
+        );
 
 
 

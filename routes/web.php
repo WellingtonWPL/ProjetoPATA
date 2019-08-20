@@ -55,3 +55,9 @@ Route::get('/{cod_usuario}/solicitacoes', function($codUsuario){
   return view('visualizaPedidos',['codUsuario'=>$codUsuario]);
 
 });
+
+Route::get('/perfil', function(){
+    return view('perfilUsuario');
+
+});
+
