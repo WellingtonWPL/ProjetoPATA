@@ -60,4 +60,7 @@ Route::get('/perfil', function(){
     return view('perfilUsuario');
 
 });
+Route::get('teste', function () {
+    return view('teste');
+});
 
