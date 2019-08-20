@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCidadeTable extends Migration
+class CreateFotoUsuarioTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Cidade';
+    public $tableName = 'Foto_usuario';
 
     /**
      * Run the migrations.
-     * @table Cidade
+     * @table Foto_usuario
      *
      * @return void
      */
@@ -22,25 +22,18 @@ class CreateCidadeTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_cidade');
-            $table->string('nome_cidade', 100);
+            $table->unsignedInteger('cod_usuario');
+            $table->string('link_foto_usuario', 100);
+            $table->increments('cod_foto_usuario');
 
-            $table->unsignedInteger('cod_estado_cidade');
+            $table->index(["cod_usuario"], 'cod_usuario_idx');
 
-            // $table->index(["cod_estado"], 'cod_estado_idx');
 
-            // $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
-
-            $table->foreign('cod_estado_cidade')
-                ->references('cod_estado')->on('Estado')->onDelete('cascade');
-
+            $table->foreign('cod_usuario')
+                ->references('cod_usuario')->on('Usuario')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
-
-        // Schema::table($this->tableName, function($table) {
-            
-        // });
-
-
     }
 
     /**

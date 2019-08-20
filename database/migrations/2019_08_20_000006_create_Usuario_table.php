@@ -41,7 +41,7 @@ class CreateUsuarioTable extends Migration
             $table->unique(["email"], 'email_UNIQUE');
 
 
-            $table->foreign('cod_cidade', 'cod_cidade_idx')
+            $table->foreign('cod_cidade')
                 ->references('cod_cidade')->on('Cidade')
                 ->onDelete('no action')
                 ->onUpdate('no action');

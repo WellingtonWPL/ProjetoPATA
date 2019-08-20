@@ -32,32 +32,32 @@ class CreatePostagemDoAnimalTable extends Migration
             $table->enum('vermifugado', ['sim', 'nao', 'indefinido'])->nullable();
             $table->text('descricao_saude');
             $table->decimal('avaliacao', 3, 2)->nullable();
-            $table->unsignedInteger('cod_usuario_adotante');
+            $table->unsignedInteger('cod_usuario_adotante')->nullable();
             $table->unsignedInteger('cod_usuario_postagem');
             $table->unsignedInteger('cod_porte');
             $table->unsignedInteger('cod_especie');
             $table->enum('listagem_postagem', ['sim', 'nao']);
 
-            // $table->index(["cod_especie"], 'cod_especie_idx');
+            $table->index(["cod_especie"], 'cod_especie_idx');
 
-            // $table->index(["cod_usuario_adotante"], 'cod_adotante_idx');
+            $table->index(["cod_usuario_adotante"], 'cod_adotante_idx');
 
-            // $table->index(["cod_usuario_postagem"], 'cod_dono_post_idx');
+            $table->index(["cod_usuario_postagem"], 'cod_dono_post_idx');
 
             $table->unique(["cod_postagem"], 'cod_animal_UNIQUE');
 
 
-            $table->foreign('cod_especie', 'cod_especie_idx')
+            $table->foreign('cod_especie')
                 ->references('cod_especie')->on('Especie')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('cod_usuario_adotante', 'cod_adotante_idx')
+            $table->foreign('cod_usuario_adotante')
                 ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('cod_usuario_postagem', 'cod_dono_post_idx')
+            $table->foreign('cod_usuario_postagem')
                 ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
