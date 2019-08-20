@@ -125,6 +125,6 @@ $states = [
 ];
 
         foreach ($states as $estado)
-        DB::table('Estado')->insert($estado);
+            DB::table('Estado')->insert($estado);
     }
 }
