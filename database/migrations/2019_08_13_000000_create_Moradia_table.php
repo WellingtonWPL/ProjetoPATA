@@ -4,29 +4,29 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEspecieTable extends Migration
+class CreateMoradiaTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Especie';
+    public $tableName = 'Moradia';
 
     /**
      * Run the migrations.
-     * @table Especie
+     * @table Moradia
      *
      * @return void
      */
     public function up()
     {
+	// Schema::dropIfExists('Moradia');
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_especie');
-            $table->string('nome_especie', 100);
+            $table->increments('cod_moradia');
+            $table->string('nome', 50);
 
-            $table->unique(["nome_especie"], 'nome_especie_UNIQUE');
-            $table->unique(["cod_especie"], 'cod_especie_UNIQUE');
+            $table->unique(["cod_moradia"], 'cod_moradia_UNIQUE');
         });
     }
 

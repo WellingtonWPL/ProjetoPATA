@@ -24,18 +24,23 @@ class CreateCidadeTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('cod_cidade');
             $table->string('nome_cidade', 100);
-            $table->unsignedInteger('cod_estado');
 
-            $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
+            $table->unsignedInteger('cod_estado_cidade');
+
+            // $table->index(["cod_estado"], 'cod_estado_idx');
+
+            // $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
+
+            $table->foreign('cod_estado_cidade')
+                ->references('cod_estado')->on('Estado')->onDelete('cascade');
 
         });
 
-        Schema::table($this->tableName, function (Blueprint $table) {
-            $table->foreign('cod_estado')
-                ->references('cod_estado')->on('Estado');
-                //->onDelete('no action')
-                //->onUpdate('no action');
-        });
+        // Schema::table($this->tableName, function($table) {
+            
+        // });
+
+
     }
 
     /**

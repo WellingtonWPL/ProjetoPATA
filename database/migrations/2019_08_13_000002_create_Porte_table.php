@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstadoTable extends Migration
+class CreatePorteTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Estado';
+    public $tableName = 'Porte';
 
     /**
      * Run the migrations.
-     * @table Estado
+     * @table Porte
      *
      * @return void
      */
@@ -22,10 +22,12 @@ class CreateEstadoTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_estado');
-            $table->string('nome_estado', 100);
+            $table->increments('cod_porte');
+            $table->string('tipo_porte', 45);
 
-            $table->unique(["cod_estado"], 'cod_estado_UNIQUE');
+            $table->unique(["tipo_porte"], 'tipo_porte_UNIQUE');
+
+            $table->unique(["cod_porte"], 'cod_porte_UNIQUE');
         });
     }
 

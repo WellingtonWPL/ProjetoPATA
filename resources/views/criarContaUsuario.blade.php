@@ -5,9 +5,19 @@
 <h1>Cadastro</h1>
 <form >
     <div class="form-group">
-        E-mail
-        <input type="email" class="form-control" id="email" placeholder="email" required>
+        Nome
+        <input type="text" class="form-control" id="nome" placeholder="Nome" required>
         
+    </div>
+    <div class="form-group">
+        E-mail
+        <input type="email" class="form-control" id="email1" placeholder="email" required>
+        
+    </div>
+    <div class="form-group">
+            Repetir E-mail
+            <input type="email" class="form-control" id="email2" placeholder="email" required>
+            
     </div>
     <div class="form-group">
         Senha
@@ -19,11 +29,7 @@
         <input type="password" class="form-control" id="senha2" placeholder="senha" required>
         <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
     </div>
-    <div class="form-group">
-        Nome
-        <input type="text" class="form-control" id="nome" placeholder="Nome" required>
-        
-    </div>
+    
     <div class="form-group">
         Celular
         <input type="tel" name="fone" class="form-control" placeholder="(99) 9999-9999"required>  
