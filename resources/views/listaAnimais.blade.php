@@ -1,40 +1,45 @@
+@php
+    use \app\Http\Controllers\ListaController;
+   
+@endphp
+
 @extends('template')
 @section('css')
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
-    #campo {
-        border-style: solid;
-        border-width: 1px; 
-        border-color: #F5F5F5;
-        border-radius:15px;
-        margin-top: 3%;
-        max-height: 160px;
-        background-color: #FAFAFA;
-    }
+        #campo {
+            border-style: solid;
+            border-width: 1px; 
+            border-color: #F5F5F5;
+            border-radius:15px;
+            margin-top: 3%;
+            max-height: 160px;
+            background-color: #FAFAFA;
+        }
 
-    div button{       
-        margin: 2%;
-    }
-    
-    div a img{
-        margin: 2%;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #F5F5F5;
-        /* width: 100%; */
-        max-height: 150px;
-        padding:10px;
+        div button{       
+            margin: 2%;
+        }
         
+        div a img{
+            margin: 2%;
+            border-style: solid;
+            border-width: 1px;
+            border-color: #F5F5F5;
+            /* width: 100%; */
+            max-height: 150px;
+            padding:10px;
+            
 
-    }
-    #filtro{
-        border-style: solid;
-        border-width: 1px;
-        margin-top: 5%;
-        /* float: left; */
-        /* width: 30%;  */
+        }
+        #filtro{
+            border-style: solid;
+            border-width: 1px;
+            margin-top: 5%;
+            /* float: left; */
+            /* width: 30%;  */
 
-    }
+        }
 
     </style>
     @endsection
@@ -134,56 +139,44 @@
                 </div>
             </div>
         </div>
-        
+        {{-- mostrar os posts --}}
+    @foreach ($postagens as $postagem)
+    <div class="card">
 
-
-    <div class="row " id="campo">
-
+    <div class="row " id="" class="card-body">
         <div class="col-3">
-            <a href="{{url('/postagem/1')}}">
-                    <img src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
-                </a>
-        </div>
-        <div class="col-9">
-                <a href="{{url('/postagem/1')}}"><h2>Totó</h2> </a>
-                Macho <br>
-                4 meses <br>
-                Porte médio <br>
-        </div>
-
-    </div>
-        
-
-    <div class="row " id="campo">
-        <div class="col-3">
-            <a href="{{url('/postagem/1')}}">
-                    <img src="{{url('img/dog2.jpeg')}}" class="img-fluid rounded" >
-                </a>
-        </div>
-        <div class="col-9">
-                <a href="{{url('/postagem/1')}}"><h2>Rex</h2> </a>
-                Macho <br>
-                2 anos <br>
-                Porte médio <br>
-        </div>
-
-    </div>
-
-
-    <div class="row " id="campo">
-        <div class="col-3">
-            <a href="{{url('/postagem/1')}}">
+            <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
                     <img src="{{url('img/gato.jpeg')}}" class="img-fluid rounded" >
                 </a>
         </div>
         <div class="col-9">
-                <a href="{{url('/postagem/1')}}"><h2>Miau</h2> </a>
-                Macho <br>
-                
-                Porte pequeno <br>
+                {{-- nome --}}
+                <a href="{{url('/postagem/'.$postagem->cod_postagem)}}"><h2>{{$postagem->nome_animal}}</h2> </a>
+                {{-- sexo --}}
+                {{$postagem->sexo}} <br>   
+                {{-- idade --}}
+                @php
+                    if ($postagem->nascimento!=NULL) {
+
+                        $idade=ListaController::calcIdade($postagem->nascimento);
+                        if ($idade<1.0) {
+                            echo 'Menos de um ano<br>';
+                        }elseif ($idade==1.0) {
+                            echo '1 ano<br>';
+                        }else{
+                            echo (int) $idade." anos<br>";
+                        }
+                    }
+                @endphp
+
+                {{-- porte --}}
+                Porte {{$postagem->tipo_porte}} <br>
         </div>
 
     </div>
+    </div>
+    @endforeach
+
             
 @endsection
 
