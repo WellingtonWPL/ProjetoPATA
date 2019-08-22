@@ -47,12 +47,17 @@
 
 @section('conteudo')
 
+    {{-- {{ Form::open(array('action'=>'ListaController@pesquisa')) }}
+        {{ Form::text('pesquisa') }}
 
-    <form action="">
-        
+    {{ Form::close() }} --}}
+
+    <form action="/lista" method="POST">
+        @csrf
         <div class="col">
             <div class="input-group-prepend">
-            <input  class="form-control" id="barraDePesquisa" placeholder="Pesquise aqui">
+            <input  class="form-control" name='pesquisa' id="barraDePesquisa" placeholder="Pesquise aqui">
+            <input type="submit" value='submit'>
                 <div class="input-group-text"><i class="material-icons">search</i></div>
             </div>
         </div>
@@ -175,6 +180,7 @@
 
     </div>
     </div>
+    <br>
     @endforeach
 
             

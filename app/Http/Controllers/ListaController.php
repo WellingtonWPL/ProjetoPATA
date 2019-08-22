@@ -36,4 +36,29 @@ class ListaController extends Controller
 
 
     }
+    public function pesquisa(){
+        // dd($_POST['pesquisa']);
+
+        
+        $query='SELECT * FROM homestead.Postagem_do_animal 
+                INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte        
+                where ';
+        $aux = explode(' ', $_POST['pesquisa']);
+        foreach ($aux as $palavra) {
+            $query.='nome_animal like \'%'.(string)$palavra.'%\' or
+                     descricao like\'%'
+                     .(string)$palavra.
+                     '%\' or ';
+        }
+        $query= substr($query,0,-3);
+        
+        // dd($query);
+
+        $postagens = \DB::select($query);
+        return view('listaAnimais', 
+                ['postagens'=> $postagens,
+                 'pesquisa'=> $_POST['pesquisa']
+                ]);
+    }
+
 }

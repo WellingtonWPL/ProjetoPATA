@@ -35,6 +35,7 @@ Route::get('/postagem/{cod_postagem}/solicitar', function($cod_postagem){
 
 
 Route::get('lista', 'ListaController@mostrar');
+Route::post('lista', 'ListaController@pesquisa');
 
 Route::get('/admin', function(){
   return view('vizualizaDenunciaAdmin');
