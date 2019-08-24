@@ -49,67 +49,103 @@ class ListaController extends Controller
 
 
     }
-    public function pesquisa(){
+    public function pesquisa(Request $r){
         
-        dd(($_POST));
+        // dd(($_POST));
 
         
         $query='SELECT * FROM homestead.Postagem_do_animal 
-                INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte        
+                INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte             
+                INNER JOIN Usuario on Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
+                inner join Cidade on Cidade.cod_cidade = Usuario.cod_cidade
                 where ';
         if($_POST['pesquisa']!=''){
 
             $aux = explode(' ', $_POST['pesquisa']);
             foreach ($aux as $palavra) {
-                $query.='nome_animal like \'%'.(string)$palavra.'%\' or
-                descricao like\'%'
+                $query.='Postagem_do_animal.nome_animal like \'%'.(string)$palavra.'%\' or
+                Postagem_do_animal.descricao like\'%'
                 .(string)$palavra.
                 '%\' or ';
             }
             
             $query= substr($query,0,-3);
         }        
+        
+        if($_POST['cidade']!="Selecione" && $_POST['pesquisa']!=''){
+            $query.=' and ';
+
+        }
 
         
 
         if($_POST['cidade']!="Selecione"){
-            $query.='and cod_cidade = '.$_POST['cidade'];
+            $query.='Cidade.cod_cidade = '.$_POST['cidade'];
 
         }
+
+        if($_POST['cidade']!="Selecione" && $_POST['especie']!="Selecione"){
+            $query .= ' and ';
+        }
+
 
         if($_POST['especie']!="Selecione"){
-            $query.='and cod_especie = '.$_POST['cidade'];
+            $query.='cod_especie = '.$_POST['especie'];
 
         }
-        if(isset($_POST['pequeno']) || isset($_POST['medio']) || isset($_POST['grande'])){
-            $query .= " and (";
+        if (($_POST['cidade']!="Selecione" ||
+            $_POST['especie']!="Selecione" ||
+            $_POST['pesquisa']!='')
+            &&
+            ((isset($_POST['pequeno']) ||
+            isset($_POST['medio']) || 
+            isset($_POST['grande']) ))
+            
+            ){
+                // dd($_POST['cidade']=="Selecione" );
+                // dd($_POST['especie']=="Selecione" );
+                // dd($_POST['pesquisa']!='');
+
+                            //  dd($_POST['cidade']!="Selecione" ||
+                            //  $_POST['especie']!="Selecione" ||
+                            //  $_POST['pesquisa']!='' );
+             $query .= " and ";
+
+        }
+        // dd('cuza gostoso');
+
+        if((isset($_POST['pequeno']) ||
+           isset($_POST['medio']) || 
+           isset($_POST['grande'] ))) {
+            $query .= " ( ";
         }
 
 
         if(isset($_POST['pequeno'])  ){
-            $query .= " cod_porte = 1 or";
+            $query .= "Postagem_do_animal.cod_porte = 1 or";
         }
         if(isset($_POST['medio'])  ){
-            $query .= " cod_porte = 2 or";
+            $query .= " Postagem_do_animal.cod_porte = 2 or";
         }
         if(isset($_POST['grande'])  ){
-            $query .= " cod_porte = 3 or";
+            $query .= " Postagem_do_animal.cod_porte = 3 or";
         }
+       
 
-        $query= substr($query,0,-3);
 
         if(isset($_POST['pequeno']) || isset($_POST['medio']) || isset($_POST['grande'])){
+            $query= substr($query,0,-3);
             $query .= " )";
         }
 
         
-        dd($query);
+        // dd($query);
 
         $postagens = \DB::select($query);
 
         $estados = Estado::all();
         $cidades = Cidade::all();
-        // dd($cidades);
+        //  dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
 
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
