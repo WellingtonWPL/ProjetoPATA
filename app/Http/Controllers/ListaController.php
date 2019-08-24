@@ -18,6 +18,7 @@ class ListaController extends Controller
                     ['postagens'=> $postagens]);
 
     }
+
     public static function calcIdade($data){
         // como a data vem do mysql ela vem com aaaa/mm/dd
         // dd($data);
@@ -59,6 +60,14 @@ class ListaController extends Controller
                 ['postagens'=> $postagens,
                  'pesquisa'=> $_POST['pesquisa']
                 ]);
+    }
+
+    public static function getFotosAnimal($cod){
+
+        $fotos = \App\FotoPostagem::where('cod_postagem', $cod)->get();
+        // dd($fotos->isEmpty());
+        return $fotos;
+
     }
 
 }
