@@ -71,7 +71,7 @@ class ListaController extends Controller
             
             $query= substr($query,0,-3);
         }        
-        
+        // dd($r->cidade!='Selecione');
         if($_POST['cidade']!="Selecione" && $_POST['pesquisa']!=''){
             $query.=' and ';
 
@@ -84,7 +84,7 @@ class ListaController extends Controller
 
         }
 
-        if($_POST['cidade']!="Selecione" && $_POST['especie']!="Selecione"){
+        if(($_POST['cidade']!="Selecione" || $r->pesquisa != '') && $_POST['especie']!="Selecione"){
             $query .= ' and ';
         }
 
