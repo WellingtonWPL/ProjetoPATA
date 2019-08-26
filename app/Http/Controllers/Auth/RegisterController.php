@@ -64,9 +64,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'nome' => $data['nome'],
-            'email' => $data['email'],
-            'senha' => Hash::make($data['senha']),
+            // 'nome' => $data['nome'],
+            // 'email' => $data['email'],
+            // 'senha' => Hash::make($data['senha']),
+            'nome' => "welintinho",
+            'email' => 'wpl@gmil.com'
+            'senha' => md5('senha');
+            'telefone'=> '42999993344',
+            'contato' => 'vfubisbvuisfl',
+            'descricao'=> "imagine se eu cozinho com o pau la dentro",
+            'admin' => 'nao', 
+            'cod_cidade' 
         ]);
     }
 }
