@@ -24,6 +24,7 @@ class CreateUsuarioTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('cod_usuario');
             $table->string('nome', 100);
+            $table->rememberToken();
             $table->string('email', 100);
             $table->char('senha', 32);
             $table->string('telefone', 11);

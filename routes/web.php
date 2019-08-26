@@ -15,12 +15,9 @@ Route::get('/', function () {
   return view('home');
 });
 
-Route::get('/entrar', function () {
-  return view('loginUsuario');
-});
 
 Route::get('/cadastro', function(){
-  return view('criarContaUsuario');
+  return view('cadastrar');
 });
 
 Route::get('/postagem/{cod_postagem}', function($cod_postagem){
@@ -61,3 +58,7 @@ Route::get('/perfil', function(){
 
 });
 
+Auth::routes();
+
+
+Route::get('/entrar', 'HomeController@index')->name('home');
