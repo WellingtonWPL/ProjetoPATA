@@ -29,21 +29,21 @@ class CreateDenunciaTable extends Migration
             $table->unsignedInteger('cod_postagem_denunciada');
             $table->unsignedInteger('cod_motivo_denuncia');
 
-            // $table->index(["cod_usuario_denunciante"], 'cod_denunciante_idx');
+            $table->index(["cod_usuario_denunciante"], 'cod_denunciante_idx');
 
-            // $table->index(["cod_motivo_denuncia"], 'cod_motivos_denuncia_idx');
+            $table->index(["cod_motivo_denuncia"], 'cod_motivos_denuncia_idx');
 
-            // $table->index(["cod_postagem_denunciada"], 'cod_postagem_idx');
+            $table->index(["cod_postagem_denunciada"], 'cod_postagem_idx');
 
-            // $table->unique(["cod_denuncia"], 'cod_denuncia_UNIQUE');
+            $table->unique(["cod_denuncia"], 'cod_denuncia_UNIQUE');
 
 
-            $table->foreign('cod_usuario_denunciante', 'cod_denunciante_idx')
+            $table->foreign('cod_usuario_denunciante')
                 ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('cod_motivo_denuncia', 'cod_motivos_denuncia_idx')
+            $table->foreign('cod_motivo_denuncia')
                 ->references('cod_motivo_denuncia')->on('Motivos_Denuncia')
                 ->onDelete('no action')
                 ->onUpdate('no action');

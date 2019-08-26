@@ -23,9 +23,7 @@ Route::get('/cadastro', function(){
   return view('criarContaUsuario');
 });
 
-Route::get('/postagem/{cod_postagem}', function($cod_postagem){
-  return view('postagemAnimal', ['cod_postagem'=> $cod_postagem]);
-});
+Route::get('/postagem/{cod_postagem}', 'PostagemController@mostrar');
 
 
 Route::get('/postagem/{cod_postagem}/denunciar', function($cod_postagem){
@@ -36,10 +34,8 @@ Route::get('/postagem/{cod_postagem}/solicitar', function($cod_postagem){
 });
 
 
-Route::get('lista', function(){
-  return view('listaAnimais');
-
-});
+Route::get('lista', 'ListaController@mostrar');
+Route::post('lista', 'ListaController@pesquisa');
 
 Route::get('/admin', function(){
   return view('vizualizaDenunciaAdmin');
@@ -59,5 +55,8 @@ Route::get('/{cod_usuario}/solicitacoes', function($codUsuario){
 Route::get('/perfil', function(){
     return view('perfilUsuario');
 
+});
+Route::get('teste', function () {
+    return view('teste');
 });
 
