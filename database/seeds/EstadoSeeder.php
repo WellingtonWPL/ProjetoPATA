@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Database\Seeder;
-
 class EstadoSeeder extends Seeder
 {
     /**
@@ -11,7 +9,6 @@ class EstadoSeeder extends Seeder
      */
     public function run()
     {
-
 $states = [
     [
         
@@ -123,7 +120,6 @@ $states = [
         "sigla_estado" => "DF",
     ],
 ];
-
         foreach ($states as $estado)
             DB::table('Estado')->insert($estado);
     }
