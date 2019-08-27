@@ -24,14 +24,15 @@ class CreateUsuarioTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('cod_usuario');
             $table->string('nome', 100);
-            $table->rememberToken();
             $table->string('email', 100);
-            $table->char('senha', 32);
-            $table->string('telefone', 15);
+            $table->binary('senha');
+            $table->string('telefone', 11);
             $table->string('contato', 50);
-            $table->text('descricao');
+            $table->text('descricao')->nullable();
             $table->enum('admin', ['sim', 'nao']);
             $table->unsignedInteger('cod_cidade');
+            $table->rememberToken();
+
 
             $table->index(["cod_cidade"], 'cod_cidade_idx');
 
