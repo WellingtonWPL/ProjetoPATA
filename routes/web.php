@@ -49,10 +49,8 @@ Route::get('/{cod_usuario}/solicitacoes', function($codUsuario){
 
 });
 
-Route::get('/perfil', function(){
-    return view('perfilUsuario');
+Route::get('/perfil/{cod_usuario}', 'PerfilController@mostrar');
 
-});
 Route::get('teste', function () {
     return view('teste');
 });

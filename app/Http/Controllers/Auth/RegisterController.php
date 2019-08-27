@@ -73,7 +73,7 @@ class RegisterController extends Controller
                 'descricao' => 'teste',
                 'admin' => 'nao',
                 'cod_cidade' => '21',
-                'senha' => md5($data['senha'])
+                'senha' => bcrypt($data['senha'])
                 
             ]);
         }

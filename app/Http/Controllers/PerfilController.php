@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller
@@ -27,10 +28,15 @@ class PerfilController extends Controller
                 $cont++;
             }
             // dd($aux);
+            if($cont==0){   return 0;   }
             return ($aux/$cont);
         }
-        
-
-
     }
+
+    public function mostrar($cod_usuario){
+        $usuario = User::where('cod_usuario', $cod_usuario)->get();
+        return view('perfilUsuario', ['cod_usuario'=>$cod_usuario, 'usuario'=>$usuario]);
+    }
+
+
 }
