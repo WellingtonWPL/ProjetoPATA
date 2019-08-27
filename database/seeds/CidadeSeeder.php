@@ -19,6 +19,7 @@ class CidadeSeeder extends Seeder
 
     public function run()
     {
+
         $estados = DB::table('Estado')->get();
         
         DB::table('Cidade')->insert(

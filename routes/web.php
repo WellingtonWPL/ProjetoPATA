@@ -11,17 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
   return view('home');
 });
 
-Route::get('/entrar', function () {
-  return view('loginUsuario');
-});
 
 Route::get('/cadastro', function(){
-  return view('criarContaUsuario');
-});
+  return view('cadastrar');
+})->middleware('guest');
 
 Route::get('/postagem/{cod_postagem}', 'PostagemController@mostrar');
 
@@ -60,3 +57,7 @@ Route::get('teste', function () {
     return view('teste');
 });
 
+Auth::routes();
+
+
+Route::get('/entrar', 'HomeController@index')->name('home')->middleware('guest');
