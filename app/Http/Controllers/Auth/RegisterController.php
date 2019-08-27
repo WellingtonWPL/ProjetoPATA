@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/lista';
 
     /**
      * Create a new controller instance.
@@ -48,33 +48,44 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+            'nome' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.(new User())->getTable()],
+            'senha' => ['required', 'string', 'min:8'],
+            'password_confirmation' => ['required', 'string', 'min:8', 'same:senha' ],
+            ]);
+        }
+        
+        /**
+         * Create a new user instance after a valid registration.
+         *
+         * @param  array  $data
+         * @return \App\User
+         */
+        protected function create(array $data)
+        {
+            return User::create([
+                'nome' => $data['nome'],
+                'email' => $data['email'],
+                'telefone' => $this->arrumaTelefone($data['fone']),
+                'contato' => $data['fone'],
+                'descricao' => 'teste',
+                'admin' => 'nao',
+                'cod_cidade' => '21',
+                'senha' => md5($data['senha'])
+                
+            ]);
+        }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Usuario
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            // 'nome' => $data['nome'],
-            // 'email' => $data['email'],
-            // 'senha' => Hash::make($data['senha']),
-            'nome' => "welintinho",
-            'email' => 'wpl@gmil.com'
-            'senha' => md5('senha');
-            'telefone'=> '42999993344',
-            'contato' => 'vfubisbvuisfl',
-            'descricao'=> "imagine se eu cozinho com o pau la dentro",
-            'admin' => 'nao', 
-            'cod_cidade' 
-        ]);
-    }
+        private function arrumaTelefone($fone){
+
+            $caracteresEspeciais = array("(", ")", " ", "-");
+            return str_replace($caracteresEspeciais, "", $fone);
+            
+        }
+
+        public function showRegistrationForm(){
+            return view('cadastrar');
+        }
 }

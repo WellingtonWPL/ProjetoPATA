@@ -9,7 +9,7 @@
   <meta name="author" content="">
 
   <title>Projeto - PATA</title>
-
+  
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" type="text/css" href="/css/teste.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" >
@@ -18,18 +18,25 @@
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.min.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-reboot.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-reboot.min.css">
-
+  
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-
+  
   <!-- Custom styles for this template -->
   <link href="/css/one-page-wonder.css" rel="stylesheet">
-
+  
   <!-- Function JS -->
   <script type="text/javascript" src="/js/functions.js"></script>
   @yield('css')
   
+  {{-- <script src="/vendor/jquery/jquery.min.js"></script> --}}
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  
+  crossorigin="anonymous"></script>
+
 </head> 
 
 <body>
@@ -56,17 +63,36 @@
 
       </ul>
       
-
+      @guest
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-          <a class="nav-link" href="{{url('cadastro')}}">Cadastrar-se</a>
+          <a class="nav-link" href="{{url('register')}}">Cadastrar-se</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="{{url('entrar')}}">Entrar</a>
           </li>
         </ul>
       </div>
+      @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->nome }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+      @endguest
     </div>
   </nav>
 
@@ -93,7 +119,6 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="/vendor/jquery/jquery.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>

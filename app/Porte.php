@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Porte extends Model
 {
-    private $table = 'Porte';
+    protected $table = 'Porte';
     protected $primaryKey = 'cod_porte';
 }

@@ -1,14 +1,19 @@
 @extends('template')
 
 @section('conteudo')
+
+
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
 <script>
     $(document).ready(function(){
-        $('#senha2, #senha').keyup(function () {
+        $('#password-confirm, #senha').keyup(function () {
             // alert('ok')
-            if ($('#senha').val() == $('#senha2').val()) {
+            if ($('#senha').val() == $('#password-confirm').val()) {
                 $('#message').html(' As senhas conferem! &#10004').css('color', 'green');
             } else 
                 $('#message').html('As senhas NÃO conferem! &#10006 ').css('color', 'red');
@@ -32,10 +37,10 @@
 <div class="card" style="padding:5%;">
 <h1>Cadastro</h1>
 <form method="POST" action="{{ route('register') }}">
-    @csrf
+    {{ csrf_field() }}
     <div class="form-group">
         Nome
-        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome">
+        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome">
         <div class="col-md-6">
             @if ($errors->has('nome'))
                 <span class="invalid-feedback" role="alert">
@@ -67,7 +72,7 @@
     </div>
     <div class="form-group">
         Repetir senha
-        <input type="password" class="form-control" id="senha2" placeholder="senha" required autocomplete="new-password">
+        <input id="password-confirm" type="password" placeholder="senha" class="form-control" name="password_confirmation" required autocomplete="new-password">
         <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
         <span id='message'></span>
     </div> 

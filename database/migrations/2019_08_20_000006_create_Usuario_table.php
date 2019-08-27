@@ -27,7 +27,7 @@ class CreateUsuarioTable extends Migration
             $table->rememberToken();
             $table->string('email', 100);
             $table->char('senha', 32);
-            $table->string('telefone', 11);
+            $table->string('telefone', 15);
             $table->string('contato', 50);
             $table->text('descricao');
             $table->enum('admin', ['sim', 'nao']);
@@ -42,7 +42,7 @@ class CreateUsuarioTable extends Migration
             $table->unique(["email"], 'email_UNIQUE');
 
 
-            $table->foreign('cod_cidade', 'cod_cidade_idx')
+            $table->foreign('cod_cidade')
                 ->references('cod_cidade')->on('Cidade')
                 ->onDelete('no action')
                 ->onUpdate('no action');

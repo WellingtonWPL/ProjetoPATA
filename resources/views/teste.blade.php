@@ -15,12 +15,17 @@
     <link href="css/bootstrap-reboot.min.css" rel="stylesheet">
 </head>
 <body>
-    <fieldset id="cores">
-            <button type="button" id="botao" class="btn btn-primary"></button><br><br>
-            <button type="button" id="botao" class="btn btn-success"></button><br><br>
-            <button type="button" id="botao" class="btn btn-danger"></button><br><br>
-            <button type="button" id="botao" class="btn btn-warning"></button><br><br>
-    </fieldset>
+    
+@php
+    function codEstado($sigla){
+        dd(App\Estado::get());
+        $cod= App\Estado::where('sigla_estado', $sigla)->value('cod_estado');
+        return $cod;
+
+    }
+
+    dd(codEstado("PR"));
+@endphp
 </body>
 </html>
 

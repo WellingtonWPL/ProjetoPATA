@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuario extends Authenticatable
@@ -19,7 +18,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password_hash'
+        'nome', 'email', 'senha', 'telefone', 'contato', 'descricao', 'admin', 'cod_cidade'
     ];
 
     /**
@@ -28,11 +27,11 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password_hash'
+        'senha'
     ];
 
     public function getAuthPassword()
     {
-        return bcrypt($this->password_hash);
+        return md5($this->senha);
     }
 }

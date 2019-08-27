@@ -11,18 +11,16 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
   return view('home');
 });
 
 
 Route::get('/cadastro', function(){
   return view('cadastrar');
-});
+})->middleware('guest');
 
-Route::get('/postagem/{cod_postagem}', function($cod_postagem){
-  return view('postagemAnimal', ['cod_postagem'=> $cod_postagem]);
-});
+Route::get('/postagem/{cod_postagem}', 'PostagemController@mostrar');
 
 
 Route::get('/postagem/{cod_postagem}/denunciar', function($cod_postagem){
@@ -33,10 +31,8 @@ Route::get('/postagem/{cod_postagem}/solicitar', function($cod_postagem){
 });
 
 
-Route::get('lista', function(){
-  return view('listaAnimais');
-
-});
+Route::get('lista', 'ListaController@mostrar');
+Route::post('lista', 'ListaController@pesquisa');
 
 Route::get('/admin', function(){
   return view('vizualizaDenunciaAdmin');
@@ -57,8 +53,11 @@ Route::get('/perfil', function(){
     return view('perfilUsuario');
 
 });
+Route::get('teste', function () {
+    return view('teste');
+});
 
 Auth::routes();
 
 
-Route::get('/entrar', 'HomeController@index')->name('home');
+Route::get('/entrar', 'HomeController@index')->name('home')->middleware('guest');
