@@ -46,7 +46,7 @@
             <a class="nav-link" href="{{url('cadastro')}}">Cadastrar-se</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('entrar')}}">Entrar</a>
+            <a class="nav-link" href="{{url('login')}}">Entrar</a>
           </li>
         </ul>
       </div>

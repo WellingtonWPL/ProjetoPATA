@@ -41,7 +41,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('entrar') }}">{{ __('Entrar') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
                             </li>
                             @if (Route::has('cadastrar'))
                                 <li class="nav-item">
