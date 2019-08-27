@@ -26,7 +26,7 @@ class CreateCidadeTable extends Migration
             $table->string('nome_cidade', 100);
             $table->unsignedInteger('cod_estado');
 
-            $table->index(["cod_estado"], 'cod_estado_idx');
+            // // $table->index(["cod_estado"], 'cod_estado_idx');
 
             $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
 
