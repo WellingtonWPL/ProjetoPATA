@@ -55,7 +55,7 @@ Route::get('teste', function () {
     return view('teste');
 });
 
-Route::get('/login', 'LoginController@login')->name('login')->middleware('guest');
+Route::post('/logar', 'UsuarioController@login')->name('logar')->middleware('guest');
 
 
 Auth::routes();

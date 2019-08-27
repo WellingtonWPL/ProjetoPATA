@@ -25,7 +25,7 @@ class CreateUsuarioTable extends Migration
             $table->increments('cod_usuario');
             $table->string('nome', 100);
             $table->string('email', 100);
-            $table->binary('senha');
+            $table->string('senha');
             $table->string('telefone', 11);
             $table->string('contato', 50);
             $table->text('descricao')->nullable();
