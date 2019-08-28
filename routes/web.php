@@ -59,7 +59,10 @@ Route::get('teste', function () {
     return view('teste');
 });
 
+Route::get('/login', 'LoginController@login')->name('login')->middleware('guest');
+
+
 Auth::routes();
 
 
-Route::get('/entrar', 'HomeController@index')->name('home')->middleware('guest');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');

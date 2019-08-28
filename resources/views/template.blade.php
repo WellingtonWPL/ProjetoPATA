@@ -136,8 +136,6 @@
     </li>
     </ul>
     @endguest
-
-
     </div>
   </nav>
 

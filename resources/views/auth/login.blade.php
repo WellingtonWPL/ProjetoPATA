@@ -4,7 +4,7 @@
 <div class="card" style="padding:5%; margin-left: 25%; margin-right:25%;">
 
     <form method="POST" action="{{ route('login') }}" >
-        @csrf
+        {{ csrf_field() }}
         <h2>Entrar</h2>
         <div class="form-group">
             E-mail

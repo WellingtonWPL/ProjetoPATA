@@ -24,6 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         //dd("oi");
-        return view('auth.login');
+        return view('login');
     }
 }
