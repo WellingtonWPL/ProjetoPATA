@@ -15,7 +15,7 @@ class UsuarioController extends Controller
             if(Hash::check($request->senha, $user->senha)){
                 Auth::login($user, true);
             }
-        }
+        } 
         return redirect('/lista');
     }
 }
