@@ -27,7 +27,7 @@ class ListaController extends Controller
         $especies = Especie::orderBy('cod_especie')->get();
 
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
-                    
+
 
     }
 
@@ -37,7 +37,7 @@ class ListaController extends Controller
         // Separa em dia, mês e ano
         // $data = '2015-03-13';
         list($ano, $mes, $dia) = explode('-', $data);
-    
+
         // Descobre que dia é hoje e retorna a unix timestamp
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         // Descobre a unix timestamp da data de nascimento do fulano
@@ -50,12 +50,12 @@ class ListaController extends Controller
 
     }
     public function pesquisa(Request $r){
-        
+
         // dd(($_POST));
 
-        
-        $query='SELECT * FROM homestead.Postagem_do_animal 
-                INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte             
+
+        $query='SELECT * FROM homestead.Postagem_do_animal
+                INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte
                 INNER JOIN Usuario on Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
                 inner join Cidade on Cidade.cod_cidade = Usuario.cod_cidade
                 where ';
@@ -68,16 +68,16 @@ class ListaController extends Controller
                 .(string)$palavra.
                 '%\' or ';
             }
-            
+
             $query= substr($query,0,-3);
-        }        
+        }
         // dd($r->cidade!='Selecione');
         if($_POST['cidade']!="Selecione" && $_POST['pesquisa']!=''){
             $query.=' and ';
 
         }
 
-        
+
 
         if($_POST['cidade']!="Selecione"){
             $query.='Cidade.cod_cidade = '.$_POST['cidade'];
@@ -98,9 +98,9 @@ class ListaController extends Controller
             $_POST['pesquisa']!='')
             &&
             ((isset($_POST['pequeno']) ||
-            isset($_POST['medio']) || 
+            isset($_POST['medio']) ||
             isset($_POST['grande']) ))
-            
+
             ){
                 // dd($_POST['cidade']=="Selecione" );
                 // dd($_POST['especie']=="Selecione" );
@@ -115,7 +115,7 @@ class ListaController extends Controller
         // dd('cuza gostoso');
 
         if((isset($_POST['pequeno']) ||
-           isset($_POST['medio']) || 
+           isset($_POST['medio']) ||
            isset($_POST['grande'] ))) {
             $query .= " ( ";
         }
@@ -130,7 +130,7 @@ class ListaController extends Controller
         if(isset($_POST['grande'])  ){
             $query .= " Postagem_do_animal.cod_porte = 3 or";
         }
-       
+
 
 
         if(isset($_POST['pequeno']) || isset($_POST['medio']) || isset($_POST['grande'])){
@@ -138,7 +138,7 @@ class ListaController extends Controller
             $query .= " )";
         }
 
-        
+
         // dd($query);
 
         $postagens = \DB::select($query);
