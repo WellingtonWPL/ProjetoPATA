@@ -98,7 +98,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link"
-              href="{{url('entrar')}}">Entrar</a>
+              href="{{url('login')}}">Entrar</a>
           </li>
       </ul>
     </div>

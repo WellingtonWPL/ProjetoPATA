@@ -27,7 +27,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'senha'
+        'senha','remember_token',
     ];
 
     public function getAuthPassword()
