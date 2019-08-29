@@ -54,10 +54,8 @@ Route::get('/{cod_usuario}/postar', function($codUsuario){
 
 });
 
-Route::get('/{cod_usuario}/solicitacoes', function($codUsuario){
-  return view('visualizaPedidos',['codUsuario'=>$codUsuario]);
+Route::get('/{cod_usuario}/solicitacoes', 'SolicitacaoController@mostrarPedidos');
 
-});
 
 Route::get('/perfil/{cod_usuario}', 'PerfilController@mostrar');
 

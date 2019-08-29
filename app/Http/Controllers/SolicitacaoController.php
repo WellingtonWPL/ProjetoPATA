@@ -40,5 +40,20 @@ class SolicitacaoController extends Controller
         'postagem'=> $postagem]
         );
     }
+
+    public function mostrarPedidos($cod_usuario){
+        $solicitacoes = \DB::table('Solicitacao')
+        ->join('Postagem_do_animal', 'Postagem_do_animal.cod_postagem', '=', 'Solicitacao.cod_postagem')
+        ->join('Usuario', 'Solicitacao.cod_usuario_solicitante', '=', 'Usuario.cod_usuario')
+        ->where('Postagem_do_animal.cod_usuario_postagem', $cod_usuario)
+        ->get()
+        ;
+
+        // dd($solicitacoes);
+
+        return view('visualizaPedidos',compact('cod_usuario', 'solicitacoes'));
+
+
+    }
 }
 
