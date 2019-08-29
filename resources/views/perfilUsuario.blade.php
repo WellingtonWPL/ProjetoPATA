@@ -111,18 +111,22 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
 
             <div style="margin-left: 2%"
                 class="container-fluid">
-                <button class=" btn btn-primary"><i
+                <a href="{{url($cod_usuario.'/solicitacoes')}}">
+                    <button class=" btn btn-primary"><i
                         class="material-icons"
                         style>announcement</i>
-                    Notificações</button>
+                        Notificações</button>
+                </a>
                 <button class=" btn btn-alert"><i
                         class="material-icons"
                         style>edit</i>
                     Editar</button>
-                <button class=" btn btn-success"><i
+                <a href="{{url($cod_usuario.'/postar')}}">
+                    <button class=" btn btn-success"><i
                         class="material-icons"
                         style>library_add</i>
-                    Novo post</button>
+                        Novo post</button>
+                </a>
                 <button class=" btn btn-danger"><i
                         class="material-icons"
                         style>delete</i>

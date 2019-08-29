@@ -106,7 +106,7 @@
     {{-- <ul class="navbar-nav ml-auto"> --}}
     <li class="nav-item">
       <a class="nav-link"
-        href="{{url('perfil')}}">Perfil</a>
+        href="{{url('perfil/'.Auth::user()->cod_usuario)}}">Perfil</a>
     </li>
 
     <li class="nav-item dropdown">
