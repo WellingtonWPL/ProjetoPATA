@@ -70,10 +70,10 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'telefone' => $this->arrumaTelefone($data['fone']),
                 'contato' => $data['fone'],
-                'descricao' => 'teste',
+                'descricao' => $data['desc'],
                 'admin' => 'nao',
                 'cod_cidade' => '21',
-                'senha' => bcrypt($data['senha'])
+                'senha' => Hash::make($data['senha'])
                 
             ]);
         }
