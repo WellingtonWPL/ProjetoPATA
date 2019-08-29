@@ -27,11 +27,12 @@
 
 <div class="card" style="padding:5%; margin-left: 25%; margin-right:25%;">
     <h3>
-        Solicitar adoção de Totó <br>
+       {{$postagem->nome_animal}} <br>
     </h3>
-    Dono da postagem: José da Silva
+    Dono da postagem: <a href="{{url('/perfil/'.$postagem->cod_usuario_postagem)}}">{{$postagem->nome}}</a>
 
     <img src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
+
 
     <form action="{{url('/postagem/'.$cod_postagem.'/solicitar')}}" class="form" method="post">
         @csrf

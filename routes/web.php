@@ -31,9 +31,8 @@ Route::get('/postagem/{cod_postagem}/denunciar', function($cod_postagem){
   return view('denunciaPostagem', ['cod_postagem'=> $cod_postagem]);
 });
 
-Route::get('/postagem/{cod_postagem}/solicitar', function($cod_postagem){
-  return view('solicitacaoPostagem', ['cod_postagem'=> $cod_postagem]);
-});
+Route::get('/postagem/{cod_postagem}/solicitar', 'SolicitacaoController@mostrar');
+
 Route::post('/postagem/{cod_postagem}/solicitar', 'SolicitacaoController@solicitar');
 
 
