@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\PostagemDoAnimal;
 use App\Solicitacao;
+use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +48,7 @@ class SolicitacaoController extends Controller
         ->join('Postagem_do_animal', 'Postagem_do_animal.cod_postagem', '=', 'Solicitacao.cod_postagem')
         ->join('Usuario', 'Solicitacao.cod_usuario_solicitante', '=', 'Usuario.cod_usuario')
         ->where('Postagem_do_animal.cod_usuario_postagem', $cod_usuario)
+        ->where('recusada', 'nao')
         ->get()
         ;
 
@@ -53,6 +56,39 @@ class SolicitacaoController extends Controller
 
         return view('visualizaPedidos',compact('cod_usuario', 'solicitacoes'));
 
+
+    }
+
+    public function aceitarSolicitacao(Request $r){
+
+        // dd($r->Aceitar);
+        // dd($r->Recusar);
+        // dd($r->postagem);
+        // dd($r->donoPost);
+        $postagem =PostagemDoAnimal::where('cod_postagem', $r->postagem )->first();
+        // dd($postageSm);
+        if (isset($r->Aceitar)) {
+            $postagem->cod_usuario_adotante = $r->solicitante;
+            $postagem->save();
+
+        }else{
+           $solicitacao = \DB::table('Solicitacao')
+           ->where('cod_usuario_solicitante', $r->solicitante)
+            ->where('cod_postagem', $r->postagem)
+            ->update(['recusada' => 'sim']);
+            // dd($solicitacao);
+            // $solicitacao->recusada ='sim';
+            // $solicitacao->save();
+        }
+
+        // troca de contatos
+
+
+        return redirect($r->donoPost.'/solicitacoes');
+    }
+
+    public static function getUsuario($cod){
+        return Usuario::where('cod_usuario', $cod)->first();
 
     }
 }

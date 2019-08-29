@@ -55,6 +55,8 @@ Route::get('/{cod_usuario}/postar', function($codUsuario){
 });
 
 Route::get('/{cod_usuario}/solicitacoes', 'SolicitacaoController@mostrarPedidos');
+Route::post('/{cod_usuario}/solicitacoes', 'SolicitacaoController@aceitarSolicitacao');
+
 
 
 Route::get('/perfil/{cod_usuario}', 'PerfilController@mostrar');
