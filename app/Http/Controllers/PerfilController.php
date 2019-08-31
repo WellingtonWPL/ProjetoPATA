@@ -14,6 +14,7 @@ class PerfilController extends Controller
         // // // dd($cod);
         $avaliacoes = \DB::table('Postagem_do_animal')
         ->where('cod_usuario_postagem', $cod)
+        ->where('avaliacao', '!=', NULL)
         ->get();
 
         if($avaliacoes==NULL){

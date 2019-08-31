@@ -18,14 +18,16 @@ class ListaController extends Controller
         // $postagens = PostagemDoAnimal::all();
         // // $porte = Porte::all();
         $postagens=\DB::table('Postagem_do_animal')
-            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')->get();
+            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
+            ->where('cod_usuario_adotante', NULL)
+            ->get();
         // dd($coiso);]
 
         $estados = Estado::all();
         $cidades = Cidade::all();
         // dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
-
+        // dd($postagens);
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
 
 

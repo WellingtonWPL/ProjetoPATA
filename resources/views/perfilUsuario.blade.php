@@ -176,7 +176,7 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
                     class="img-fluid rounded">
                     {{-- </a> --}}
             </div>
-            <div class="col-9">
+            <div class="col-6">
                 <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
                     <h2>{{$postagem->nome_animal}}</h2>
                 </a>
@@ -200,6 +200,18 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
 
 Porte {{$postagem->tipo_porte}} <br>
 {{-- Porte {{}} <br> --}}
+</div>
+<div class="col-3">
+    <br><br>
+
+@if ($postagem->avaliacao==NULL)
+
+@else
+Avaliação:
+    @for ($i = 0; $i < $postagem->avaliacao; $i++)
+        <i class=" material-icons">pets</i>
+    @endfor
+@endif
 </div>
 
 </div>

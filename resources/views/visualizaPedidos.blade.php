@@ -3,6 +3,15 @@
 @section('conteudo')
 @php
 use App\Http\Controllers\SolicitacaoController;
+
+
+$usuarioLogado = Auth::user();
+if($cod_usuario!=$usuarioLogado->cod_usuario){
+    // dd('ghujl');
+    return redirect('perfil/'.$cod_usuario);
+}
+
+
 @endphp
 
 <div class="card">
@@ -70,7 +79,7 @@ use App\Http\Controllers\SolicitacaoController;
 	<div class='card-body'>
 		<h2>Adoções em andamento</h2>
 
-		@foreach ($solicitacoes as $solicitacao)
+		 @foreach ($solicitacoes as $solicitacao)
 		@if ($solicitacao->cod_usuario_adotante != null)
 
 		@php
@@ -94,18 +103,83 @@ use App\Http\Controllers\SolicitacaoController;
 		{{$adotante->contato}}
 	</div>
 
-	<div class="col-4">
-
-		<button class="btn ">Finalizar</button>
-
-	</div>
-	</div>
-
-		@endif
-		<br>
-		@endforeach
-	</div>
 </div>
+
+@endif
+<br>
+@endforeach
+	</div>
+    </div>
+    <br>
+
+<div class="card">
+        <div class='card-body'>
+            <h2>Suas adoções em andamento</h2>
+
+            @php
+                // dd($suasSolicitacoes);
+            @endphp
+            @foreach ($suasSolicitacoes as $suasSol)
+            @if ($suasSol->avaliacao == NULL)
+
+            <div class="row">
+                <div class="col">
+
+                    Adoção de {{$suasSol->nome_animal}} (postagem #{{ $suasSol->cod_postagem}}) <br>
+                    Doador: <a href="  {{url('/perfil/'.$suasSol->cod_usuario)}}  ">{{ $suasSol->nome}}</a> <br>
+                    Contato: {{ $suasSol->contato}} <br>
+                </div>
+                <div class="col-4">
+                    <a href="{{url('/postagem/'.$suasSol->cod_postagem.'/avaliar')}}">
+                        <button class="btn ">Finalizar</button>
+                    </a>
+                </div>
+
+            </div>
+
+            @endif
+
+            @endforeach
+        </div>
+</div>
+
+<br>
+<div class="card">
+        <div class='card-body'>
+            <h2>Suas adoções Finalizadas</h2>
+
+            @php
+                // dd($suasSolicitacoes);
+            @endphp
+            @foreach ($suasSolicitacoes as $suasSol)
+            @if ($suasSol->avaliacao != NULL)
+
+            <div class="row">
+                <div class="col">
+
+                    Adoção de {{$suasSol->nome_animal}} (postagem #{{ $suasSol->cod_postagem}}) <br>
+                    Doador: <a href="  {{url('/perfil/'.$suasSol->cod_usuario)}}  ">{{ $suasSol->nome}}</a> <br>
+                    Contato: {{ $suasSol->contato}} <br>
+                </div>
+                <div class="col-4">
+                    <a href="{{url('/postagem/'.$suasSol->cod_postagem.'/avaliar')}}">
+                        <button class="btn btn-block">Editar avaliação</button>
+                    </a>
+                </div>
+
+            </div>
+
+            @endif
+
+            @endforeach
+        </div>
+</div>
+
+
+
+
+
+
 
 @endsection
 

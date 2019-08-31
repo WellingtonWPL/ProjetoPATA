@@ -44,6 +44,8 @@ class SolicitacaoController extends Controller
     }
 
     public function mostrarPedidos($cod_usuario){
+
+        #solicitações para o usuario logado
         $solicitacoes = \DB::table('Solicitacao')
         ->join('Postagem_do_animal', 'Postagem_do_animal.cod_postagem', '=', 'Solicitacao.cod_postagem')
         ->join('Usuario', 'Solicitacao.cod_usuario_solicitante', '=', 'Usuario.cod_usuario')
@@ -54,7 +56,18 @@ class SolicitacaoController extends Controller
 
         // dd($solicitacoes);
 
-        return view('visualizaPedidos',compact('cod_usuario', 'solicitacoes'));
+        //solicitações do usuario logado para outros usuarios
+        $usuarioLogado= Auth::user();
+
+        $suasSolicitacoes = \DB::table('Postagem_do_animal')
+        ->join('Usuario', 'Usuario.cod_usuario', '=', 'Postagem_do_animal.cod_usuario_postagem')
+        ->where('cod_usuario_adotante', $usuarioLogado->cod_usuario)
+        ->get();
+        // dd($suasSolicitacoes);
+
+
+
+        return view('visualizaPedidos',compact('cod_usuario', 'solicitacoes', 'suasSolicitacoes'));
 
 
     }
@@ -91,5 +104,16 @@ class SolicitacaoController extends Controller
         return Usuario::where('cod_usuario', $cod)->first();
 
     }
+
+    public function avaliar($cod_postagem, Request $r){
+        // dd($r->nota);
+        $usuario= Auth::user();
+        \DB::table('Postagem_do_animal')
+        ->where('cod_postagem', $cod_postagem)
+        ->update(['avaliacao'=> $r->nota]);
+        return redirect($usuario->cod_usuario.'/solicitacoes');
+    }
+
+
 }
 

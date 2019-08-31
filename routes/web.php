@@ -38,6 +38,12 @@ Route::get('/postagem/{cod_postagem}/solicitar', 'SolicitacaoController@mostrar'
 
 Route::post('/postagem/{cod_postagem}/solicitar', 'SolicitacaoController@solicitar');
 
+Route::get('/postagem/{cod_postagem}/avaliar', function($cod_postagem){
+  return view('avaliarPostagem', ['cod_postagem'=>$cod_postagem]);
+});
+
+
+Route::post('/postagem/{cod_postagem}/avaliar', 'SolicitacaoController@avaliar');
 
 
 Route::get('lista', 'ListaController@mostrar');
@@ -72,3 +78,5 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
+
+
