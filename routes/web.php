@@ -51,10 +51,9 @@ Route::post('/postagem/{cod_postagem}/avaliar', 'SolicitacaoController@avaliar')
 Route::get('lista', 'ListaController@mostrar');
 Route::post('lista', 'ListaController@pesquisa');
 
-Route::get('/admin', function(){
-  return view('vizualizaDenunciaAdmin');
-
-});
+Route::get('/admin', 'AdminController@mostrar' );
+Route::get('/admin/excluir/{cod_postagem}', 'AdminController@excluir');
+Route::get('/admin/restaurar/{cod_postagem}', 'AdminController@restaurar');
 
 
 Route::get('/{cod_usuario}/postar', function($codUsuario){

@@ -28,6 +28,7 @@ class CreateDenunciaTable extends Migration
             $table->unsignedInteger('cod_usuario_denunciante');
             $table->unsignedInteger('cod_postagem_denunciada');
             $table->unsignedInteger('cod_motivo_denuncia');
+            $table->enum('finalizada', ['sim', 'nao'])->default('nao');
 
             $table->index(["cod_usuario_denunciante"], 'cod_denunciante_idx');
 

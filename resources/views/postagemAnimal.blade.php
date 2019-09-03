@@ -65,6 +65,11 @@
                     Esse animal já foi adotado ou está em processo de adoção.
                   </div>
                 @endif
+                @if($postagem->listagem_postagem=='nao')
+                <div class="alert alert-info" role="alert">
+                        Essa postagem foi denunciada e está em processo de moderação.
+                      </div>
+                @endif
 
                 <b>Nome:</b>  {{$postagem->nome_animal}} <br>
                 <b>Sexo:</b>  {{$postagem->sexo}} <br>
@@ -104,7 +109,7 @@
         --}}
 
         <br>
-        @if ($adotado)
+        @if ($adotado ||  $postagem->listagem_postagem=='nao')
 
         @else
 
