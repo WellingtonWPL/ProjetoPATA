@@ -31,6 +31,7 @@ class CreateUsuarioTable extends Migration
             $table->text('descricao')->nullable();
             $table->enum('admin', ['sim', 'nao']);
             $table->unsignedInteger('cod_cidade');
+            $table->enum('oculto', ['sim', 'nao'])->default('nao');
             $table->rememberToken();
 
             $table->index(["cod_cidade"], 'cod_cidade_idx');
