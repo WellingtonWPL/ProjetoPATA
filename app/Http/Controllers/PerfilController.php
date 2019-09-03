@@ -7,6 +7,11 @@ use App\Estado;
 use App\PostagemDoAnimal;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Hash;
+// use AuthenticatesUsers {
+//     logout as performLogout;
+// }
 
 class PerfilController extends Controller
 {
@@ -39,6 +44,10 @@ class PerfilController extends Controller
 
     public function mostrar($cod_usuario){
         $usuario = User::where('cod_usuario', $cod_usuario)->get();
+
+        if($usuario[0]->oculto=='sim'){
+            return view('sucesso', ['msg'=>'Usuario excluido']);
+        }
         return view('perfilUsuario', ['cod_usuario'=>$cod_usuario, 'usuario'=>$usuario]);
     }
 
@@ -63,6 +72,49 @@ class PerfilController extends Controller
         // dd($estado[0]->sigla_estado );
         return[$cidade[0]->nome_cidade, $estado[0]->sigla_estado ];
 
+
+    }
+
+    public function editar($cod_usuario){
+        $usuario= User::where('cod_usuario',$cod_usuario)->first();
+        // dd($usuario);
+        $cidades = Cidade::all();
+        $estados = Estado::all();
+        return view('editarPerfil', compact('usuario', 'estados', 'cidades'));
+
+    }
+    public function inserirEdicao($cod_usuario, Request $r){
+        if($r->cidade=="Selecione"){
+            return redirect('perfil/'.$cod_usuario.'/editar');
+
+
+        }
+
+        $usuario= User::where('cod_usuario',$cod_usuario)->first();
+        //  dd($usuario);
+        $usuario->nome = $r->nome;
+        $usuario->email = $r->email;
+        $usuario->cod_cidade = $r->cidade;
+        $usuario->descricao= $r->desc;
+        $usuario->save();
+        return redirect('perfil/'.$cod_usuario);
+    }
+
+    public function excluirPerfil($cod_usuario, Request $r){
+        $usuario = Auth::user();
+        User::where('cod_usuario', $cod_usuario)
+              ->update(['oculto'=> 'sim']);
+
+        PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)
+                ->update(['listagem_postagem' => 'nao']);
+
+                // return redirect('logout');
+                // return route('logout');
+                 __('Logout');
+                // $this->performLogout($r);
+                // dd('show');
+                Auth::logout();
+                return redirect()->route('login');
 
     }
 

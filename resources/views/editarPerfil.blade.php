@@ -2,9 +2,6 @@
 
 @section('conteudo')
 
-@php
-
-@endphp
 
 
 
@@ -37,12 +34,14 @@
 
 </script>
 <div class="card" style="padding:5%;">
-<h1>Cadastro</h1>
-<form method="POST" action="{{ route('register') }}">
-    {{ csrf_field() }}
+<h1>Editar informações</h1>
+<form method="POST" action="{{ url('/perfil/'.$usuario->cod_usuario.'/editar')}}">
+    {{-- {{ csrf_field() }} --}}
+    @csrf
     <div class="form-group">
         Nome
-        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome">
+    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value=" {{$usuario->nome}}" required autocomplete="name" autofocus
+        >
         <div class="col-md-6">
             @if ($errors->has('nome'))
                 <span class="invalid-feedback" role="alert">
@@ -53,7 +52,7 @@
     </div>
     <div class="form-group">
         E-mail
-        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="email" required>
+        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $usuario->email}}" required autocomplete="email" id="email" placeholder="email" required>
         <div class="col-md-6">
             @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">
@@ -62,30 +61,7 @@
             @endif
         </div>
     </div>
-    <div class="form-group">
-        Senha
-        <input id="senha" type="password" class="form-control{{ $errors->has('senha') ? ' is-invalid' : '' }}" name="senha" required autocomplete="new-password" placeholder="Senha">
-        <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
-        @if ($errors->has('senha'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('senha') }}</strong>
-            </span>
-        @endif
-    </div>
-    <div class="form-group">
-        Repetir senha
-        <input id="password-confirm" type="password" placeholder="senha" class="form-control" name="password_confirmation" required autocomplete="new-password">
-        <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
-        <span id='message'></span>
-    </div>
-
-    <div class="form-group">
-        Celular
-        <input id="fone" type="text" name="fone" class="form-control" placeholder="(99) 9999-9999"required>
-    </div>
-    {{-- <div class="row"> --}}
-
-        Estado
+     Estado
             <select class="estado form-control">
                 <option value="estado" selected>Selecione
                 </option>
@@ -115,14 +91,18 @@
         <input type="file" class="form-control-file">
 
     </div>
+
+    @php
+        //  dd($usuario->descricao);
+    @endphp
     <div class="form-group">
         Descrição pessoal
-        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5" ></textarea>
+        <textarea name="desc" class="form-control"  rows="5" value = " ">{{$usuario->descricao}}</textarea>
 
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <button type="submit" class="btn btn-primary">Editar</button>
 
 </form>
 </div>
@@ -153,6 +133,7 @@
 
                      });
     </script>
+
 
 
 @endsection

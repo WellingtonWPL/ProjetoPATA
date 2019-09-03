@@ -6,6 +6,7 @@ use App\PostagemDoAnimal;
 use App\Porte;
 use App\Especie;
 use App\Cidade;
+use App\Denuncia;
 use App\Estado;
 
 
@@ -160,5 +161,12 @@ class ListaController extends Controller
         return $fotos;
 
     }
+
+    // public static function temDenuncia($cod_postagem){
+    //     $denuncias= Denuncia::all();
+
+
+
+    // }
 
 }

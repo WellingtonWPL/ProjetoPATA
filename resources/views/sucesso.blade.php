@@ -7,7 +7,7 @@
 </div>
 
 <script>
-setTimeout(location.href = "{{url('/home')}}",15000);
+setTimeout(function(){location.href = "{{url('/home')}}"}, 3000);
 </script>
 
 

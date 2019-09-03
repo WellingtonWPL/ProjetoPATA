@@ -176,11 +176,13 @@ use \app\Http\Controllers\ListaController;
 
 {{-- mostrar os posts --}}
 @foreach ($postagens as $postagem)
+@if ( ($postagem->listagem_postagem)=='sim' && $postagem->avaliacao==NULL)
 
 @php
 $fotos =
 ListaController::getFotosAnimal($postagem->cod_postagem);
 @endphp
+
 <div class="card">
 
 
@@ -188,47 +190,50 @@ ListaController::getFotosAnimal($postagem->cod_postagem);
     <div class="row " id="" class="card-body">
         <div class="col-3">
             <a
-                href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+            href="{{url('/postagem/'.$postagem->cod_postagem)}}">
 
-                @if ($fotos->isEmpty())
-                <img src="{{url('img/animal_sem_foto.png')}}"
-                    alt="Postagem sem foto">
-                @else
-                <img src="{{url('img/'.$fotos[0])}}"
-                    class="img-fluid rounded">
-                @endif
+            @if ($fotos->isEmpty())
+            <img src="{{url('img/animal_sem_foto.png')}}"
+            alt="Postagem sem foto">
+            @else
+            <img src="{{url('img/'.$fotos[0])}}"
+            class="img-fluid rounded">
+            @endif
 
 
 
-            </a>
-        </div>
-        <div class="col-9">
-            {{-- nome --}}
-            <a
-                href="{{url('/postagem/'.$postagem->cod_postagem)}}">
-                <h2>{{$postagem->nome_animal}}</h2>
-            </a>
-            {{-- sexo --}}
-            {{$postagem->sexo}} <br>
-            {{-- idade --}}
-            @php
+        </a>
+    </div>
+    <div class="col-9">
+        {{-- nome --}}
+        <a
+        href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+        <h2>{{$postagem->nome_animal}}</h2>
+    </a>
+    {{-- sexo --}}
+    {{$postagem->sexo}} <br>
+    {{-- idade --}}
+    @php
             if ($postagem->nascimento!=NULL) {
 
-            $idade=ListaController::calcIdade($postagem->nascimento);
-            if ($idade<1.0) { echo 'Menos de um ano<br>' ;
-                }elseif ($idade==1.0) { echo '1 ano<br>' ;
-                }else{ echo (int) $idade." anos<br>";
-                }
-                }
-                @endphp
+                $idade=ListaController::calcIdade($postagem->nascimento);
+                if ($idade<1.0) { echo 'Menos de um ano<br>' ;
+            }elseif ($idade==1.0) { echo '1 ano<br>' ;
+        }else{ echo (int) $idade." anos<br>";
+    }
+}
+@endphp
 
-                {{-- porte --}}
-                Porte {{$postagem->tipo_porte}} <br>
-        </div>
+{{-- porte --}}
+Porte {{$postagem->tipo_porte}} <br>
+</div>
 
-    </div>
+</div>
 </div>
 <br>
+
+
+@endif
 @endforeach
 
 

@@ -62,7 +62,7 @@
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ListaController;
 
-// dd($usuario);
+
 $donoPerfil = False;
 
 if (Auth::check()){
@@ -117,17 +117,24 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
                         style>announcement</i>
                         Notificações</button>
                 </a>
-                <button class=" btn btn-alert"><i
+                <a href="{{url('perfil/'.$cod_usuario.'/editar')}}">
+
+                    <button class=" btn btn-alert"><i
                         class="material-icons"
                         style>edit</i>
-                    Editar</button>
+                        Editar</button>
+                    </a>
+
                 <a href="{{url($cod_usuario.'/postar')}}">
                     <button class=" btn btn-success"><i
                         class="material-icons"
                         style>library_add</i>
                         Novo post</button>
                 </a>
-                <button class=" btn btn-danger"><i
+                <button class=" btn btn-danger"
+
+                type="button" data-toggle="modal" data-target="#myModal"
+                ><i
                         class="material-icons"
                         style>delete</i>
                     Deletar</button>
@@ -144,6 +151,57 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
             </p>
         </div>
     </div>
+
+<script>
+// $(function funcaoModal() {
+//    $('#myModal').modal('toggle');
+// });
+</script>
+
+{{-- modal --}}
+
+<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          {{-- header modal --}}
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Você tem certeza que quer excluir sua conta? </h4>
+              <br>
+            </div>
+            {{-- corpo modal --}}
+
+            <div class="modal-body">
+                <form action="{{url('/perfil/'.$cod_usuario.'/excluir')}}" method="POST">
+                    @csrf
+                    (Você poderá recuperá-la no futuro.)
+                    <br>
+
+                    {{-- <input type="submit" class="btn btn btn-lg " value= "Sim">
+
+                    <input type="cancel" class="btn btn-default" value= "Não"> --}}
+
+                    <button class="btn btn-danger" type="submit" >Sim</button>
+                    {{-- <button  class="btn btn-default"  >Não</button> --}}
+                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Não</button>
+                </form>
+
+            </div>
+            </div>
+
+
+            {{-- footer do modal --}}
+            <div class="modal-footer">
+              {{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
+            </div>
+          </div>
+
+        </div>
+      {{-- </div>
+    </div> --}}
+
+
 
 
     {{-- postagens --}}
