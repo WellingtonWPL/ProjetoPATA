@@ -21,6 +21,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+       
 
     /**
      * Where to redirect users after login.
@@ -28,6 +29,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/lista';
+    
 
     /**
      * Create a new controller instance.
@@ -39,6 +41,8 @@ class LoginController extends Controller
         
         $this->middleware('guest')->except('logout');
     }
+
+    
 
     
 

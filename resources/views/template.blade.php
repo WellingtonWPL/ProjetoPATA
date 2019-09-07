@@ -49,6 +49,7 @@
     crossorigin="anonymous"></script>
 
   <style>
+    
     ul li {
       list-style: none;
     }
@@ -59,7 +60,8 @@
   </style>
 </head>
 
-<body>
+<body style="background-image: url('/img/patas.png'); ">
+  
   <script>
     window.addEventListener('load', function() {
         changeBG('#eeeeee');
@@ -69,15 +71,20 @@
   <nav
     class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand"
-        href="{{url('/lista')}}">Pata</a>
-      <button class="navbar-toggler" data-toggle="collapse"
+      <a class="navbar-brand" href="#">
+            <img style="max-width: 10%; height: auto;" src="{{asset('/img/logo.png')}}" alt="pata">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      {{-- <a class="navbar-brand" href="{{url('/lista')}}"><img style="max-width: 30%; height: auto;" src="{{asset('/img/teste.png')}}" alt="pata"></a> --}}
+      {{-- <button class="navbar-toggler" data-toggle="collapse"
         data-target="#navbarResponsive"
         aria-controls="navbarResponsive"
         aria-expanded="false"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> --}}
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link"
@@ -121,14 +128,14 @@
       <div class="dropdown-menu dropdown-menu-right"
         aria-labelledby="navbarDropdown">
         <a class="dropdown-item"
-          href="{{ route('logout') }}"
+          href="{{ url('sair') }}"
           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
           {{ __('Logout') }}
         </a>
 
         <form id="logout-form"
-          action="{{ route('logout') }}" method="POST"
+          action="{{ url('sair') }}" method="POST"
           style="display: none;">
           @csrf
         </form>
