@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Cidade;
+use App\Estado;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +50,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        
+
         return Validator::make($data, [
             'nome' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.(new User())->getTable()],
@@ -56,7 +58,7 @@ class RegisterController extends Controller
             'password_confirmation' => ['required', 'string', 'min:8', 'same:senha' ],
             ]);
         }
-        
+
         /**
          * Create a new user instance after a valid registration.
          *
@@ -72,9 +74,9 @@ class RegisterController extends Controller
                 'contato' => $data['fone'],
                 'descricao' => $data['desc'],
                 'admin' => 'nao',
-                'cod_cidade' => '21',
+                'cod_cidade' => $data['cidade'],
                 'senha' => Hash::make($data['senha'])
-                
+
             ]);
         }
 
@@ -82,10 +84,12 @@ class RegisterController extends Controller
 
             $caracteresEspeciais = array("(", ")", " ", "-");
             return str_replace($caracteresEspeciais, "", $fone);
-            
+
         }
 
         public function showRegistrationForm(){
-            return view('cadastrar');
+            $estados = Estado::all();
+            $cidades = Cidade::all();
+            return view('cadastrar', compact('estados', 'cidades'));
         }
 }
