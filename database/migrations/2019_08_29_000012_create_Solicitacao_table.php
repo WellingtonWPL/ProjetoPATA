@@ -24,6 +24,7 @@ class CreateSolicitacaoTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedInteger('cod_usuario_solicitante');
             $table->unsignedInteger('cod_postagem');
+            $table->enum('recusada', ['sim', 'nao'])->default('nao');
 
             $table->index(["cod_usuario_solicitante"], 'cod_solicitante_idx');
 

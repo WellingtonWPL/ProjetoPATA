@@ -3,22 +3,22 @@
 @section('css')
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
-    
 
-    div button{       
-        margin: 2%;
-    }
-    
-    div img{
-        margin: 2%;
-        border-style: solid;
-        border-width: 1px;
-        /* width: 100%; */
-        max-height: 300px;
-        padding:10px;
-        
 
-    }
+        div button{
+            margin: 2%;
+        }
+
+        div img{
+            margin: 2%;
+            border-style: solid;
+            border-width: 1px;
+            /* width: 100%; */
+            max-height: 300px;
+            padding:10px;
+
+
+        }
 
     </style>
     @endsection
@@ -27,18 +27,22 @@
 
 <div class="card" style="padding:5%; margin-left: 25%; margin-right:25%;">
     <h3>
-        Solicitar adoção de Totó <br>
+       {{$postagem->nome_animal}} <br>
     </h3>
-    Dono da postagem: José da Silva
-    
+    Dono da postagem: <a href="{{url('/perfil/'.$postagem->cod_usuario_postagem)}}">{{$postagem->nome}}</a>
+
     <img src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
-    
-    <form action="" class="form">
 
 
-        <button type="submit" class="btn btn-success ">Solicitar</button>
+    <form action="{{url('/postagem/'.$cod_postagem.'/solicitar')}}" class="form" method="post">
+        @csrf
+
+        <input type="submit" class="btn btn-success" Value=" Solicitar">
+
+
+        {{-- <button type="submit" class="btn btn-success ">Solicitar</button> --}}
         <button type="" class="btn btn-danger ">Cancelar</button>
-        
+
 
 
 
@@ -47,5 +51,5 @@
 </div>
 
 
-    
+
 @endsection

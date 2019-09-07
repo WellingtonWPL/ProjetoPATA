@@ -25,14 +25,14 @@ class CreateUsuarioTable extends Migration
             $table->increments('cod_usuario');
             $table->string('nome', 100);
             $table->string('email', 100);
-            $table->string('senha');
+            $table->binary('senha');
             $table->string('telefone', 11);
             $table->string('contato', 50);
             $table->text('descricao')->nullable();
             $table->enum('admin', ['sim', 'nao']);
             $table->unsignedInteger('cod_cidade');
+            $table->enum('oculto', ['sim', 'nao'])->default('nao');
             $table->rememberToken();
-
 
             $table->index(["cod_cidade"], 'cod_cidade_idx');
 
