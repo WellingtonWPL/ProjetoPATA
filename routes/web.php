@@ -77,6 +77,8 @@ Route::get('teste', function () {
     return view('teste');
 });
 
+Route::post('/sair', 'UsuarioController@loggedOut')->name('sair');
+
 Route::post('/logar', 'UsuarioController@login')->name('logar')->middleware('guest');
 
 
