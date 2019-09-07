@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePorteTable extends Migration
+class CreateFotoPostagemTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Porte';
+    public $tableName = 'Foto_postagem';
 
     /**
      * Run the migrations.
-     * @table Porte
+     * @table Foto_postagem
      *
      * @return void
      */
@@ -22,11 +22,17 @@ class CreatePorteTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_porte');
-            $table->string('tipo_porte', 45);
+            $table->unsignedInteger('cod_foto_postagem');
+            $table->string('link_foto_postagem', 100);
+            $table->unsignedInteger('cod_postagem');
 
-            $table->unique(["tipo_porte"], 'tipo_porte_UNIQUE');
-            $table->unique(["cod_porte"], 'cod_porte_UNIQUE');
+            $table->index(["cod_postagem"], 'cod_postagem_idx');
+
+
+            $table->foreign('cod_postagem')
+                ->references('cod_usuario_adotante')->on('Postagem_do_animal')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 

@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFotoUsuarioTable extends Migration
+class CreateSolicitacaoTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Foto_usuario';
+    public $tableName = 'Solicitacao';
 
     /**
      * Run the migrations.
-     * @table Foto_usuario
+     * @table Solicitacao
      *
      * @return void
      */
@@ -22,17 +22,22 @@ class CreateFotoUsuarioTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_foto_usuario');
-            $table->unsignedInteger('cod_usuario');
-            $table->string('link_foto_usuario', 100);
+            $table->unsignedInteger('cod_usuario_solicitante');
+            $table->unsignedInteger('cod_postagem');
+            $table->enum('recusada', ['sim', 'nao'])->default('nao');
 
-            $table->unique(["cod_foto_usuario"], 'cod_foto_usuario_UNIQUE');
-           
-        });
+            $table->index(["cod_usuario_solicitante"], 'cod_solicitante_idx');
 
-        Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_usuario')
+            $table->index(["cod_postagem"], 'cod_postagem_idx');
+
+
+            $table->foreign('cod_usuario_solicitante')
                 ->references('cod_usuario')->on('Usuario')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
+            $table->foreign('cod_postagem')
+                ->references('cod_postagem')->on('Postagem_do_animal')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCidadeTable extends Migration
+class CreateEspecieTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Cidade';
+    public $tableName = 'Especie';
 
     /**
      * Run the migrations.
-     * @table Cidade
+     * @table Especie
      *
      * @return void
      */
@@ -22,19 +22,12 @@ class CreateCidadeTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_cidade');
-            $table->string('nome_cidade', 100);
-            $table->unsignedInteger('cod_estado');
+            $table->increments('cod_especie');
+            $table->string('nome_especie', 100);
 
-            $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
+            $table->unique(["nome_especie"], 'nome_especie_UNIQUE');
 
-        });
-
-        Schema::table($this->tableName, function (Blueprint $table) {
-            $table->foreign('cod_estado')
-                ->references('cod_estado')->on('Estado');
-                //->onDelete('no action')
-                //->onUpdate('no action');
+            $table->unique(["cod_especie"], 'cod_especie_UNIQUE');
         });
     }
 

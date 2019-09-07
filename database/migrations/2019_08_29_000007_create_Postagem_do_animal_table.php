@@ -24,50 +24,41 @@ class CreatePostagemDoAnimalTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('cod_postagem');
             $table->string('nome_animal', 100)->default('Sem Nome');
-            $table->char('sexo', 1)->nullable()->default('F');
+            $table->enum('sexo', ['macho', 'femea', 'indefinido'])->nullable()->default('indefinido');
             $table->date('nascimento')->nullable();
-            $table->binary('descricao_saude');
+            $table->text('descricao');
+            $table->enum('castrado', ['sim', 'nao', 'indefinido'])->nullable();
+            $table->enum('vacinacao_em_dia', ['sim', 'nao', 'indefinido'])->nullable();
+            $table->enum('vermifugado', ['sim', 'nao', 'indefinido'])->nullable();
+            $table->text('descricao_saude');
             $table->decimal('avaliacao', 3, 2)->nullable();
-            $table->char('adocao_finalizada', 3);
             $table->unsignedInteger('cod_usuario_adotante')->nullable();
-            $table->unsignedInteger('cod_porte');
             $table->unsignedInteger('cod_usuario_postagem');
+            $table->unsignedInteger('cod_porte');
             $table->unsignedInteger('cod_especie');
-            $table->char('listagem_postagem', 3);
+            $table->enum('listagem_postagem', ['sim', 'nao']);
 
+            $table->index(["cod_especie"], 'cod_especie_idx');
+
+            $table->index(["cod_usuario_adotante"], 'cod_adotante_idx');
+
+            $table->index(["cod_usuario_postagem"], 'cod_dono_post_idx');
 
             $table->unique(["cod_postagem"], 'cod_animal_UNIQUE');
 
 
-        });
+            $table->foreign('cod_especie')
+                ->references('cod_especie')->on('Especie')
+                ->onDelete('no action')
+                ->onUpdate('no action');
 
-       
-
-        Schema::table($this->tableName, function ($table) {
             $table->foreign('cod_usuario_adotante')
                 ->references('cod_usuario')->on('Usuario')
                 ->onDelete('no action')
                 ->onUpdate('no action');
-        });
 
-        Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_porte')
-                ->references('cod_porte')->on('Porte')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-        });
-        
-
-        Schema::table($this->tableName, function ($table) {
             $table->foreign('cod_usuario_postagem')
                 ->references('cod_usuario')->on('Usuario')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-        });
-
-         Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_especie')
-                ->references('cod_especie')->on('Especie')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

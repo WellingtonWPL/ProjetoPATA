@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEspecieTable extends Migration
+class CreateEstadoTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Especie';
+    public $tableName = 'Estado';
 
     /**
      * Run the migrations.
-     * @table Especie
+     * @table Estado
      *
      * @return void
      */
@@ -22,11 +22,13 @@ class CreateEspecieTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('cod_especie');
-            $table->string('nome_especie', 100);
+            $table->increments('cod_estado');
+            $table->string('nome_estado', 100);
+            $table->char('sigla_estado', 2);
 
-            $table->unique(["nome_especie"], 'nome_especie_UNIQUE');
-            $table->unique(["cod_especie"], 'cod_especie_UNIQUE');
+            $table->unique(["sigla_estado"], 'sigla_estado_UNIQUE');
+
+            $table->unique(["cod_estado"], 'cod_estado_UNIQUE');
         });
     }
 

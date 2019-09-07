@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMoradiaUsuarioTable extends Migration
+class CreateFotoUsuarioTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Moradia_usuario';
+    public $tableName = 'Foto_usuario';
 
     /**
      * Run the migrations.
-     * @table Moradia_usuario
+     * @table Foto_usuario
      *
      * @return void
      */
@@ -22,20 +22,15 @@ class CreateMoradiaUsuarioTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedInteger('cod_moradia');
-            $table->unsignedInteger('cod_usuario_morador');
+            $table->unsignedInteger('cod_usuario');
+            $table->string('link_foto_usuario', 100);
+            $table->increments('cod_foto_usuario');
 
-        });
-        Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_usuario_morador')
+            $table->index(["cod_usuario"], 'cod_usuario_idx');
+
+
+            $table->foreign('cod_usuario')
                 ->references('cod_usuario')->on('Usuario')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-        });
-
-        Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_moradia')
-                ->references('cod_moradia')->on('Moradia')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

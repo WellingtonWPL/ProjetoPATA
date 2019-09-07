@@ -3,15 +3,15 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Usuario extends Authenticatable
 {
     use Notifiable;
+
     protected $table = 'Usuario';
     protected $primaryKey = 'cod_usuario';
-    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,15 +27,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'senha', 'remember_token',
+        'senha','remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        //'email_verified_at' => 'datetime',
-    ];
+    public function getAuthPassword()
+    {
+        return md5($this->senha);
+    }
 }

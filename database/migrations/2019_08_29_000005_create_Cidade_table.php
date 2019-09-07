@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSolicitacaoTable extends Migration
+class CreateCidadeTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Solicitacao';
+    public $tableName = 'Cidade';
 
     /**
      * Run the migrations.
-     * @table Solicitacao
+     * @table Cidade
      *
      * @return void
      */
@@ -22,20 +22,17 @@ class CreateSolicitacaoTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedInteger('cod_usuario_solicitante');
-            $table->unsignedInteger('cod_postagem');
-        });
+            $table->increments('cod_cidade');
+            $table->string('nome_cidade', 100);
+            $table->unsignedInteger('cod_estado');
 
-         Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_usuario_solicitante')
-                ->references('cod_usuario')->on('Usuario')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-        });
+            $table->index(["cod_estado"], 'cod_estado_idx');
 
-        Schema::table($this->tableName, function ($table) {
-            $table->foreign('cod_postagem')
-                ->references('cod_postagem')->on('Postagem_do_animal')
+            $table->unique(["cod_cidade"], 'cod_cidade_UNIQUE');
+
+
+            $table->foreign('cod_estado')
+                ->references('cod_estado')->on('Estado')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

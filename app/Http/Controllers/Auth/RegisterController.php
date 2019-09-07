@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Cidade;
+use App\Estado;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/lista';
 
     /**
      * Create a new controller instance.
@@ -48,25 +50,46 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+        return Validator::make($data, [
+            'nome' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.(new User())->getTable()],
+            'senha' => ['required', 'string', 'min:8'],
+            'password_confirmation' => ['required', 'string', 'min:8', 'same:senha' ],
+            ]);
+        }
+
+        /**
+         * Create a new user instance after a valid registration.
+         *
+         * @param  array  $data
+         * @return \App\User
+         */
+        protected function create(array $data)
+        {
+            return User::create([
+                'nome' => $data['nome'],
+                'email' => $data['email'],
+                'telefone' => $this->arrumaTelefone($data['fone']),
+                'contato' => $data['fone'],
+                'descricao' => $data['desc'],
+                'admin' => 'nao',
+                'cod_cidade' => $data['cidade'],
+                'senha' => Hash::make($data['senha'])
+
+            ]);
+        }
+
+        private function arrumaTelefone($fone){
+
+            $caracteresEspeciais = array("(", ")", " ", "-");
+            return str_replace($caracteresEspeciais, "", $fone);
+
+        }
+
+        public function showRegistrationForm(){
+            $estados = Estado::all();
+            $cidades = Cidade::all();
+            return view('cadastrar', compact('estados', 'cidades'));
+        }
 }

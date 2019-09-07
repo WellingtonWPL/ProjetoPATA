@@ -1,11 +1,25 @@
 @extends('template')
+
+@section('css')
+<style>
+  p{
+    font-size: 30px;
+  }
+</style>
+    
+@endsection
+
 @section('conteudo')
 <header >
         <div style="text-align:center; margin-top: 20%; position: center;" >
           <div class="container">
             {{-- <h1 class="masthead-heading mb-0">One Page Wonder</h1>--}}
-            <h2 class="masthead-subheading mb-0">Clique no botão abaixo e conheça os candidatos.</h2>
-            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Explore!</a>
+            <p>o
+            <b>Projeto PATA</b>
+            tem o intuito de possibilitar a adoção de
+            todos os animais que precisam de um lar, 
+            sem distinção de raça ou especie</p>
+            <a href="/lista" class="btn btn-primary btn-xl rounded-pill mt-5">Conheça os animais cadastrados!</a>
           </div>
         </div>
         
