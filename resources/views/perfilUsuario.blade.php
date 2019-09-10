@@ -8,7 +8,7 @@
         vertical-align: middle;
     }
 
-    div a img {
+    #foto{
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -43,7 +43,7 @@
         margin: 2%;
     }
 
-    div img {
+    #foto {
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -79,7 +79,7 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
 
 
 <div id="perfil" style="float: right; align:center;">
-    <img src="{{url('img/perfil.jpg')}}"
+    <img id="foto" src="{{url('img/perfil.jpg')}}"
         class="img-fluid rounded">
     <br>
     <div align="center" style="align:center;">
@@ -230,7 +230,7 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
         <div class="card-body row">
             <div class="col-3">
                 {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}"> --}}
-                    <img src="{{url('img/dog.jpeg')}}"
+                    <img  id="foto" src="{{url('img/dog.jpeg')}}"
                     class="img-fluid rounded">
                     {{-- </a> --}}
             </div>
