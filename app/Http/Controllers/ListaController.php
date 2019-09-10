@@ -61,7 +61,20 @@ class ListaController extends Controller
                 INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte
                 INNER JOIN Usuario on Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
                 inner join Cidade on Cidade.cod_cidade = Usuario.cod_cidade
-                where ';
+                ';
+
+        //ver se tem algo setado para colocar o where
+        if( $_POST['pesquisa']!=''          ||
+            $_POST['cidade']!="Selecione"   ||
+            $_POST['especie']!="Selecione"  ||
+            isset($_POST['pequeno']) ||
+            isset($_POST['medio']) ||
+            isset($_POST['grande'])
+
+        ){
+            $query .= ' where ';
+        }
+
         if($_POST['pesquisa']!=''){
 
             $aux = explode(' ', $_POST['pesquisa']);
