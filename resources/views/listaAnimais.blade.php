@@ -25,7 +25,7 @@ use \app\Http\Controllers\ListaController;
         margin: 2%;
     }
 
-    div a img {
+    #foto-perfil {
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -84,18 +84,19 @@ use \app\Http\Controllers\ListaController;
                 @endforeach
             </select>
             Cidade
+            <div name="div_cidade" style="display: none;">
             <select name="cidade" class="form-control">
 
                 <option selected>Selecione</option>
                 @foreach ($cidades as $cidade)
                 <option
-                    class="cidade {{$cidade->cod_estado_cidade}}"
+                    class="cidade {{$cidade->cod_estado}}"
                     value="{{$cidade->cod_cidade}}">
                     {{$cidade->nome_cidade}}</option>
                 @endforeach
                 {{-- <option>Ponta Grossa</option> --}}
             </select>
-
+            </div>
         </div>
         <div class="col">
             Espécie
@@ -193,10 +194,10 @@ ListaController::getFotosAnimal($postagem->cod_postagem);
             href="{{url('/postagem/'.$postagem->cod_postagem)}}">
 
             @if ($fotos->isEmpty())
-            <img src="{{url('img/animal_sem_foto.png')}}"
+            <img id="foto-perfil" src="{{url('img/animal_sem_foto.png')}}"
             alt="Postagem sem foto">
             @else
-            <img src="{{url('img/'.$fotos[0])}}"
+            <img id="foto-perfil" src="{{url('img/'.$fotos[0])}}"
             class="img-fluid rounded">
             @endif
 
@@ -244,25 +245,30 @@ Porte {{$postagem->tipo_porte}} <br>
 
 <script>
     $(document).ready(function(){
-						$('.cidade').hide()
-						// alert('ta ok')
-						$('.estado').focusout(function(){
-								let id_estado = $(this).val()
-								$('.cidade').hide()
-								$('.' + id_estado).show()
+        $('.cidade').hide()
+         //alert('ta ok')
+        $('.estado').click(function(){
+            let id_estado = $(this).val()
+            if (id_estado === 'estado'){
+                $("div[name='div_cidade']").hide();
+            } else {
+                $("div[name='div_cidade']").show();
+                // console.log(id_estado)
+                $('.cidade').hide()
+                $('.' + id_estado).show()
+                //  alert('dsa');
+            }
+        })
+    })
 
-						})
-				})
+    $('[value="estado"]').click(function(){
 
-				 $('[name="estado"]').click(function(){
+        // ocultando todas
+        $('[name="cidades"] option').css('display', 'none');
 
+        // exibindo as do estado selecionado
+        $('[name="cidades"] .' + $(this).val()).css('display', '');
 
-					 // ocultando todas
-						 $('[name="cidades"] option').css('display', 'none');
-
-						// exibindo as do estado selecionado
-						 $('[name="cidades"] .' + $(this).val()).css('display', '');
-
-				});
+    });
 </script>
 @endsection
