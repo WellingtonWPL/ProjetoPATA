@@ -52,12 +52,18 @@ class ListaController extends Controller
 
 
     }
+
+    /*
+    Essa função precisa ser revista, mesmo sendo feita por mim lendo a documentação
+     posteriormente pude ver que ela por ser mais bem feita usando models ou o \DB
+     mas por enquando esta funcionando
+    */
     public function pesquisa(Request $r){
 
         // dd(($_POST));
 
 
-        $query='SELECT * FROM homestead.Postagem_do_animal
+        $query='SELECT * FROM Postagem_do_animal
                 INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte
                 INNER JOIN Usuario on Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
                 inner join Cidade on Cidade.cod_cidade = Usuario.cod_cidade
@@ -69,7 +75,10 @@ class ListaController extends Controller
             $_POST['especie']!="Selecione"  ||
             isset($_POST['pequeno']) ||
             isset($_POST['medio']) ||
-            isset($_POST['grande'])
+            isset($_POST['grande']) ||
+            isset($_POST['0-1']) ||
+             isset($_POST['1-3']) ||
+             isset($_POST['3+'])
 
         ){
             $query .= ' where ';
@@ -155,15 +164,55 @@ class ListaController extends Controller
         }
 
 
+
+        $hoje = ''.date('Y').'-'.date('m').'-'.date('d');
+        // dd($hoje);
+        $umAnoAntes=''.(date('Y')-1).'-'.date('m').'-'.date('d');
+        $tresAnosAntes = ''.(date('Y')-3).'-'.date('m').'-'.date('d');
+        // dd(date($hoje));
+        // dd($_POST);
+
+        if(isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']) ){
+            $query.= ' and (  ';
+
+        }
+        if(isset($_POST['0-1'])){
+            $query .='   nascimento >= \''.$umAnoAntes.'\' AND nascimento <= \''.$hoje.'\'';
+
+        }
+
+
+        if(isset($_POST['1-3'])){
+            if(isset($_POST['0-1'])){
+                $query .= ' or ';
+
+            }
+            $query .=' nascimento >= \''.$tresAnosAntes.'\' AND nascimento <= \''.$umAnoAntes.'\'';
+
+        }if(isset($_POST['3+'])){
+            if(isset($_POST['0-1']) || isset($_POST['1-3']) ){
+                $query .= ' or ';
+
+            }
+            $query .='  nascimento <= \''.$tresAnosAntes.'\'';
+        }
+
+        if(isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']) ){
+            $query.= ' )  ';
+
+        }
+
         // dd($query);
 
         $postagens = \DB::select($query);
+
+
 
         $estados = Estado::all();
         $cidades = Cidade::all();
         //  dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
-
+        // dd('das');
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
     }
 
