@@ -61,6 +61,10 @@ Route::get('/{cod_usuario}/postar', function($codUsuario){
 
 });
 
+Route::get('crop-image', 'ImageController@index');
+
+Route::post('crop-image', ['as'=>'upload.image','uses'=>'ImageController@uploadImage']);
+
 Route::get('/{cod_usuario}/solicitacoes', 'SolicitacaoController@mostrarPedidos');
 Route::post('/{cod_usuario}/solicitacoes', 'SolicitacaoController@aceitarSolicitacao');
 

@@ -1,7 +1,10 @@
 @extends('template')
 @section('css')
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+      
 <style>
     i {
         font-size: 24px !important;
@@ -53,6 +56,27 @@
 
 
     }
+    
+
+
+    .dot {
+        margin-left: 3px;
+        height: 25px;
+        width: 25px;
+        background-color: tomato;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    /* #tamanhoContentModal{
+        width: 1000px;
+        align-content: center;
+        margin-left: -50%;
+    }
+
+    #conteudoModal{
+        width: 100%;
+    } */
 </style>
 @endsection
 
@@ -66,14 +90,14 @@ use App\Http\Controllers\ListaController;
 $donoPerfil = False;
 
 if (Auth::check()){
-$usuarioLogado =(Auth::user());
-if($usuarioLogado->cod_usuario==$cod_usuario){
-$donoPerfil = True;
-}
+    $usuarioLogado =(Auth::user());
+    if($usuarioLogado->cod_usuario==$cod_usuario){
+        $donoPerfil = True;
+    }
 }
 
 $avaliacao = PerfilController::getAvaliacao($cod_usuario);
-
+$notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
 
 @endphp
 
@@ -112,32 +136,33 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
             <div style="margin-left: 2%"
                 class="container-fluid">
                 <a href="{{url($cod_usuario.'/solicitacoes')}}">
-                    <button class=" btn btn-primary"><i
+                    <button class="btn btn-primary"><i
                         class="material-icons"
                         style>announcement</i>
-                        Notificações</button>
+                    Notificações <span class="dot">{{ $notificaçoes }}</span></button>
+                    
                 </a>
                 <a href="{{url('perfil/'.$cod_usuario.'/editar')}}">
 
-                    <button class=" btn btn-alert"><i
+                    <button class="btn btn-alert"><i
                         class="material-icons"
                         style>edit</i>
                         Editar</button>
                     </a>
-
-                <a href="{{url($cod_usuario.'/postar')}}">
-                    <button class=" btn btn-success"><i
+                    <a href="{{url($cod_usuario.'/postar')}}">
+                    <button  class=" btn btn-success"><i
                         class="material-icons"
                         style>library_add</i>
                         Novo post</button>
-                </a>
-                <button class=" btn btn-danger"
+                    </a>
+                
 
-                type="button" data-toggle="modal" data-target="#myModal"
-                ><i
-                        class="material-icons"
-                        style>delete</i>
+                <button class=" btn btn-danger" type="button" data-toggle="modal" data-target="#myModal">
+                    <i class="material-icons" style>delete</i>
                     Deletar</button>
+
+                   
+
             </div>
             @endif
     </div>
@@ -152,12 +177,7 @@ $avaliacao = PerfilController::getAvaliacao($cod_usuario);
         </div>
     </div>
 
-<script>
-// $(function funcaoModal() {
-//    $('#myModal').modal('toggle');
-// });
-</script>
-
+    
 {{-- modal --}}
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -279,4 +299,8 @@ Avaliação:
 
 @endif
 
+
 @endsection
+
+
+
