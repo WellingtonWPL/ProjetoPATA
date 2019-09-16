@@ -271,14 +271,14 @@ $cod_usuario = $url[1];
             if(flag === 1){
                 count++;
                 img_id++;
-                if(count<=4){
+                if(count<=1){
                     html = '<div style="" id="img' + img_id + '" class="col-md-2 m-3 teste"><img style="max-width: 100px;" src="' + img + '" /> <span class="close" onclick="deleta(img' + img_id + ')">&times;</span></div>';
                     $("#preview-crop-image").append(html);
                     imagens.push(img);
                 }
                 else{
-                    count = 4;
-                    alert("Valor máximo de fotos atingidas");
+                    count = 1;
+                    alert("Você só pode inserir uma imagem no sistema!");
                 }
             }
         });

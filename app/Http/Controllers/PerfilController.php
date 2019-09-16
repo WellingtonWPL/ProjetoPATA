@@ -48,7 +48,8 @@ class PerfilController extends Controller
         if($usuario[0]->oculto=='sim'){
             return view('sucesso', ['msg'=>'Usuario excluido']);
         }
-        return view('perfilUsuario', ['cod_usuario'=>$cod_usuario, 'usuario'=>$usuario]);
+        // $foto = \DB::table('Foto_postagem')->where('cod_postagem', $cod_postagem)->first();
+        return view('perfilUsuario', ['cod_usuario'=>$cod_usuario, 'usuario'=>$usuario ]);
     }
 
     public static function getPostagens($cod_usuario){

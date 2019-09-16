@@ -246,12 +246,19 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
     @else
 
     @foreach ($postagens as $postagem)
+    @php
+        $foto = \DB::table('Foto_postagem')->where('cod_postagem', $postagem->cod_postagem)->first();
+    @endphp
     <div class="card">
         <div class="card-body row">
             <div class="col-3">
                 {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}"> --}}
-                    <img  id="foto" src="{{url('img/dog.jpeg')}}"
-                    class="img-fluid rounded">
+                    @if ($foto==NULL)
+                        <img src="{{url('img/animal_sem_foto.png')}}" id="foto"  class="" >
+                        
+                    @else
+                        <img src="{{url(''.$foto->link_foto_postagem)}}" id="foto"  class="img-fluid rounded" >
+                    @endif
                     {{-- </a> --}}
             </div>
             <div class="col-6">
