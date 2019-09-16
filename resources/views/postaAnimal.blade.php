@@ -208,7 +208,7 @@ $cod_usuario = $url[1];
                         <button class="btn btn-success salva">Postar</button>
                 </div>
                 <div id="resultado" name="resultado" >
-                    TESTE:
+                    
                 </div>
 
                 {{-- <button type="submit" class="btn btn-success salva">Postar</button> --}}
@@ -265,16 +265,14 @@ $cod_usuario = $url[1];
     $('.upload-image').on('click', function (ev) {
         resize.croppie('result', {
             type: 'canvas',
-            size:{
-                width: 100,
-                height: 100
-            }
+            size:'viewport'
+            
         }).then(function (img) {
             if(flag === 1){
                 count++;
                 img_id++;
                 if(count<=4){
-                    html = '<div id="img' + img_id + '" class="col-md-2 m-3 teste"><img  src="' + img + '" /> <span class="close" onclick="deleta(img' + img_id + ')">&times;</span></div>';
+                    html = '<div style="" id="img' + img_id + '" class="col-md-2 m-3 teste"><img style="max-width: 100px;" src="' + img + '" /> <span class="close" onclick="deleta(img' + img_id + ')">&times;</span></div>';
                     $("#preview-crop-image").append(html);
                     imagens.push(img);
                 }
@@ -430,7 +428,7 @@ $cod_usuario = $url[1];
                 url: "/salvaPost",
                 type: "POST",
                 data: {"nome": nome,
-                    //"fotos": imagens,
+                    "fotos": imagens,
                     "dataN": dataN,
                     "sexo": op_sexo,
                     "porte": op_porte,
@@ -445,7 +443,7 @@ $cod_usuario = $url[1];
                 // cache: false,
                 // contentType: false,
                 success: function( data ) {
-                    $("#resultado").html(data);
+                    //$("#resultado").html(data);
                     //console.log(data);
                     window.location = '/perfil/' + '{{$cod_usuario}}';
                 }

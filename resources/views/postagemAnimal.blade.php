@@ -47,18 +47,24 @@
 
 @section('conteudo')
 
+@php
+    // dd($foto);
+@endphp
 
 
 <div class="card">
 <div class="card-body">
 
     <div class="row ">
-        <div class="col-6 " style="align:center;">
-                <img id="foto-postagem" src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
-
+        <div class="col-3 " style="align:center;">
+            @if ($foto==NULL)
+            <img id="foto-postagem" src="{{url('img/animal_sem_foto.png')}}" class="img-fluid rounded" >
+            @else
+                <img id="foto-postagem" src="{{url($foto->link_foto_postagem)}}" class="img-fluid rounded" >
+            @endif
             </div>
 
-            <div class="col-6 ">
+            <div class="col-6 " style="float: left;">
                 <br>
                 @if ($adotado)
                 <div class="alert alert-info" role="alert">
