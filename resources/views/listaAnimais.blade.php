@@ -193,6 +193,7 @@ use \app\Http\Controllers\ListaController;
 
 @php
 $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
+
 @endphp
 
 <div class="card">
@@ -202,10 +203,10 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
             href="{{url('/postagem/'.$postagem->cod_postagem)}}">
 
             @if ($fotos->isEmpty())
-            <img id="foto-perfil" src="{{url('img/animal_sem_foto.png')}}"
-            alt="Postagem sem foto">
+                <img id="foto-perfil" src="{{url('img/animal_sem_foto.png')}}"
+                alt="Postagem sem foto">
             @else
-            <img id="foto-perfil" src="{{url('img/'.$fotos[0])}}"
+                <img id="foto-perfil" src="{{url(''.$fotos[0]->link_foto_postagem)}}"
             class="img-fluid rounded">
             @endif
             </a>
