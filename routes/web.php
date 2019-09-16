@@ -72,7 +72,7 @@ Route::get('/perfil/{cod_usuario}/editar', 'PerfilController@editar');
 Route::post('/perfil/{cod_usuario}/editar', 'PerfilController@inserirEdicao');
 Route::post('/perfil/{cod_usuario}/excluir', 'PerfilController@excluirPerfil');
 
-Route::get('/{cod_usuario}/notificacoes', 'NotificacoesController@');
+Route::get('/{cod_usuario}/notificacoes', 'NotificacoesController@mostraNotificacoes')->middleware('auth');
 
 
 Route::post('/salvaPost', 'PostagemController@inserirPostagem')->name('salvaPost'); 

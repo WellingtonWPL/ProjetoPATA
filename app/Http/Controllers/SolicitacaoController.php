@@ -44,7 +44,6 @@ class SolicitacaoController extends Controller
     }
 
     public function mostrarPedidos($cod_usuario){
-
         #solicitações para o usuario logado
         $solicitacoes = \DB::table('Solicitacao')
         ->join('Postagem_do_animal', 'Postagem_do_animal.cod_postagem', '=', 'Solicitacao.cod_postagem')

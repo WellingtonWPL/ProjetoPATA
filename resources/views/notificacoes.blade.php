@@ -11,7 +11,17 @@
         vertical-align: middle;
     }
 
-    div a img {
+    #foto-perfil {
+        margin: 1%;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #F5F5F5;
+        width: 80%;
+        max-height: 200px;
+        padding: 15px;
+    }
+
+    /* div a img {
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -21,7 +31,7 @@
         padding: 10px;
 
 
-    }
+    } */
 
     #campo {
         border-style: solid;
@@ -84,7 +94,8 @@
 
 @php
 use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\ListaController;
+use App\Http\Controllers\NotificacoesController; 
+use App\Http\Controllers\ListaController; 
 
 
 $donoPerfil = False;
@@ -113,7 +124,7 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
 
 
     <div id="campo" align="center">
-        <h2>POSTAGENS</h2>
+        <h2>NOTIFICAÇÕES</h2>
     </div>
     <br>
 
@@ -130,7 +141,7 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
         <div class="card-body row">
             <div class="col-3">
                 {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}"> --}}
-                    <img src="{{url('img/dog.jpeg')}}"
+                    <img id="foto-perfil" src="{{url('img/dog.jpeg')}}"
                     class="img-fluid rounded">
                     {{-- </a> --}}
             </div>
