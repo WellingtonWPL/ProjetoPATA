@@ -18,15 +18,17 @@ class ListaController extends Controller
     public function mostrar(){
         // $postagens = PostagemDoAnimal::all();
         // // $porte = Porte::all();
-        $postagens=\DB::table('Postagem_do_animal')
+        $postagens= \DB::table('Postagem_do_animal')
             ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
             ->where('cod_usuario_adotante', NULL)
             ->get();
         // dd($coiso);]
 
+
         $estados = Estado::all()->sortBy('sigla_estado');
         $cidades = Cidade::all()->sortBy('nome_cidade');
         // dd($cidades);
+
         $especies = Especie::orderBy('cod_especie')->get();
         // dd($postagens);
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
@@ -97,19 +99,19 @@ class ListaController extends Controller
             $query= substr($query,0,-3);
         }
         // dd($r->cidade!='Selecione');
-        if($_POST['cidade']!="Selecione" && $_POST['pesquisa']!=''){
+        if($_POST['cidade']!="cidade" && $_POST['pesquisa']!=''){
             $query.=' and ';
 
         }
 
 
 
-        if($_POST['cidade']!="Selecione"){
+        if($_POST['cidade']!="cidade"){
             $query.='Cidade.cod_cidade = '.$_POST['cidade'];
 
         }
 
-        if(($_POST['cidade']!="Selecione" || $r->pesquisa != '') && $_POST['especie']!="Selecione"){
+        if(($_POST['cidade']!="cidade" || $r->pesquisa != '') && $_POST['especie']!="Selecione"){
             $query .= ' and ';
         }
 
@@ -118,7 +120,7 @@ class ListaController extends Controller
             $query.='cod_especie = '.$_POST['especie'];
 
         }
-        if (($_POST['cidade']!="Selecione" ||
+        if (($_POST['cidade']!="cidade" ||
             $_POST['especie']!="Selecione" ||
             $_POST['pesquisa']!='')
             &&
@@ -215,6 +217,18 @@ class ListaController extends Controller
         $especies = Especie::orderBy('cod_especie')->get();
         // dd('das');
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
+    }
+
+    public static function buscaLocal($cod){
+        //$cod = \App\PostagemDoAnimal::where('cod_postagem', $r)->get();
+        $query = "SELECT Cidade.nome_cidade
+        FROM Cidade , Usuario , Postagem_do_animal
+        WHERE Postagem_do_animal.cod_postagem =  $cod
+        AND Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
+        AND Usuario.cod_cidade = Cidade.cod_cidade";
+        $local = \DB::select($query);
+        return $local;
+
     }
 
     public static function getFotosAnimal($cod){

@@ -25,17 +25,19 @@ use \app\Http\Controllers\ListaController;
         margin: 2%;
     }
 
+
     #foto-perfil {
+
         margin: 2%;
         border-style: solid;
         border-width: 1px;
         border-color: #F5F5F5;
         /* width: 100%; */
-        max-height: 150px;
-        padding: 10px;
+        /* max-height: 150px;
+        padding: 10px; */
 
 
-    }
+    /* } */
 
     #filtro {
         border-style: solid;
@@ -57,7 +59,8 @@ use \app\Http\Controllers\ListaController;
     {{-- <div class="col"> --}}
     {{-- <div class="input-group-prepend"> --}}
     <input class="form-control" name='pesquisa'
-        id="barraDePesquisa" placeholder="Pesquise aqui">
+           id="barraDePesquisa" placeholder="Pesquise aqui">
+    <br>
     {{-- <div class="input-group-text"><i class="material-icons">search</i></div> --}}
     {{-- </div> --}}
     {{-- </div> --}}
@@ -75,11 +78,11 @@ use \app\Http\Controllers\ListaController;
     <div class="row">
         <div class="col">
             Estado
-            <select class="estado form-control">
-                <option value="estado" selected>Selecione
-                </option>
+            <select name="estado" class="estado form-control">
+                <option value="estado" selected>Selecione</option>
                 @foreach ($estados as $estado)
                 <option value="{{ $estado->cod_estado }}">
+
                     {{$estado->sigla_estado}}</option>
                 @endforeach
             </select>
@@ -93,9 +96,21 @@ use \app\Http\Controllers\ListaController;
                     class="cidade {{$cidade->cod_estado}}"
                     value="{{$cidade->cod_cidade}}">
                     {{$cidade->nome_cidade}}</option>
+
                 @endforeach
-                {{-- <option>Ponta Grossa</option> --}}
             </select>
+            <div name="div_cidade" style="display: none;">
+                Cidade
+                <select name="cidade" id="cidade" class="form-control">
+                    <option value="cidade" selected>Selecione</option>
+                    @foreach ($cidades as $cidade)
+                    <option class="cidade {{$cidade->cod_estado}}"
+                            value="{{$cidade->cod_cidade}}">
+                            {{$cidade->nome_cidade}}
+                    </option>
+                    @endforeach
+                    {{-- <option>Ponta Grossa</option> --}}
+                </select>
             </div>
         </div>
         <div class="col">
@@ -180,14 +195,10 @@ use \app\Http\Controllers\ListaController;
 @if ( ($postagem->listagem_postagem)=='sim' && $postagem->avaliacao==NULL)
 
 @php
-$fotos =
-ListaController::getFotosAnimal($postagem->cod_postagem);
+$fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 @endphp
 
 <div class="card">
-
-
-
     <div class="row " id="" class="card-body">
         <div class="col-3">
             <a
@@ -200,55 +211,62 @@ ListaController::getFotosAnimal($postagem->cod_postagem);
             <img id="foto-perfil" src="{{url('img/'.$fotos[0])}}"
             class="img-fluid rounded">
             @endif
+            </a>
+        </div>
 
+        <div class="col-6">
+            <br>
+            {{-- nome --}}
+            <a
+            href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+            <h2>{{$postagem->nome_animal}}</h2>
+            </a>
+            <div class="row">
+                <div class="col-3">
+                    {{-- sexo --}}
+                @php
+                    echo "Gênero: " .ucfirst($postagem->sexo)."<br>";
 
+                    //{{-- idade --}}
 
-        </a>
+                    if ($postagem->nascimento!=NULL) {
+                        $idade=ListaController::calcIdade($postagem->nascimento);
+                        if ($idade<1.0) {
+                            echo 'Idade: Menos de um ano<br>' ;
+                        }
+                        elseif ($idade==1.0) {
+                            echo 'Idade: 1 ano<br>' ;
+                        }
+                        else {
+                            echo "Idade: ". (int) $idade." anos<br>";
+                        }
+                    }
+                @endphp
+                </div>
+                <div class="col-3">
+                @php
+                    //{{-- Local --}}
+                    $Local = ListaController::buscaLocal($postagem->cod_postagem);
+                    echo "Local: ".$Local['0']->nome_cidade."<br>";
+                @endphp
+                    {{-- porte --}}
+                    Porte: {{$postagem->tipo_porte}} <br>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-9">
-        {{-- nome --}}
-        <a
-        href="{{url('/postagem/'.$postagem->cod_postagem)}}">
-        <h2>{{$postagem->nome_animal}}</h2>
-    </a>
-    {{-- sexo --}}
-    {{$postagem->sexo}} <br>
-    {{-- idade --}}
-    @php
-            if ($postagem->nascimento!=NULL) {
-
-                $idade=ListaController::calcIdade($postagem->nascimento);
-                if ($idade<1.0) { echo 'Menos de um ano<br>' ;
-            }elseif ($idade==1.0) { echo '1 ano<br>' ;
-        }else{ echo (int) $idade." anos<br>";
-    }
-}
-@endphp
-
-{{-- porte --}}
-Porte {{$postagem->tipo_porte}} <br>
-</div>
-
-</div>
 </div>
 <br>
-
-
 @endif
 @endforeach
-
-
-
-
-
-
 
 <script>
     $(document).ready(function(){
         $('.cidade').hide()
          //alert('ta ok')
         $('.estado').click(function(){
-            let id_estado = $(this).val()
+            let id_estado = $(this).val();
+            $('#cidade').val('cidade');
             if (id_estado === 'estado'){
                 $("div[name='div_cidade']").hide();
             } else {

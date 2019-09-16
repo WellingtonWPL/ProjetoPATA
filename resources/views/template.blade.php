@@ -34,6 +34,7 @@
   <link
     href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <!-- Custom styles for this template -->
   <link href="/css/one-page-wonder.css" rel="stylesheet">
@@ -49,6 +50,10 @@
     crossorigin="anonymous"></script>
 
   <style>
+     i {
+        font-size: 24px !important;
+        vertical-align: middle;
+    }
 
     ul li {
       list-style: none;
@@ -57,22 +62,46 @@
     ul li a {
       color: aliceblue;
     }
+
+
+
   </style>
 </head>
+@php
+  use App\Http\Controllers\PerfilController;
+  if (Auth::check()){
+    $notificaçoes = PerfilController::getSolicitacoes(Auth::user()->cod_usuario);
+  }
+  else{
+    $notificaçoes = 0;
+  }
+
+
+@endphp
+
+@if ($notificaçoes >= 1)
+    <style>
+      #perfil{
+        color: tomato;
+      }
+    </style>
+
+@endif
+
 
 <body style="background-image: url('/img/patas.png'); ">
 
   <script>
-    window.addEventListener('load', function() {
-        changeBG('#eeeeee');
-    });
+    // window.addEventListener('load', function() {
+    //     changeBG('#eeeeee');
+    // });
   </script>
   <!-- Navigation -->
   <nav
-    class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-            <img style="max-width: 10%; height: auto;" src="{{asset('/img/logo.png')}}" alt="pata">
+            <img style="max-width:10%; height:auto; " src="{{asset('/img/logo.png')}}" alt="pata">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -89,7 +118,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
         <li class="nav-item">
           <a class="nav-link"
-            href="{{url('/lista')}}">Lista</a>
+            href="{{url('/lista')}}">Lista <i
+            class="material-icons">pets</i></a>
 
         </li>
 
@@ -97,24 +127,30 @@
         {{-- </ul> --}}
 
         @guest
-        {{-- <div class="collapse navbar-collapse" --}}
-          {{-- id="navbarResponsive"> --}}
+
+
+
+        <div class="collapse navbar-collapse"
+          id="navbarResponsive">
           {{-- <ul class="navbar-nav ml-auto"> --}}
           <li class="nav-item">
             <a class="nav-link"
-              href="{{url('register')}}">Cadastrar-se</a>
+              href="{{url('register')}}">Cadastrar-se <i
+              class="material-icons">assignment</i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link"
-              href="{{url('login')}}">Entrar</a>
+              href="{{url('login')}}">Entrar <i
+              class="material-icons">input</i></a>
           </li>
       </ul>
     </div>
     @else
     {{-- <ul class="navbar-nav ml-auto"> --}}
     <li class="nav-item">
-      <a class="nav-link"
-        href="{{url('perfil/'.Auth::user()->cod_usuario)}}">Perfil</a>
+      <a class="nav-link" id="perfil"
+        href="{{url('perfil/'.Auth::user()->cod_usuario)}}">Perfil <i
+        class="material-icons">face</i></a>
     </li>
 
     <li class="nav-item dropdown">
@@ -132,7 +168,7 @@
           href="{{ url('sair') }}"
           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-          {{ __('Logout') }}
+          {{ __('Sair') }}
         </a>
 
         <form id="logout-form"
@@ -158,19 +194,24 @@
   <footer class="py-3 bg-black fixed-bottom">
     <fieldset id="cores" style="margin-top: -10px">
       <button type="button" id="botao"
-        onclick="changeBG('#B39DDB')"
+        onclick="changeBackGround('lightblue')"
+        {{-- onclick="changeBG('#B39DDB')"  --}}
         class="btn btn-primary"></button>
       <button type="button" id="botao"
-        onclick="changeBG('#E6EE9C')"
+        {{-- onclick="changeBG('#E6EE9C')" --}}
+        onclick="changeBackGround('lightgreen')"
         class="btn btn-success"></button>
       <button type="button" id="botao"
-        onclick="changeBG('#ef9a9a')"
+        {{-- onclick="changeBG('#ef9a9a')" --}}
+        onclick="changeBackGround('#ef9a9a')"
         class="btn btn-danger"></button>
       <button type="button" id="botao"
-        onclick="changeBG('#FFF59D')"
+        {{-- onclick="changeBG('#FFF59D')" --}}
+        onclick="changeBackGround('#FFF59D')"
         class="btn btn-warning"></button>
       <button type="button" id="botao"
-        onclick="changeBG('#eeeeee')"
+        {{-- onclick="changeBG('#eeeeee')" --}}
+        onclick="changeBackGround('lightgrey')"
         class="btn btn-secondary"></button>
     </fieldset>
     <div class="container">
@@ -184,6 +225,22 @@
   <!-- Bootstrap core JavaScript -->
   <script
     src="/vendor/bootstrap/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+  $(document).ready(function(){
+        var cor = localStorage.getItem('cor');
+        if(cor === null){
+          cor = 'lightgrey'
+        }
+        //alert(cor);
+        document.body.style.backgroundColor = cor;
+  });
+
+  function changeBackGround(cor){
+    document.body.style.backgroundColor = cor;
+    localStorage.setItem('cor', cor);
+  }
+
   </script>
 
 </body>
