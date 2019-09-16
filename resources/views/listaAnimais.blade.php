@@ -254,7 +254,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
                 @endphp
                 </div>
                 <div class="col-4">
-                @php
+                @php 
                     //{{-- Local --}}
                     $Local = ListaController::buscaLocal($postagem->cod_postagem);
                     echo "Local: ".$Local['0']->nome_cidade."<br>";
