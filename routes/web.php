@@ -75,6 +75,7 @@ Route::get('/perfil/{cod_usuario}/editar', 'PerfilController@editar');
 Route::post('/perfil/{cod_usuario}/editar', 'PerfilController@inserirEdicao');
 Route::post('/perfil/{cod_usuario}/excluir', 'PerfilController@excluirPerfil');
 
+Route::post('/salvaPost', 'PostagemController@inserirPostagem')->name('salvaPost'); 
 
 
 Route::get('teste', function () {

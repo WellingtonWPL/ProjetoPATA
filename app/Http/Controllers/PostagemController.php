@@ -23,4 +23,22 @@ class PostagemController extends Controller
         //  dd($postagem);
         return view('postagemAnimal', ['postagem'=>$postagem]);
     }
+
+    public function inserirPostagem(request $data){
+        // Postagem::create([
+        //      'nome' => $data['nome'],
+        // //     // 'email' => $data['email'],
+        // //     // 'telefone' => $this->arrumaTelefone($data['fone']),
+        // //     // 'contato' => $data['fone'],
+        // //     // 'descricao' => $data['desc'],
+        // //     // 'admin' => 'nao',
+        // //     // 'cod_cidade' => $data['cidade'],
+        // //     // 'senha' => Hash::make($data['senha'])
+
+        //  ]);
+        dd($data);
+        //$input = $request->all();
+
+        //return response()->json([$request]);
+    }
 }
