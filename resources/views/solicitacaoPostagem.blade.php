@@ -9,7 +9,7 @@
             margin: 2%;
         }
 
-        div img{
+        #foto{
             margin: 2%;
             border-style: solid;
             border-width: 1px;
@@ -31,7 +31,7 @@
     </h3>
     Dono da postagem: <a href="{{url('/perfil/'.$postagem->cod_usuario_postagem)}}">{{$postagem->nome}}</a>
 
-    <img src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
+    <img src="{{url('img/dog.jpeg')}}" id="foto"  class="img-fluid rounded" >
 
 
     <form action="{{url('/postagem/'.$cod_postagem.'/solicitar')}}" class="form" method="post">
