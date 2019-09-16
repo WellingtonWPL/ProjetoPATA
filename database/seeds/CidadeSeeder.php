@@ -211,6 +211,20 @@ class CidadeSeeder extends Seeder
             ]
 
         );
+        DB::table('Cidade')->insert(
+            [
+            "nome_cidade" => "Ponta Grossa",
+            "cod_estado" => $this->codEstado('PR'),
+            ]
+
+        );
+        DB::table('Cidade')->insert(
+            [
+            "nome_cidade" => "Castro",
+            "cod_estado" => $this->codEstado('PR'),
+            ]
+
+        );
 
 
     }
