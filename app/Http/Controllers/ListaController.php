@@ -24,8 +24,8 @@ class ListaController extends Controller
             ->get();
         // dd($coiso);]
 
-        $estados = Estado::all();
-        $cidades = Cidade::all();
+        $estados = Estado::all()->sortBy('sigla_estado');
+        $cidades = Cidade::all()->sortBy('nome_cidade');
         // dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
         // dd($postagens);
@@ -208,8 +208,9 @@ class ListaController extends Controller
 
 
 
-        $estados = Estado::all();
-        $cidades = Cidade::all();
+
+        $estados = Estado::all()->sortBy('sigla_estado');
+        $cidades = Cidade::all()->sortBy('nome_cidade');
         //  dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
         // dd('das');
