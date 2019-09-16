@@ -25,9 +25,19 @@ use \app\Http\Controllers\ListaController;
         margin: 2%;
     }
 
-
     #foto-perfil {
+        margin: 1%;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #F5F5F5;
+        width: 80%;
+        max-height: 200px;
+        padding: 15px;
+    }
 
+    /* } */
+
+    /* div a img {
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -243,7 +253,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
                     }
                 @endphp
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                 @php
                     //{{-- Local --}}
                     $Local = ListaController::buscaLocal($postagem->cod_postagem);
