@@ -60,9 +60,17 @@ class PerfilController extends Controller
 
     }
 
+    public static function getSolicitacoes($cod_usuario){
+        $solicitacoes = \DB::table('solicitacao')
+        ->join('Postagem_do_animal', 'Postagem_do_animal.cod_postagem', '=', 'Solicitacao.cod_postagem')
+        ->join('Usuario', 'Usuario.cod_usuario', '=', 'cod_usuario_postagem')
+        ->where('Usuario.cod_usuario', $cod_usuario)->get();
+        return count($solicitacoes);     
+    }
+
     public static function getCidade($cod_cidade){
 
-        $cidade =Cidade::where('cod_cidade', $cod_cidade)->get();
+        $cidade = Cidade::where('cod_cidade', $cod_cidade)->get();
 
         // dd($cidade[0]->cod_estado);
         $estado= Estado::where('cod_estado', $cidade[0]->cod_estado)->get();
