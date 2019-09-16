@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Especie;
+use App\PostagemDoAnimal;
 use Illuminate\Http\Request;
 
 class PostagemController extends Controller
@@ -26,22 +27,38 @@ class PostagemController extends Controller
         return view('postagemAnimal', ['postagem'=>$postagem]);
     }
 
-    public function inserirPostagem(request $data){
-        // Postagem::create([
-        //      'nome' => $data['nome'],
-        // //     // 'email' => $data['email'],
-        // //     // 'telefone' => $this->arrumaTelefone($data['fone']),
-        // //     // 'contato' => $data['fone'],
-        // //     // 'descricao' => $data['desc'],
-        // //     // 'admin' => 'nao',
-        // //     // 'cod_cidade' => $data['cidade'],
-        // //     // 'senha' => Hash::make($data['senha'])
+    public function inserirPostagem(Request $data){
 
-        //  ]);
-        dd($data['nome']);
+        //  $usuario = Auth::user();
+    //    $usuario = User::where('cod_usuario', $cod_usuario)->get();
+        //$data = $data->all();
+        //dd($data);
+        $postagem = new PostagemDoAnimal();
+
+        $postagem->nome_animal= $data['nome'];
+        $postagem->sexo= $data->sexo;
+        $postagem->nascimento= $data->dataN;
+        $postagem->descricao= $data->descricao;
+        $postagem->castrado= $data->castrado;
+        $postagem->vacinacao_em_dia= $data->vacinado;
+        $postagem->vermifugado= $data->vermifugado;
+        $postagem->descricao_saude= $data->descricaoSaude;
+        $postagem->cod_usuario_postagem= 1;
+
+        $postagem->cod_porte= $data->porte;
+        $postagem->cod_especie= $data->especie;
+        $postagem->listagem_postagem= 'sim';
+
+        //dd($postagem);
+
+
+
+        // dd($data);
+
+        $postagem->save();
         //$input = $request->all();
 
-        //return response()->json([$request]);
+        return response()->json(['success'=>'deu boa.']);
     }
 
     public function novaPostagem(){

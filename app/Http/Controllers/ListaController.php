@@ -112,7 +112,7 @@ class ListaController extends Controller
         }
 
         if(($_POST['cidade']!="cidade" || $r->pesquisa != '') && $_POST['especie']!="Selecione"){
-            $query .= ' and ';
+            $query .= ' and  ';
         }
 
 
@@ -129,6 +129,7 @@ class ListaController extends Controller
             isset($_POST['grande']) ))
 
             ){
+
                 // dd($_POST['cidade']=="Selecione" );
                 // dd($_POST['especie']=="Selecione" );
                 // dd($_POST['pesquisa']!='');
@@ -136,10 +137,10 @@ class ListaController extends Controller
                             //  dd($_POST['cidade']!="Selecione" ||
                             //  $_POST['especie']!="Selecione" ||
                             //  $_POST['pesquisa']!='' );
-             $query .= " and ";
+             $query .= " and   ";
 
         }
-        // 
+        //
 
         if((isset($_POST['pequeno']) ||
            isset($_POST['medio']) ||
@@ -174,8 +175,20 @@ class ListaController extends Controller
         // dd(date($hoje));
         // dd($_POST);
 
+        if(
+            $_POST['pesquisa']!=''          ||
+            $_POST['cidade']!="Selecione"   ||
+            $_POST['especie']!="Selecione"  ||
+            isset($_POST['pequeno']) ||
+            isset($_POST['medio']) ||
+            isset($_POST['grande'])
+            && (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))
+        ){
+
+
+        }
         if(isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']) ){
-            $query.= ' and (  ';
+            $query.= ' (  ';
 
         }
         if(isset($_POST['0-1'])){

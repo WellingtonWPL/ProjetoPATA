@@ -92,21 +92,8 @@ use \app\Http\Controllers\ListaController;
                 <option value="estado" selected>Selecione</option>
                 @foreach ($estados as $estado)
                 <option value="{{ $estado->cod_estado }}">
-
-                    {{$estado->sigla_estado}}</option>
-                @endforeach
-            </select>
-            Cidade
-            <div name="div_cidade" style="display: none;">
-            <select name="cidade" class="form-control">
-
-                <option selected>Selecione</option>
-                @foreach ($cidades as $cidade)
-                <option
-                    class="cidade {{$cidade->cod_estado}}"
-                    value="{{$cidade->cod_cidade}}">
-                    {{$cidade->nome_cidade}}</option>
-
+                        {{$estado->sigla_estado}}
+                </option>
                 @endforeach
             </select>
             <div name="div_cidade" style="display: none;">
@@ -254,7 +241,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
                 @endphp
                 </div>
                 <div class="col-4">
-                @php 
+                @php
                     //{{-- Local --}}
                     $Local = ListaController::buscaLocal($postagem->cod_postagem);
                     echo "Local: ".$Local['0']->nome_cidade."<br>";
@@ -271,6 +258,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 @endforeach
 
 <script>
+
     $(document).ready(function(){
         $('.cidade').hide()
          //alert('ta ok')
@@ -298,5 +286,6 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
         $('[name="cidades"] .' + $(this).val()).css('display', '');
 
     });
+
 </script>
 @endsection
