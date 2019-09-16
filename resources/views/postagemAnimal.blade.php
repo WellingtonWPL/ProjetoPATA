@@ -30,7 +30,7 @@
             margin: 2%;
         }
 
-        div img{
+        #foto-postagem{
             margin: 2%;
             border-style: solid;
             border-width: 1px;
@@ -54,7 +54,7 @@
 
     <div class="row ">
         <div class="col-6 " style="align:center;">
-                <img src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
+                <img id="foto-postagem" src="{{url('img/dog.jpeg')}}" class="img-fluid rounded" >
 
             </div>
 

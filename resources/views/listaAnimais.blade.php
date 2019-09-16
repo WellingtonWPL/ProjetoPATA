@@ -25,7 +25,8 @@ use \app\Http\Controllers\ListaController;
         margin: 2%;
     }
 
-    /* div a img {
+
+    #foto-perfil {
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -80,10 +81,26 @@ use \app\Http\Controllers\ListaController;
                 <option value="estado" selected>Selecione</option>
                 @foreach ($estados as $estado)
                 <option value="{{ $estado->cod_estado }}">
-                        {{$estado->sigla_estado}}
-                </option>
+
+                    {{$estado->sigla_estado}}</option>
                 @endforeach
             </select>
+            Cidade
+            <div name="div_cidade" style="display: none;">
+            <select name="cidade" class="form-control">
+
+                <option selected>Selecione</option>
+                @foreach ($cidades as $cidade)
+                <option
+                    class="cidade {{$cidade->cod_estado}}"
+                    value="{{$cidade->cod_cidade}}">
+                    {{$cidade->nome_cidade}}</option>
+                        {{$estado->sigla_estado}}
+                </option>
+
+                @endforeach
+            </select>
+
             <div name="div_cidade" style="display: none;">
                 Cidade
                 <select name="cidade" id="cidade" class="form-control">
@@ -190,10 +207,10 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
             href="{{url('/postagem/'.$postagem->cod_postagem)}}">
 
             @if ($fotos->isEmpty())
-            <img src="{{url('img/animal_sem_foto.png')}}"
+            <img id="foto-perfil" src="{{url('img/animal_sem_foto.png')}}"
             alt="Postagem sem foto">
             @else
-            <img src="{{url('img/'.$fotos[0])}}"
+            <img id="foto-perfil" src="{{url('img/'.$fotos[0])}}"
             class="img-fluid rounded">
             @endif
             </a>
@@ -246,11 +263,12 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 @endforeach
 
 <script>
-
     $(document).ready(function(){
         $('.cidade').hide()
          //alert('ta ok')
         $('.estado').click(function(){
+
+            let id_estado = $(this).val()
             let id_estado = $(this).val();
             $('#cidade').val('cidade');
             if (id_estado === 'estado'){
@@ -274,6 +292,6 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
         $('[name="cidades"] .' + $(this).val()).css('display', '');
 
     });
-    
+
 </script>
 @endsection
