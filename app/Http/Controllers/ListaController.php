@@ -139,7 +139,7 @@ class ListaController extends Controller
              $query .= " and ";
 
         }
-        // dd('cuza gostoso');
+        // 
 
         if((isset($_POST['pequeno']) ||
            isset($_POST['medio']) ||
