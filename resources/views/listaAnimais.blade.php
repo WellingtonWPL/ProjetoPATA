@@ -25,8 +25,19 @@ use \app\Http\Controllers\ListaController;
         margin: 2%;
     }
 
-
     #foto-perfil {
+        margin: 1%;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #F5F5F5;
+        width: 80%;
+        max-height: 200px;
+        padding: 15px;
+    }
+
+    /* } */ 
+
+    /* div a img {
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -81,26 +92,10 @@ use \app\Http\Controllers\ListaController;
                 <option value="estado" selected>Selecione</option>
                 @foreach ($estados as $estado)
                 <option value="{{ $estado->cod_estado }}">
-
-                    {{$estado->sigla_estado}}</option>
-                @endforeach
-            </select>
-            Cidade
-            <div name="div_cidade" style="display: none;">
-            <select name="cidade" class="form-control">
-
-                <option selected>Selecione</option>
-                @foreach ($cidades as $cidade)
-                <option
-                    class="cidade {{$cidade->cod_estado}}"
-                    value="{{$cidade->cod_cidade}}">
-                    {{$cidade->nome_cidade}}</option>
                         {{$estado->sigla_estado}}
                 </option>
-
                 @endforeach
             </select>
-
             <div name="div_cidade" style="display: none;">
                 Cidade
                 <select name="cidade" id="cidade" class="form-control">
@@ -115,7 +110,7 @@ use \app\Http\Controllers\ListaController;
                 </select>
             </div>
         </div>
-        <div class="col">
+        <div class="col"> 
             Espécie
 
             <select name="especie" class="form-control">
@@ -199,7 +194,7 @@ use \app\Http\Controllers\ListaController;
 @php
 $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 @endphp
-
+ 
 <div class="card">
     <div class="row " id="" class="card-body">
         <div class="col-3">
@@ -245,7 +240,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
                     }
                 @endphp
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                 @php
                     //{{-- Local --}}
                     $Local = ListaController::buscaLocal($postagem->cod_postagem);
@@ -263,12 +258,11 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 @endforeach
 
 <script>
+
     $(document).ready(function(){
         $('.cidade').hide()
          //alert('ta ok')
         $('.estado').click(function(){
-
-            let id_estado = $(this).val()
             let id_estado = $(this).val();
             $('#cidade').val('cidade');
             if (id_estado === 'estado'){
@@ -292,6 +286,6 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
         $('[name="cidades"] .' + $(this).val()).css('display', '');
 
     });
-
+    
 </script>
 @endsection
