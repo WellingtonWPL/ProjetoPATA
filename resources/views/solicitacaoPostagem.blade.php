@@ -13,8 +13,8 @@
             margin: 2%;
             border-style: solid;
             border-width: 1px;
-            /* width: 100%; */
-            max-height: 300px;
+            width: 100%;
+            /* max-height: 300px; */
             padding:10px;
 
 
@@ -24,15 +24,21 @@
     @endsection
 
 @section('conteudo')
-
+@php
+    // dd($foto);
+@endphp
 <div class="card" style="padding:5%; margin-left: 25%; margin-right:25%;">
     <h3>
        {{$postagem->nome_animal}} <br>
     </h3>
     Dono da postagem: <a href="{{url('/perfil/'.$postagem->cod_usuario_postagem)}}">{{$postagem->nome}}</a>
 
-    <img src="{{url('img/dog.jpeg')}}" id="foto"  class="img-fluid rounded" >
-
+    @if ($foto==NULL)
+        <img src="{{url('img/animal_sem_foto.png')}}" id="foto"  class="" >
+        
+    @else
+        <img src="{{url(''.$foto->link_foto_postagem)}}" id="foto"  class="img-fluid rounded" >
+    @endif
 
     <form action="{{url('/postagem/'.$cod_postagem.'/solicitar')}}" class="form" method="post">
         @csrf

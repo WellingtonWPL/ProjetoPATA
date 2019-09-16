@@ -37,10 +37,10 @@ class SolicitacaoController extends Controller
         ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
         ->join('Usuario', 'Postagem_do_animal.cod_usuario_postagem', '=', 'Usuario.cod_usuario')
         ->first();
-
+        $foto = \DB::table('Foto_postagem')->where('cod_postagem', $cod_postagem)->first();
 
         return view('solicitacaoPostagem', ['cod_postagem'=> $cod_postagem,
-        'postagem'=> $postagem]
+        'postagem'=> $postagem , 'foto'=>$foto]
         );
     }
 
