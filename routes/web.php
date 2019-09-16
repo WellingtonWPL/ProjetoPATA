@@ -51,9 +51,9 @@ Route::post('/postagem/{cod_postagem}/avaliar', 'SolicitacaoController@avaliar')
 Route::get('lista', 'ListaController@mostrar');
 Route::post('lista', 'ListaController@pesquisa');
 
-Route::get('/admin', 'AdminController@mostrar' );
-Route::get('/admin/excluir/{cod_postagem}', 'AdminController@excluir');
-Route::get('/admin/restaurar/{cod_postagem}', 'AdminController@restaurar');
+Route::get('/admin', 'AdminController@mostrar' )->middleware('admin');
+Route::get('/admin/excluir/{cod_postagem}', 'AdminController@excluir')->middleware('admin');
+Route::get('/admin/restaurar/{cod_postagem}', 'AdminController@restaurar')->middleware('admin');
 
 
 Route::get('/{cod_usuario}/postar', 'PostagemController@novaPostagem');
