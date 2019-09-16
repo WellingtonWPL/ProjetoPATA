@@ -67,14 +67,13 @@ Route::get('/{cod_usuario}/solicitacoes', 'SolicitacaoController@mostrarPedidos'
 Route::post('/{cod_usuario}/solicitacoes', 'SolicitacaoController@aceitarSolicitacao');
 
 
-Route::get('/perfil/{cod_usuario}', 'PerfilController@mostrar');
+Route::get('/perfil/{cod_usuario}', 'PerfilController@mostrar'); 
 Route::get('/perfil/{cod_usuario}/editar', 'PerfilController@editar');
 Route::post('/perfil/{cod_usuario}/editar', 'PerfilController@inserirEdicao');
 Route::post('/perfil/{cod_usuario}/excluir', 'PerfilController@excluirPerfil');
 
-Route::get('/perfil/{cod_usuario}/notificacoes', function () {
-  return view('notificacoes');
-});
+Route::get('/{cod_usuario}/notificacoes', 'NotificacoesController@');
+
 
 Route::post('/salvaPost', 'PostagemController@inserirPostagem')->name('salvaPost'); 
 
