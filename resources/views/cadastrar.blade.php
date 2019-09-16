@@ -41,7 +41,7 @@
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
     <div class="form-group">
-        Nome
+            <b> Nome</b>
         <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome">
         <div class="col-md-6">
             @if ($errors->has('nome'))
@@ -52,7 +52,7 @@
         </div>
     </div>
     <div class="form-group">
-        E-mail
+            <b>E-mail</b>
         <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="email" required>
         <div class="col-md-6">
             @if ($errors->has('email'))
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="form-group">
-        Senha
+            <b> Senha</b>
         <input id="senha" type="password" class="form-control{{ $errors->has('senha') ? ' is-invalid' : '' }}" name="senha" required autocomplete="new-password" placeholder="Senha">
         <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
         @if ($errors->has('senha'))
@@ -73,19 +73,24 @@
         @endif
     </div>
     <div class="form-group">
-        Repetir senha
+            <b>Repetir senha</b>
         <input id="password-confirm" type="password" placeholder="senha" class="form-control" name="password_confirmation" required autocomplete="new-password">
         <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
         <span id='message'></span>
     </div>
 
     <div class="form-group">
-        Celular
+            <b>Celular</b>
         <input id="fone" type="text" name="fone" class="form-control" placeholder="(99) 9999-9999"required>
+    </div>
+    <div class="form-group">
+            <b>Contato
+            <input id="contato" type="text" name="contato" class="form-control" required placeholder="Ex: WhatsApp - (99) 99999-9999 ou E-mail - pata@pata.com">
+            <small id="contatoHelp" class="form-text text-muted">Aqui você deve inserir sua forma de contato para o doador poder conversar com você. </small>
     </div>
     {{-- <div class="row"> --}}
 
-        Estado
+            <b>Estado</b>
             <select class="estado form-control">
                 <option value="estado" selected>Selecione
                 </option>
@@ -96,7 +101,7 @@
             </select>
             {{-- {{dd($cidades)}} --}}
             <br>
-            Cidade
+            <b>Cidade</b>
             <select name="cidade" class="form-control">
 
                 <option selected>Selecione</option>
@@ -111,12 +116,12 @@
 
     {{-- </div> --}}
     <div class="form-group">
-        Foto
+            <b>Foto</b>
         <input type="file" class="form-control-file">
 
     </div>
     <div class="form-group">
-        Descrição pessoal
+            <b>Descrição pessoal</b>
         <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5" ></textarea>
 
     </div>
