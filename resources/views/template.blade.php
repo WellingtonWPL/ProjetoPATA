@@ -50,7 +50,6 @@
     crossorigin="anonymous"></script>
 
   <style>
-
      i {
         font-size: 24px !important;
         vertical-align: middle;
@@ -91,7 +90,7 @@
 
 
 <body style="background-image: url('/img/patas.png'); ">
-
+  
   <script>
     // window.addEventListener('load', function() {
     //     changeBG('#eeeeee');
@@ -116,7 +115,6 @@
         <span class="navbar-toggler-icon"></span>
       </button> --}}
       <ul class="navbar-nav ml-auto">
-            <div class="collapse navbar-collapse" id="navbarResponsive">
         <li class="nav-item">
           <a class="nav-link"
             href="{{url('/lista')}}">Lista <i
@@ -129,8 +127,10 @@
 
         @guest
 
-        {{-- <div class="collapse navbar-collapse" --}}
-          {{-- id="navbarResponsive"> --}}
+
+        
+        <div class="collapse navbar-collapse"
+          id="navbarResponsive">
           {{-- <ul class="navbar-nav ml-auto"> --}}
           <li class="nav-item">
             <a class="nav-link"
@@ -192,7 +192,7 @@
   <!-- Footer -->
   <footer class="py-3 bg-black fixed-bottom">
     <fieldset id="cores" style="margin-top: -10px">
-      <button type="button" id="botao"
+      <button type="button" id="botao" 
         onclick="changeBackGround('lightblue')"
         {{-- onclick="changeBG('#B39DDB')"  --}}
         class="btn btn-primary"></button>
