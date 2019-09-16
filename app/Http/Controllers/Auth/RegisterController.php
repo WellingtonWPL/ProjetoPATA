@@ -71,7 +71,7 @@ class RegisterController extends Controller
                 'nome' => $data['nome'],
                 'email' => $data['email'],
                 'telefone' => $this->arrumaTelefone($data['fone']),
-                'contato' => $data['fone'],
+                'contato' => $data['contato'],
                 'descricao' => $data['desc'],
                 'admin' => 'nao',
                 'cod_cidade' => $data['cidade'],

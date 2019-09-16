@@ -28,7 +28,7 @@ class ListaController extends Controller
         $cidades = Cidade::orderBy('nome_cidade')->get();
         //dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
-        // dd($postagens); 
+        // dd($postagens);
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
 
 
