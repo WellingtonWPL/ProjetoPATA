@@ -38,7 +38,7 @@ class PostagemController extends Controller
         // //     // 'senha' => Hash::make($data['senha'])
 
         //  ]);
-        dd($data['nome']);
+        dd($data);
         //$input = $request->all();
 
         //return response()->json([$request]);
