@@ -44,7 +44,6 @@ class PostagemController extends Controller
         $postagem->vermifugado= $data->vermifugado;
         $postagem->descricao_saude= $data->descricaoSaude;
         $postagem->cod_usuario_postagem= 1;
- 
         $postagem->cod_porte= $data->porte;
         $postagem->cod_especie= $data->especie;
         $postagem->listagem_postagem= 'sim';

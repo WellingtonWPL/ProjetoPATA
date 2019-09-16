@@ -88,8 +88,8 @@ class RegisterController extends Controller
         }
 
         public function showRegistrationForm(){
-            $estados = Estado::all();
-            $cidades = Cidade::all();
+            $estados = Estado::all()->sortBy('sigla_estado');
+            $cidades = Cidade::all()->sortBy('nome_cidade');
             return view('cadastrar', compact('estados', 'cidades'));
         }
 }

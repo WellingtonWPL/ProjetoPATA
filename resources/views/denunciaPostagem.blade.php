@@ -26,7 +26,9 @@
 
             <button type="submit" class="btn btn-primary ">Denunciar</button>
 
-            <button type="cancel" class="btn btn-danger ">Cancelar</button>
+            <a href="javascript:history.back()">
+                <button type="button" value="Cancelar" class="btn btn-danger ">Cancelar</button>
+            </a>
     </form>
 
 </div>

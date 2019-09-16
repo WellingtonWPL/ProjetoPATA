@@ -61,11 +61,11 @@ class PerfilController extends Controller
     }
 
     public static function getSolicitacoes($cod_usuario){
-        $solicitacoes = \DB::table('solicitacao')
+        $solicitacoes = \DB::table('Solicitacao')
         ->join('Postagem_do_animal', 'Postagem_do_animal.cod_postagem', '=', 'Solicitacao.cod_postagem')
         ->join('Usuario', 'Usuario.cod_usuario', '=', 'cod_usuario_postagem')
         ->where('Usuario.cod_usuario', $cod_usuario)->get();
-        return count($solicitacoes);     
+        return count($solicitacoes);
     }
 
     public static function getCidade($cod_cidade){

@@ -35,7 +35,7 @@ use \app\Http\Controllers\ListaController;
         padding: 15px;
     }
 
-    /* } */ 
+    /* } */
 
     /* div a img {
         margin: 2%;
@@ -47,7 +47,7 @@ use \app\Http\Controllers\ListaController;
         padding: 10px; */
 
 
-    /* } */ 
+    /* } */
 
     #filtro {
         border-style: solid;
@@ -110,7 +110,7 @@ use \app\Http\Controllers\ListaController;
                 </select>
             </div>
         </div>
-        <div class="col"> 
+        <div class="col">
             Espécie
 
             <select name="especie" class="form-control">
@@ -194,7 +194,7 @@ use \app\Http\Controllers\ListaController;
 @php
 $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 @endphp
- 
+
 <div class="card">
     <div class="row " id="" class="card-body">
         <div class="col-3">
@@ -210,7 +210,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
             @endif
             </a>
         </div>
-        
+
         <div class="col-6">
             <br>
             {{-- nome --}}
@@ -223,29 +223,29 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
                     {{-- sexo --}}
                 @php
                     echo "Gênero: " .ucfirst($postagem->sexo)."<br>";
-                    
+
                     //{{-- idade --}}
-                
+
                     if ($postagem->nascimento!=NULL) {
                         $idade=ListaController::calcIdade($postagem->nascimento);
-                        if ($idade<1.0) { 
+                        if ($idade<1.0) {
                             echo 'Idade: Menos de um ano<br>' ;
                         }
-                        elseif ($idade==1.0) { 
+                        elseif ($idade==1.0) {
                             echo 'Idade: 1 ano<br>' ;
                         }
-                        else { 
+                        else {
                             echo "Idade: ". (int) $idade." anos<br>";
                         }
                     }
                 @endphp
                 </div>
                 <div class="col-4">
-                @php 
+                @php
                     //{{-- Local --}}
                     $Local = ListaController::buscaLocal($postagem->cod_postagem);
                     echo "Local: ".$Local['0']->nome_cidade."<br>";
-                @endphp 
+                @endphp
                     {{-- porte --}}
                     Porte: {{$postagem->tipo_porte}} <br>
                 </div>
@@ -286,6 +286,6 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
         $('[name="cidades"] .' + $(this).val()).css('display', '');
 
     });
-    
+
 </script>
 @endsection

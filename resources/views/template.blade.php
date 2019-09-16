@@ -61,11 +61,11 @@
     }
 
     ul li a {
-      color: aliceblue; 
+      color: aliceblue;
     }
-    
-      
-    
+
+
+
   </style>
 </head>
 @php
@@ -77,10 +77,10 @@
     $notificaçoes = 0;
   }
 
-  
+
 @endphp
 
-@if ($notificaçoes >= 1) 
+@if ($notificaçoes >= 1)
     <style>
       #perfil{
         color: tomato;
@@ -129,11 +129,13 @@
 
         @guest
 
-        {{-- <div class="collapse navbar-collapse" --}}
-          {{-- id="navbarResponsive"> --}}
+
+
+        <div class="collapse navbar-collapse"
+          id="navbarResponsive">
           {{-- <ul class="navbar-nav ml-auto"> --}}
           <li class="nav-item">
-            <a class="nav-link"
+            <a class="nav-link" 
               href="{{url('register')}}">Cadastrar-se <i
               class="material-icons">assignment</i></a>
           </li>

@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // dd($exception->errorInfo[2]);
+        // // dd($exception->errorInfo[2]);
 
         // if($exception->errorInfo[2]=="TriggerError: usuario adotando proprio animal"){
         // // dd($exception);

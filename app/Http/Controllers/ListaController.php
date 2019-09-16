@@ -24,9 +24,11 @@ class ListaController extends Controller
             ->get();
         // dd($coiso);]
 
-        $estados = Estado::orderBy('nome_estado')->get();
-        $cidades = Cidade::orderBy('nome_cidade')->get();
-        //dd($cidades);
+
+        $estados = Estado::all()->sortBy('sigla_estado');
+        $cidades = Cidade::all()->sortBy('nome_cidade');
+        // dd($cidades);
+
         $especies = Especie::orderBy('cod_especie')->get();
         // dd($postagens);
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
@@ -110,7 +112,7 @@ class ListaController extends Controller
         }
 
         if(($_POST['cidade']!="cidade" || $r->pesquisa != '') && $_POST['especie']!="Selecione"){
-            $query .= ' and ';
+            $query .= ' and  ';
         }
 
 
@@ -127,6 +129,7 @@ class ListaController extends Controller
             isset($_POST['grande']) ))
 
             ){
+
                 // dd($_POST['cidade']=="Selecione" );
                 // dd($_POST['especie']=="Selecione" );
                 // dd($_POST['pesquisa']!='');
@@ -134,10 +137,10 @@ class ListaController extends Controller
                             //  dd($_POST['cidade']!="Selecione" ||
                             //  $_POST['especie']!="Selecione" ||
                             //  $_POST['pesquisa']!='' );
-             $query .= " and ";
+             $query .= " and   ";
 
         }
-        // dd('cuza gostoso');
+        //
 
         if((isset($_POST['pequeno']) ||
            isset($_POST['medio']) ||
@@ -172,8 +175,20 @@ class ListaController extends Controller
         // dd(date($hoje));
         // dd($_POST);
 
+        if(
+            $_POST['pesquisa']!=''          ||
+            $_POST['cidade']!="Selecione"   ||
+            $_POST['especie']!="Selecione"  ||
+            isset($_POST['pequeno']) ||
+            isset($_POST['medio']) ||
+            isset($_POST['grande'])
+            && (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))
+        ){
+
+
+        }
         if(isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']) ){
-            $query.= ' and (  ';
+            $query.= ' (  ';
 
         }
         if(isset($_POST['0-1'])){
@@ -208,8 +223,9 @@ class ListaController extends Controller
 
 
 
-        $estados = Estado::all();
-        $cidades = Cidade::all();
+
+        $estados = Estado::all()->sortBy('sigla_estado');
+        $cidades = Cidade::all()->sortBy('nome_cidade');
         //  dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
         // dd('das');
@@ -218,14 +234,14 @@ class ListaController extends Controller
 
     public static function buscaLocal($cod){
         //$cod = \App\PostagemDoAnimal::where('cod_postagem', $r)->get();
-        $query = "SELECT Cidade.nome_cidade 
-        FROM Cidade , Usuario , Postagem_do_animal 
+        $query = "SELECT Cidade.nome_cidade
+        FROM Cidade , Usuario , Postagem_do_animal
         WHERE Postagem_do_animal.cod_postagem =  $cod
         AND Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
         AND Usuario.cod_cidade = Cidade.cod_cidade";
         $local = \DB::select($query);
         return $local;
-                
+
     }
 
     public static function getFotosAnimal($cod){
