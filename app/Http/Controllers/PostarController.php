@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ImageController extends Controller
+class PostarController extends Controller
 {
     public function index()
 
     {
-
       return view('imageUpload');
-
     }
 
 
@@ -21,23 +19,13 @@ class ImageController extends Controller
     {
 
         $image = $request->image;
-
-
-
         list($type, $image) = explode(';', $image);
-
         list(, $image)      = explode(',', $image);
-
         $image = base64_decode($image);
-
         $image_name= time().'.png';
-
         $path = public_path('upload/'.$image_name);
 
-
-
         file_put_contents($path, $image);
-
         return response()->json(['status'=>true]);
 
     }

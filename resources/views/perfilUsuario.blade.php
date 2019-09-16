@@ -135,7 +135,7 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
 
             <div style="margin-left: 2%"
                 class="container-fluid">
-                <a href="{{url($cod_usuario.'/solicitacoes')}}">
+                <a href="{{url('perfil/'.$cod_usuario.'/notificacoes')}}">
                     <button class="btn btn-primary"><i
                         class="material-icons"
                         style>announcement</i>

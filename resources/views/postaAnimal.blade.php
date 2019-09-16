@@ -2,7 +2,7 @@
 // dd('oi');
 // dd($estados);
 
-use \app\Http\Controllers\ListaController;
+use \app\Http\Controllers\PostagemController;
 
 @endphp
 
@@ -64,7 +64,7 @@ $cod_usuario = $url[1];
         <h1 class="m-3">Nova Postagem</h1>
         <div class="card-body">           
             {{-- <p class="card-text"></p> --}}
-            <form>
+            <form action="/lista" method="POST">
                 @csrf
                 {{-- {{ csrf_field() }} --}}
                 {{-- <form> --}}
@@ -131,11 +131,10 @@ $cod_usuario = $url[1];
                         <b>Espécie</b>
                         <select name="especie" id="especie" class="form-control">
                             <option value="0" selected>Selecione</option>
-                            {{-- @foreach ($especies as $especie)
+                            @foreach ($especies as $especie)
                             <option value="{{$especie->cod_especie}}">
                                 {{$especie->nome_especie}}</option>
-                            @endforeach --}}
-                            <option >Cachorro</option>
+                            @endforeach
                         </select>
                         <div class="col-sm-12 alert alert-danger" id="div_erro_especie" style="display: none; margin-top: 20px;"> 
                                 Informe a espécie do animal.
@@ -278,20 +277,6 @@ $cod_usuario = $url[1];
                     html = '<div id="img' + img_id + '" class="col-md-2 m-3 teste"><img  src="' + img + '" /> <span class="close" onclick="deleta(img' + img_id + ')">&times;</span></div>';
                     $("#preview-crop-image").append(html);
                     imagens.push(img);
-                    // var fd2 = new FormData();
-                    // $("#preview-crop-image").find("input[type='file']").each(function(){
-                    //     $.each(this.files, function(i, file){
-                    //         fd2.append('imagens', file)
-                    //     })
-                    // });
-        //         url: "{{route('upload.image')}}",
-        //         type: "POST",
-                    // $.ajax({
-                    //     data: {"image":img},
-                        
-                    // })
-                    // alert(data);
-                    //success: function (data) {
                 }
                 else{
                     count = 4;

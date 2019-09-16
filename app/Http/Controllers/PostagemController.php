@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Especie;
 use Illuminate\Http\Request;
 
 class PostagemController extends Controller
@@ -16,6 +17,7 @@ class PostagemController extends Controller
         ->first();
 
         $usuario = User::where('cod_usuario', $postagem->cod_usuario)->get();
+        $especies = Especie::orderBy('cod_especie')->get();
 
         if($usuario[0]->oculto=='sim'){
             return view('sucesso', ['msg'=>'Perfil do dono da postagem excluido']);
@@ -36,9 +38,16 @@ class PostagemController extends Controller
         // //     // 'senha' => Hash::make($data['senha'])
 
         //  ]);
-        dd($data);
+        dd($data['nome']);
         //$input = $request->all();
 
         //return response()->json([$request]);
+    }
+
+    public function novaPostagem(){
+        ///dd('TESTE');
+        $especies = Especie::orderBy('cod_especie')->get();
+        return view('postaAnimal', compact('especies'));
+
     }
 }
