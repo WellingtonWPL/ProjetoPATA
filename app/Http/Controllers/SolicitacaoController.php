@@ -12,6 +12,7 @@ class SolicitacaoController extends Controller
 {
     public function solicitar($cod_postagem){
 
+        //  dd($_POST);
 
 
         // dd($cod_postagem);
