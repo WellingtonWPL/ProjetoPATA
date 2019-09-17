@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -13,19 +13,19 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" type="text/css"
-    href="/css/teste.css">
+    href="{{ asset('/css/teste.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap.css">
+    href="{{ asset('/css/bootstrap.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap.min.css">
+    href="{{ asset('/css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-grid.css">
+    href="{{ asset('/css/bootstrap-grid.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-grid.min.css">
+    href="{{ asset('/css/bootstrap-grid.min.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-reboot.css">
+    href="{{ asset('/css/bootstrap-reboot.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-reboot.min.css">
+    href="{{ asset('/css/bootstrap-reboot.min.css') }}">
 
   <!-- Custom fonts for this template -->
   <link
@@ -37,10 +37,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <!-- Custom styles for this template -->
-  <link href="/css/one-page-wonder.css" rel="stylesheet">
+  <link href="{{ asset('/css/one-page-wonder.css') }}" rel="stylesheet">
 
   <!-- Function JS -->
-  <script type="text/javascript" src="/js/functions.js">
+  <script type="text/javascript" src="{{ asset('/js/functions.js') }}">
   </script>
   @yield('css')
 
@@ -90,7 +90,7 @@
 @endif
 
 
-<body style="background-image: url('/img/patas.png'); ">
+<body style="background-image: url({{ asset('/img/patas.png') }}); ">
 
   <script>
     // window.addEventListener('load', function() {
