@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Pedidos de Adoção")
 @section('conteudo')
 @php
 use App\Http\Controllers\SolicitacaoController;

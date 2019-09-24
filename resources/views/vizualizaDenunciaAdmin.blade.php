@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Denúncias de Postagens")
 @section('conteudo')
 
 <div id="accordion">

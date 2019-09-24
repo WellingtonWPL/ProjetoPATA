@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Editar Perfil")
 @section('conteudo')
 
 

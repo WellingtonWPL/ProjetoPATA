@@ -1,4 +1,5 @@
 @extends('template')
+@section("titulo", "Solicitações de Adoção")
 @section('css')
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

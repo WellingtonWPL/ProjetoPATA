@@ -1,4 +1,5 @@
 @extends('template')
+@section("titulo", "Perfil de Usuário")
 @section('css')
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -106,7 +107,7 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
     <img id="foto" src="{{url('img/perfil.jpg')}}"
         class="img-fluid rounded">
     <br>
-    <div align="center" style="align:center;">
+    <div align="center" style="align:center; color:black;">
         <b>Avaliação:</b>
         @php
         if ($avaliacao==0) {
@@ -169,7 +170,7 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
     <div class="row" id="campo">
         <div class="container-fluid">
             <br>
-            <h2>Descrição</h2>
+            <h2>Descrição:</h2>
             <p>
                 {{  $usuario[0]->descricao  }}
 
@@ -233,7 +234,7 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
 
 
     <div id="campo" align="center">
-        <h2>POSTAGENS</h2>
+        <h2>Doações publicadas:</h2>
     </div>
     <br>
 

@@ -7,6 +7,7 @@ use \app\Http\Controllers\ListaController;
 @endphp
 
 @extends('template')
+@section("titulo", "Lista de Animais")
 @section('css')
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/icon?family=Material+Icons">

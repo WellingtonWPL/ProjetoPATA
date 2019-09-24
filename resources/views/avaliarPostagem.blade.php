@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Avaliação")
 @section('conteudo')
 <!-- alternate codepen version https://codepen.io/mad-d/pen/aJMPWr?editors=0010 -->
 <h1>Avaliação da postagem #{{$cod_postagem}}</h1>

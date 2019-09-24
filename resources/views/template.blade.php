@@ -35,6 +35,7 @@
     href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
     rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Alegreya&display=swap" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="{{ asset('/css/one-page-wonder.css') }}" rel="stylesheet">
@@ -50,6 +51,7 @@
     crossorigin="anonymous"></script>
 
   <style>
+    
 
      i {
         font-size: 24px !important;
@@ -62,6 +64,13 @@
 
     ul li a {
       color: aliceblue;
+    }
+
+    #titulo{
+      font-family: 'Alegreya', serif;
+      color: white;
+      margin-left:10%;
+        
     }
 
 
@@ -90,7 +99,7 @@
 @endif
 
 
-<body style="background-image: url({{ asset('/img/patas.png') }}); ">
+<body style="background-image: url({{ asset('/img/patinhas.png') }}); ">
 
   <script>
     // window.addEventListener('load', function() {
@@ -104,6 +113,8 @@
       <a class="navbar-brand" href="#">
             <img style="max-width:10%; height:auto; " src="{{asset('/img/logo.png')}}" alt="pata">
       </a>
+      <div id="titulo" name="titulo" class="title m-1"><h2>@yield("titulo")</h2></div>
+      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

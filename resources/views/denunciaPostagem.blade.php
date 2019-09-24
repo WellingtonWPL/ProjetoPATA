@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Denúncia de Postagem")
 @section('conteudo')
 @php
     // dd($motivosDenuncia)

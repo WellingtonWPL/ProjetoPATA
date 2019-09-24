@@ -7,6 +7,7 @@ use \app\Http\Controllers\PostagemController;
 @endphp
 
 @extends('template')
+@section("titulo", "Publicar Nova Adoção")
 
 @section('conteudo')
 <head>

@@ -11,6 +11,7 @@
 @endphp
 
 @extends('template')
+@section("titulo", "Animal para Adoção")
 
     @section('css')
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
