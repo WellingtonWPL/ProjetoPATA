@@ -188,6 +188,29 @@ use \app\Http\Controllers\ListaController;
 </form>
 <br>
 
+
+@if ($pagina != 1)
+<a  href = "{{url("lista/1")}}">
+    <button class="btn btn-sm"> Primeira </button>
+</a>
+<a  href = "{{url("lista/".($pagina-1))}}">
+    <button class="btn btn-sm"> < </button>
+</a>
+@endif
+
+
+<button class="btn btn-sm"> {{$pagina }}</button>
+
+@if ($pagina != $numPaginas)
+<a  href = "{{url("lista/".($pagina+1))}}">
+    <button class="btn btn-sm" > > </button>
+</a>
+
+<a href="{{url("lista/".$numPaginas)}}">
+    <button class="btn btn-sm" > Ultima </button>
+</a>
+@endif
+
 {{-- mostrar os posts --}}
 @foreach ($postagens as $postagem)
 @if ( ($postagem->listagem_postagem)=='sim' && $postagem->avaliacao==NULL)
@@ -258,6 +281,28 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 <br>
 @endif
 @endforeach
+
+@if ($pagina != 1)
+<a  href = "{{url("lista/1")}}">
+    <button class="btn"> Primeira </button>
+</a>
+<a  href = "{{url("lista/".($pagina-1))}}">
+    <button class="btn"> < </button>
+</a>
+@endif
+
+
+<button class="btn"> {{$pagina }}</button>
+
+@if ($pagina != $numPaginas)
+<a  href = "{{url("lista/".($pagina+1))}}">
+    <button class="btn"> > </button>
+</a>
+
+<a href="{{url("lista/".$numPaginas)}}">
+    <button class="btn" > Ultima </button>
+</a>
+@endif
 
 <script>
 

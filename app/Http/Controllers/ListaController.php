@@ -16,22 +16,60 @@ use App\Estado;
 class ListaController extends Controller
 {
     public function mostrar(){
+
+        return redirect("lista/1");
         // $postagens = PostagemDoAnimal::all();
         // // $porte = Porte::all();
+        // $postagens= \DB::table('Postagem_do_animal')
+        //     ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
+        //     ->where('cod_usuario_adotante', NULL)
+        //     ->get();
+        // // dd($coiso);]
+
+
+        // $estados = Estado::all()->sortBy('sigla_estado');
+        // $cidades = Cidade::all()->sortBy('nome_cidade');
+        // // dd($cidades);
+
+        // $especies = Especie::orderBy('cod_especie')->get();
+        // // dd($postagens);
+        // return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
+
+
+    }
+
+
+
+    public function mostrarPagina($pagina){
+        // $postagens = PostagemDoAnimal::all();
+        // // $porte = Porte::all();
+        $numPostagens = \DB::table('Postagem_do_animal')
+                        ->count();
+
+        $numPaginas = intval($numPostagens/10) + 1;
+
+        if($pagina >$numPaginas){
+            return redirect("lista/".$numPaginas);
+        }
+        if ($pagina<1) {
+            return redirect("lista/1");
+        }
+
         $postagens= \DB::table('Postagem_do_animal')
             ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
             ->where('cod_usuario_adotante', NULL)
+            ->orderBy('cod_postagem', 'DESC')
+            ->skip(($pagina-1 )*10)->take(10)
             ->get();
         // dd($coiso);]
-
-
+        // dd($numPaginas);
         $estados = Estado::all()->sortBy('sigla_estado');
         $cidades = Cidade::all()->sortBy('nome_cidade');
         // dd($cidades);
-        
+
         $especies = Especie::orderBy('cod_especie')->get();
         // dd($postagens);
-        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
+        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas'));
 
 
     }

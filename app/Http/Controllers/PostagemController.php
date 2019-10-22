@@ -57,14 +57,14 @@ class PostagemController extends Controller
         $cod_postagem = $postagem->cod_postagem;
 
         $foto = new FotoPostagem();
- 
+
         $image = $data->fotos[0];
         list($type, $image) = explode(';', $image);
         list(, $image)      = explode(',', $image);
         $image = base64_decode($image);
         $image_name= time().'.jpg';
-        $path = public_path('upload\\'.$image_name);
-        $link = 'upload\\'.$image_name;
+        $path = public_path('upload/'.$image_name);
+        $link = 'upload/'.$image_name;
 
         file_put_contents($path, $image);
 
@@ -79,7 +79,7 @@ class PostagemController extends Controller
 
         // dd($data);
 
-        
+
         //$input = $request->all();
 
         return response()->json(['success'=>'deu boa.']);

@@ -97,7 +97,7 @@
             }
             @endphp
         <b>Porte:</b> {{$postagem->tipo_porte}} <br>
-        <b>Dono da postagem: </b> <a href="{{url('/perfil'.$postagem->cod_usuario_postagem)}}">{{$postagem->nome}}</a><br>
+        <b>Dono da postagem: </b> <a href="{{url('/perfil/'.$postagem->cod_usuario_postagem)}}">{{$postagem->nome}}</a><br>
         <b>Avaliação do dono da postagem:</b>
 
         @if (PerfilController::getAvaliacao($postagem->cod_usuario_postagem) !=NULL)
