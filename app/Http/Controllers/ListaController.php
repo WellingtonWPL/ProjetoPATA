@@ -15,6 +15,8 @@ use App\Estado;
 
 class ListaController extends Controller
 {
+
+    private $query= "";
     public function mostrar(){
 
         return redirect("lista/1");
@@ -98,7 +100,20 @@ class ListaController extends Controller
      posteriormente pude ver que ela por ser mais bem feita usando models ou o \DB
      mas por enquando esta funcionando
     */
-    public function pesquisa(Request $r){
+    public function pesquisa(Request $r, $pagina){
+
+        $numPostagens = \DB::table('Postagem_do_animal')
+                        ->count();
+
+        $numPaginas = intval($numPostagens/10) + 1;
+
+        if($pagina >$numPaginas){
+            return redirect("lista/".$numPaginas);
+        }
+        if ($pagina<1) {
+            return redirect("lista/1");
+        }
+
 
         // dd(($_POST));
 
@@ -205,24 +220,25 @@ class ListaController extends Controller
         }
 
 
-
+        //calculo datas
         $hoje = ''.date('Y').'-'.date('m').'-'.date('d');
-        // dd($hoje);
+
         $umAnoAntes=''.(date('Y')-1).'-'.date('m').'-'.date('d');
         $tresAnosAntes = ''.(date('Y')-3).'-'.date('m').'-'.date('d');
-        // dd(date($hoje));
         // dd($_POST);
 
         if(
             $_POST['pesquisa']!=''          ||
-            $_POST['cidade']!="Selecione"   ||
+            $_POST['cidade']!="cidade"   ||
             $_POST['especie']!="Selecione"  ||
             isset($_POST['pequeno']) ||
             isset($_POST['medio']) ||
             isset($_POST['grande'])
-            && (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))
+            // && (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))
         ){
-
+            if( (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+'])) ){
+                $query.= '  and  ';
+            }
 
         }
         if(isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']) ){
@@ -256,10 +272,12 @@ class ListaController extends Controller
         }
 
         // dd($query);
-
+        // >skip(($pagina-1 )*10)->take(10)
+        $aux = $query;
+        $query .= "  LIMIT 10 OFFSET ".(($pagina-1 )*10);
         $postagens = \DB::select($query);
 
-
+        $query = $aux;
 
 
         $estados = Estado::all()->sortBy('sigla_estado');
@@ -267,7 +285,41 @@ class ListaController extends Controller
         //  dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();
         // dd('das');
-        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies'));
+
+        $pesquisa = true;
+        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa', 'query'));
+    }
+
+    public function listaFiltro(Request $r, $pagina ){
+
+        $numPostagens = \DB::table('Postagem_do_animal')
+                        ->count();
+
+        $numPaginas = intval($numPostagens/10) + 1;
+
+        if($pagina >$numPaginas){
+            return redirect("lista/".$numPaginas);
+        }
+        if ($pagina<1) {
+            return redirect("lista/1");
+        }
+
+        // dd('bhjbjk,.');
+        $query = $r->Query;
+
+        $query .= "  LIMIT 10 OFFSET ".(($pagina-1 )*10);
+        $postagens = \DB::select($query);
+
+        $query = $r->Query;
+        $estados = Estado::all()->sortBy('sigla_estado');
+        $cidades = Cidade::all()->sortBy('nome_cidade');
+        //  dd($cidades);
+        $especies = Especie::orderBy('cod_especie')->get();
+
+        $pesquisa = true;
+
+        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa', 'query'));
+
     }
 
     public static function buscaLocal($cod){
@@ -289,12 +341,5 @@ class ListaController extends Controller
         return $fotos;
 
     }
-
-    // public static function temDenuncia($cod_postagem){
-    //     $denuncias= Denuncia::all();
-
-
-
-    // }
 
 }
