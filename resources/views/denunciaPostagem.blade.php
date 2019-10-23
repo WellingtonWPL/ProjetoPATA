@@ -16,7 +16,7 @@
             <select class="custom-select my-1 mr-sm-2" onchange="checkOpcao()" id="options" name="motivo">
                 <option selected>Selecione...</option>
                 @foreach ($motivosDenuncia as $motivo)
-                    <option value="{{$motivo->cod_motivo_denuncia}}">{{$motivo->descricao}}</option>
+                    <option value="{{$motivo->cod_motivo_denuncia}}">{{$motivo->descricao_denuncia}}</option>
                 @endforeach
             </select>
             <br>
