@@ -6,29 +6,37 @@
     font-size: 30px;
   }
 </style>
-    
+
 @endsection
 
 @section('conteudo')
 <header >
-        <div style="text-align:center; margin-top: 20%; position: center;" >
+
+        <div style="text-align:center; margin-top: 10%; position: center;" >
           <div class="container">
-            {{-- <h1 class="masthead-heading mb-0">One Page Wonder</h1>--}}
-            <p>o
-            <b>Projeto PATA</b>
-            tem o intuito de possibilitar a adoção de
-            todos os animais que precisam de um lar, 
-            sem distinção de raça ou especie</p>
-            <a href="/lista" class="btn btn-primary btn-xl rounded-pill mt-5">Conheça os animais cadastrados!</a>
+
+            <div class="card"  style="max-width:750px;
+            position: center; margin:auto;">
+                <div class="card-body">
+                {{-- <h1 class="masthead-heading mb-0">One Page Wonder</h1>--}}
+                <img src="{{url('img/cachorro_home.jpg')}}" class="card-img-top" alt="..." style="max-height: 455px; max-width:720px" >
+                <p>o
+                    <b>Projeto PATA</b>
+                    tem o intuito de possibilitar a adoção de
+                    todos os animais que precisam de um lar,
+                    sem distinção de raça ou especie</p>
+                    <a href="/lista" class="btn btn-primary btn-xl rounded-pill mt-5">Conheça os animais cadastrados!</a>
+                </div>
+            </div>
           </div>
         </div>
-        
+
         {{-- <div class="bg-circle-1 bg-circle"></div>
         <div class="bg-circle-2 bg-circle"></div>
         <div class="bg-circle-3 bg-circle"></div>
         <div class="bg-circle-4 bg-circle"></div>  --}}
 </header>
-      
+
     <!--
       <section>
         <div class="container">
@@ -47,7 +55,7 @@
           </div>
         </div>
       </section>
-    
+
       <section>
         <div class="container">
           <div class="row align-items-center">
@@ -65,7 +73,7 @@
           </div>
         </div>
       </section>
-    
+
       <section>
         <div class="container">
           <div class="row align-items-center">

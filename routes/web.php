@@ -49,9 +49,9 @@ Route::post('/postagem/{cod_postagem}/avaliar', 'SolicitacaoController@avaliar')
 
 
 Route::get('lista', 'ListaController@mostrar');
-Route::post('lista', 'ListaController@pesquisa');
-
+Route::post('lista/{pagina}', 'ListaController@pesquisa');
 Route::get('lista/{pagina}', 'ListaController@mostrarPagina');
+Route::post('lista_filtro/{pagina}', "ListaController@listaFiltro");
 // Route::post('lista', 'ListaController@pesquisa');
 
 
@@ -95,6 +95,6 @@ Route::post('/logar', 'UsuarioController@login')->name('logar')->middleware('gue
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
 
 
