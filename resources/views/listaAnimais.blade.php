@@ -65,7 +65,7 @@ use \app\Http\Controllers\ListaController;
 @section('conteudo')
 
 
-<form action="/lista" method="POST">
+<form action="/lista/{{ $pagina}}" method="POST">
     @csrf
     {{-- <div class="col"> --}}
     {{-- <div class="input-group-prepend"> --}}
@@ -188,28 +188,74 @@ use \app\Http\Controllers\ListaController;
 </form>
 <br>
 
+@if (isset($pesquisa))
+<div class="row">
 
-@if ($pagina != 1)
-<a  href = "{{url("lista/1")}}">
-    <button class="btn btn-sm"> Primeira </button>
-</a>
-<a  href = "{{url("lista/".($pagina-1))}}">
-    <button class="btn btn-sm"> < </button>
-</a>
+     @if ($pagina != 1)
+        <a style="margin-right:1em" href = "{{url("lista/1")}} ">
+            <button class="btn btn-sm"> Primeira </button>
+        </a>
+
+        <form class="form"action="{{ url('lista_filtro/'.($pagina-1) )}}" method= "POST" >
+            @csrf
+            <button class="btn btn-sm" type="submit"> < </button>
+            <input type="hidden" name="Query" value="{{$query}}">
+        </form>
+    @endif
+
+
+    <button style="margin-top: 0" class="btn btn-sm"> {{$pagina }}</button>
+
+    @if ($pagina != $numPaginas)
+        <form class="form"action="{{ url('lista_filtro/'.($pagina+1) )}}" method= "POST" >
+            @csrf
+            <button class="btn btn-sm" type="submit"> > </button>
+            <input type="hidden" name="Query" value="{{$query}}">
+        </form>
+
+        <a style="margin-left:1em" href="{{url("lista/".$numPaginas)}}">
+            <button class="btn btn-sm" > Ultima </button>
+        </a>
+    @endif
+    {{--
+        @if ($pagina != $numPaginas)
+
+        <a href="{{url("lista/".$numPaginas)}}">
+            <button class="btn btn-sm" > Ultima </button>
+        </a>
+
+
+    @endif --}}
+
+
+
+</div>
+@else
+    @if ($pagina != 1)
+    <a  href = "{{url("lista/1")}}">
+        <button class="btn btn-sm"> Primeira </button>
+    </a>
+    <a  href = "{{url("lista/".($pagina-1))}}">
+        <button class="btn btn-sm"> < </button>
+    </a>
+    @endif
+
+
+    <button class="btn btn-sm"> {{$pagina }}</button>
+
+
+    @if ($pagina != $numPaginas)
+
+            <a  href = "{{url("lista/".($pagina+1))}}">
+                <button class="btn btn-sm" > > </button>
+            </a>
+
+        <a href="{{url("lista/".$numPaginas)}}">
+            <button class="btn btn-sm" > Ultima </button>
+        </a>
+        @endif
 @endif
 
-
-<button class="btn btn-sm"> {{$pagina }}</button>
-
-@if ($pagina != $numPaginas)
-<a  href = "{{url("lista/".($pagina+1))}}">
-    <button class="btn btn-sm" > > </button>
-</a>
-
-<a href="{{url("lista/".$numPaginas)}}">
-    <button class="btn btn-sm" > Ultima </button>
-</a>
-@endif
 
 {{-- mostrar os posts --}}
 @foreach ($postagens as $postagem)
