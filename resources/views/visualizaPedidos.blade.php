@@ -131,7 +131,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
                 </div>
                 <div class="col-4">
                     <a href="{{url('/postagem/'.$suasSol->cod_postagem.'/avaliar')}}">
-                        <button class="btn ">Finalizar</button>
+                        <button class="btn ">Concluir</button>
                     </a>
                 </div>
 
@@ -146,7 +146,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
 <br>
 <div class="card">
         <div class='card-body'>
-            <h2>Suas adoções Finalizadas</h2>
+            <h2>Suas adoções Concluidas</h2>
 
             @php
                 // dd($suasSolicitacoes);
