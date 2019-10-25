@@ -4,7 +4,7 @@
 
 @php
 // dd($foto);
-$i=0
+$i=0;$j=0;
 @endphp
 
 <div id="accordion">
@@ -105,7 +105,7 @@ $i=0
         </div>
         <br>
         @php
-        $i++;
+        $i++;;
         @endphp
 
 
@@ -169,7 +169,7 @@ $i=0
                 <div class="col">
 
                   <div>
-                    @if ($fotoPI[$i]==NULL)
+                    @if ($fotoPI[$j]==NULL)
                     <img id="foto-postagem"
                       src="{{url('img/animal_sem_foto.png')}}"
                       class="img-fluid rounded">
@@ -208,7 +208,7 @@ $i=0
               </div>
               <br>
               @php
-              $i++;
+              $j++;
               @endphp
 
 
