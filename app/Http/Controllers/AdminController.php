@@ -6,11 +6,12 @@ use App\Denuncia;
 use App\FotoPostagem;
 use App\PostagemDoAnimal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function mostrar(){
-#($denuncia->finalizada=="nao"
+        #($denuncia->finalizada=="nao"
         $denunciasDP =  Denuncia
         ::where('finalizada', '=', 'nao')
         ->join('Postagem_do_animal', 'cod_postagem_denunciada' , '=', 'Postagem_do_animal.cod_postagem')
@@ -48,6 +49,7 @@ class AdminController extends Controller
             $i++;
             // dd(FotoPostagem::where('cod_postagem', $denuncia->cod_postagem_)->first());
         }
+        // dd($fotoPI);
 
         return view('vizualizaDenunciaAdmin', compact('denunciasDP', 'denunciasPI', 'fotoDP', "fotoPI"));
 
@@ -72,4 +74,19 @@ class AdminController extends Controller
         return redirect('/admin');
 
     }
+
+    public static function ehAdmin(){
+        $usuario = Auth::user();
+        if($usuario==null){
+            return false;
+        }
+        if($usuario->admin == 'sim'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
 }
