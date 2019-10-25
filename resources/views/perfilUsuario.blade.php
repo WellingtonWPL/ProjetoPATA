@@ -1,18 +1,20 @@
 @extends('template')
 @section("titulo", "Perfil de Usuário")
 @section('css')
+
 <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-      
+
 <style>
     i {
         font-size: 24px !important;
         vertical-align: middle;
     }
 
-    #foto{
+    #foto {
         margin: 2%;
         border-style: solid;
         border-width: 1px;
@@ -57,7 +59,7 @@
 
 
     }
-    
+
 
 
     .dot {
@@ -91,14 +93,15 @@ use App\Http\Controllers\ListaController;
 $donoPerfil = False;
 
 if (Auth::check()){
-    $usuarioLogado =(Auth::user());
-    if($usuarioLogado->cod_usuario==$cod_usuario){
-        $donoPerfil = True;
-    }
+$usuarioLogado =(Auth::user());
+if($usuarioLogado->cod_usuario==$cod_usuario){
+$donoPerfil = True;
+}
 }
 
 $avaliacao = PerfilController::getAvaliacao($cod_usuario);
-$notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
+$notificaçoes =
+PerfilController::getSolicitacoes($cod_usuario);
 
 @endphp
 
@@ -125,8 +128,9 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
                 @php
 
                 // dd($usuario[0]->cod_cidade);
-                    $cidade = PerfilController::getCidade($usuario[0]->cod_cidade);
-                    // dd('dsa')
+                $cidade =
+                PerfilController::getCidade($usuario[0]->cod_cidade);
+                // dd('dsa')
                 @endphp
 
                 <h4>{{$cidade[0]}} - {{$cidade[1]}}</h4><br>
@@ -136,33 +140,39 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
 
             <div style="margin-left: 2%"
                 class="container-fluid">
-                <a href="{{url($cod_usuario.'/solicitacoes')}}">
+                <a
+                    href="{{url($cod_usuario.'/solicitacoes')}}">
                     <button class="btn btn-primary"><i
-                        class="material-icons"
-                        style>announcement</i>
-                    Solicitações <span class="dot">{{ $notificaçoes }}</span></button>
-                    
+                            class="material-icons"
+                            style>announcement</i>
+                        Solicitações <span
+                            class="dot">{{ $notificaçoes }}</span></button>
+
                 </a>
-                <a href="{{url('perfil/'.$cod_usuario.'/editar')}}">
+                <a
+                    href="{{url('perfil/'.$cod_usuario.'/editar')}}">
 
                     <button class="btn btn-alert"><i
-                        class="material-icons"
-                        style>edit</i>
+                            class="material-icons"
+                            style>edit</i>
                         Editar</button>
-                    </a>
-                    <a href="{{url($cod_usuario.'/postar')}}">
-                    <button  class=" btn btn-success"><i
-                        class="material-icons"
-                        style>library_add</i>
+                </a>
+                <a href="{{url($cod_usuario.'/postar')}}">
+                    <button class=" btn btn-success"><i
+                            class="material-icons"
+                            style>library_add</i>
                         Novo post</button>
-                    </a>
-                
+                </a>
 
-                <button class=" btn btn-danger" type="button" data-toggle="modal" data-target="#myModal">
-                    <i class="material-icons" style>delete</i>
+
+                <button class=" btn btn-danger"
+                    type="button" data-toggle="modal"
+                    data-target="#myModal">
+                    <i class="material-icons"
+                        style>delete</i>
                     Deletar</button>
 
-                   
+
 
             </div>
             @endif
@@ -178,48 +188,56 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
         </div>
     </div>
 
-    
-{{-- modal --}}
 
-<div id="myModal" class="modal fade" role="dialog">
+    {{-- modal --}}
+
+    <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-          {{-- header modal --}}
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Você tem certeza que quer excluir sua conta? </h4>
-              <br>
-            </div>
-            {{-- corpo modal --}}
-
-            <div class="modal-body">
-                <form action="{{url('/perfil/'.$cod_usuario.'/excluir')}}" method="POST">
-                    @csrf
-                    (Você poderá recuperá-la no futuro.)
+            {{-- header modal --}}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                        data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Você tem certeza
+                        que quer excluir sua conta? </h4>
                     <br>
+                </div>
+                {{-- corpo modal --}}
 
-                    {{-- <input type="submit" class="btn btn btn-lg " value= "Sim">
+                <div class="modal-body">
+                    <form
+                        action="{{url('/perfil/'.$cod_usuario.'/excluir')}}"
+                        method="POST">
+                        @csrf
+                        (Você poderá recuperá-la no futuro.)
+                        <br>
+
+                        {{-- <input type="submit" class="btn btn btn-lg " value= "Sim">
 
                     <input type="cancel" class="btn btn-default" value= "Não"> --}}
 
-                    <button class="btn btn-danger" type="submit" >Sim</button>
-                    {{-- <button  class="btn btn-default"  >Não</button> --}}
-                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Não</button>
-                </form>
+                        <button class="btn btn-danger"
+                            type="submit">Sim</button>
+                        {{-- <button  class="btn btn-default"  >Não</button> --}}
+                        <button type="button"
+                            class="btn btn-default"
+                            data-dismiss="modal"
+                            aria-hidden="true">Não</button>
+                    </form>
 
-            </div>
+                </div>
             </div>
 
 
             {{-- footer do modal --}}
             <div class="modal-footer">
-              {{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
+                {{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
             </div>
-          </div>
-
         </div>
-      {{-- </div>
+
+    </div>
+    {{-- </div>
     </div> --}}
 
 
@@ -228,7 +246,8 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
     {{-- postagens --}}
 
     @php
-    $postagens = PerfilController::getPostagens($cod_usuario)
+    $postagens =
+    PerfilController::getPostagens($cod_usuario)
     @endphp
 
 
@@ -241,29 +260,36 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
     @if(count($postagens)==0)
     <div style="text-align: center">
 
-        <b > Nenhuma postagem encontrada... </b>
+        <b> Nenhuma postagem encontrada... </b>
     </div>
 
     @else
 
     @foreach ($postagens as $postagem)
+    @if($postagem->listagem_postagem=='sim')
     @php
-        $foto = \DB::table('Foto_postagem')->where('cod_postagem', $postagem->cod_postagem)->first();
+    $foto =
+    \DB::table('Foto_postagem')->where('cod_postagem',
+    $postagem->cod_postagem)->first();
     @endphp
     <div class="card">
         <div class="card-body row">
             <div class="col-3">
-                {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}"> --}}
-                    @if ($foto==NULL)
-                        <img src="{{url('img/animal_sem_foto.png')}}" id="foto"  class="" >
-                        
-                    @else
-                        <img src="{{url(''.$foto->link_foto_postagem)}}" id="foto"  class="img-fluid rounded" >
-                    @endif
-                    {{-- </a> --}}
+                {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+                --}}
+                @if ($foto==NULL)
+                <img src="{{url('img/animal_sem_foto.png')}}"
+                    id="foto" class="">
+
+                @else
+                <img src="{{url(''.$foto->link_foto_postagem)}}"
+                    id="foto" class="img-fluid rounded">
+                @endif
+                {{-- </a> --}}
             </div>
             <div class="col-6">
-                <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+                <a
+                    href="{{url('/postagem/'.$postagem->cod_postagem)}}">
                     <h2>{{$postagem->nome_animal}}</h2>
                 </a>
                 <br>
@@ -271,44 +297,41 @@ $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
                 {{$postagem->sexo}} <br>
 
                 @php
-                if ($postagem->nascimento!=NULL) {
+                    if ($postagem->nascimento!=NULL) {
 
                     $idade=ListaController::calcIdade($postagem->nascimento);
-                    if ($idade<1.0) {
-                        echo 'Menos de um ano<br>';
-                    }elseif ($idade==1.0) {
-                        echo '1 ano<br>' ;
-                    }else{
-                        echo (int) $idade." anos<br>";
-                    }
-                }
+                    if ($idade<1.0) { echo 'Menos de um ano<br>'
+                        ; }elseif ($idade==1.0) {
+                        echo '1 ano<br>' ; }else{ echo (int)
+                        $idade." anos<br>";
+                        }
+                        }
                 @endphp
 
-Porte {{$postagem->tipo_porte}} <br>
-{{-- Porte {{}} <br> --}}
-</div>
-<div class="col-3">
-    <br><br>
+                    Porte {{$postagem->tipo_porte}} <br>
+                    {{-- Porte {{}} <br> --}}
+            </div>
+            <div class="col-3">
+                <br><br>
 
-@if ($postagem->avaliacao==NULL)
+                @if ($postagem->avaliacao==NULL)
 
-@else
-Avaliação:
-    @for ($i = 0; $i < $postagem->avaliacao; $i++)
-        <i class=" material-icons">pets</i>
-    @endfor
-@endif
-</div>
+                @else
+                Avaliação:
+                @for ($i = 0; $i < $postagem->avaliacao;
+                    $i++)
+                    <i class=" material-icons">pets</i>
+                    @endfor
+                    @endif
+            </div>
 
-</div>
-</div>
-<br>
-@endforeach
+        </div>
+    </div>
+    <br>
+    @endif
+    @endforeach
 
-@endif
-
-
-@endsection
-
+    @endif
 
 
+    @endsection

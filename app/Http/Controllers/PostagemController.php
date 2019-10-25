@@ -2,17 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Denuncia;
 use App\User;
 use App\Especie;
 use App\PostagemDoAnimal;
 use App\FotoPostagem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
 
 class PostagemController extends Controller
 {
     public function mostrar($cod_postagem){
         // dd($cod_postagem);
+        /*denunciasPI= Denuncia
+        ::where('finalizada', '=', 'sim')->where('listagem_postagem', 'nao')
+        ->join('Postagem_do_animal', 'cod_postagem_denunciada' , '=', 'Postagem_do_animal.cod_postagem')
+        ->join('Usuario', 'Postagem_do_animal.cod_usuario_postagem', '=', 'Usuario.cod_usuario')
+        ->join('Motivos_Denuncia', 'Denuncia.cod_motivo_denuncia', '=', 'Motivos_Denuncia.cod_motivo_denuncia')
+        ->get(); */
+
+        $denuncia= Denuncia
+        ::join('Postagem_do_animal', 'cod_postagem_denunciada' , '=', 'Postagem_do_animal.cod_postagem')
+        ->where('cod_postagem_denunciada', '=', $cod_postagem)
+        ->where('finalizada', '=', 'sim')
+        ->where('listagem_postagem', 'nao')->first();
+
+
+        if($denuncia!=null && !AdminController::ehAdmin()){
+            return view('postagemDenunciada', compact('cod_postagem'));
+        }
         $postagem = \DB::table('Postagem_do_animal')
         ->where('cod_postagem', $cod_postagem)
         ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
