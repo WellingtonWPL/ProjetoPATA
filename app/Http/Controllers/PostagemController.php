@@ -106,7 +106,7 @@ class PostagemController extends Controller
 
     public function novaPostagem(){
         ///dd('TESTE');
-        $especies = Especie::orderBy('cod_especie')->get();
+        $especies = Especie::orderBy('nome_especie')->get();
         return view('postaAnimal', compact('especies'));
 
     }
