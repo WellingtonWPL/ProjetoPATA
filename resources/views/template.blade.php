@@ -51,7 +51,7 @@
     crossorigin="anonymous"></script>
 
   <style>
-    
+
 
      i {
         font-size: 24px !important;
@@ -70,10 +70,13 @@
       font-family: 'Alegreya', serif;
       color: white;
       margin-left:10%;
-        
+
     }
 
-
+    #background{
+        background-image: url({{ asset('/img/patinhas.png') }});
+        background-size: 200px;
+    }
 
   </style>
 </head>
@@ -99,7 +102,7 @@
 @endif
 
 
-<body style="background-image: url({{ asset('/img/patinhas.png') }}); ">
+<body id="background" >
 
   <script>
     // window.addEventListener('load', function() {
@@ -114,7 +117,7 @@
             <img style="max-width:10%; height:auto; " src="{{asset('/img/logo.png')}}" alt="pata">
       </a>
       <div id="titulo" name="titulo" class="title m-1"><h2>@yield("titulo")</h2></div>
-      
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -146,7 +149,7 @@
           id="navbarResponsive">
           {{-- <ul class="navbar-nav ml-auto"> --}}
           <li class="nav-item">
-            <a class="nav-link" 
+            <a class="nav-link"
               href="{{url('register')}}">Cadastrar-se <i
               class="material-icons">assignment</i></a>
           </li>
