@@ -189,47 +189,47 @@ use \app\Http\Controllers\ListaController;
 <br>
 
 @if (isset($pesquisa))
-<div class="row">
+    <div class="row">
 
-     @if ($pagina != 1)
-        <a style="margin-right:1em" href = "{{url("lista/1")}} ">
-            <button class="btn btn-sm"> Primeira </button>
-        </a>
+        @if ($pagina != 1)
+            <a style="margin-right:1em" href = "{{url("lista/1")}} ">
+                <button class="btn btn-sm"> Primeira </button>
+            </a>
 
-        <form class="form"action="{{ url('lista_filtro/'.($pagina-1) )}}" method= "POST" >
-            @csrf
-            <button class="btn btn-sm" type="submit"> < </button>
-            <input type="hidden" name="Query" value="{{$query}}">
-        </form>
-    @endif
+            <form class="form"action="{{ url('lista_filtro/'.($pagina-1) )}}" method= "POST" >
+                @csrf
+                <button class="btn btn-sm" type="submit"> < </button>
+                <input type="hidden" name="Query" value="{{$query}}">
+            </form>
+        @endif
 
 
-    <button style="margin-top: 0" class="btn btn-sm"> {{$pagina }}</button>
+        <button style="margin-top: 0" class="btn btn-sm"> {{$pagina }}</button>
 
-    @if ($pagina != $numPaginas)
-        <form class="form"action="{{ url('lista_filtro/'.($pagina+1) )}}" method= "POST" >
-            @csrf
-            <button class="btn btn-sm" type="submit"> > </button>
-            <input type="hidden" name="Query" value="{{$query}}">
-        </form>
-
-        <a style="margin-left:1em" href="{{url("lista/".$numPaginas)}}">
-            <button class="btn btn-sm" > Ultima </button>
-        </a>
-    @endif
-    {{--
         @if ($pagina != $numPaginas)
+            <form class="form"action="{{ url('lista_filtro/'.($pagina+1) )}}" method= "POST" >
+                @csrf
+                <button class="btn btn-sm" type="submit"> > </button>
+                <input type="hidden" name="Query" value="{{$query}}">
+            </form>
 
-        <a href="{{url("lista/".$numPaginas)}}">
-            <button class="btn btn-sm" > Ultima </button>
-        </a>
+            <a style="margin-left:1em" href="{{url("lista/".$numPaginas)}}">
+                <button class="btn btn-sm" > Ultima </button>
+            </a>
+        @endif
+        {{--
+            @if ($pagina != $numPaginas)
+
+            <a href="{{url("lista/".$numPaginas)}}">
+                <button class="btn btn-sm" > Ultima </button>
+            </a>
 
 
-    @endif --}}
+        @endif --}}
 
 
 
-</div>
+    </div>
 @else
     @if ($pagina != 1)
     <a  href = "{{url("lista/1")}}">
@@ -282,7 +282,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
             </a>
         </div>
 
-        <div class="col-6">
+        <div class="col">
             <br>
             {{-- nome --}}
             <a
@@ -290,7 +290,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
             <h2>{{$postagem->nome_animal}}</h2>
             </a>
             <div class="row">
-                <div class="col-3">
+                <div class="col">
                     {{-- sexo --}}
                 @php
                     echo "Gênero: " .ucfirst($postagem->sexo)."<br>";
@@ -311,7 +311,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
                     }
                 @endphp
                 </div>
-                <div class="col-4">
+                <div class="col">
                 @php
                     //{{-- Local --}}
                     $Local = ListaController::buscaLocal($postagem->cod_postagem);
