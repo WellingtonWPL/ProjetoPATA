@@ -55,10 +55,24 @@ class PerfilController extends Controller
     public static function getPostagens($cod_usuario){
         // $postagens = PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)->get();
         $postagens=\DB::table('Postagem_do_animal')
-            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')->where('cod_usuario_postagem', $cod_usuario)->get();
+            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
+            ->where('cod_usuario_postagem', $cod_usuario)
+            ->get();
         return $postagens;
 
 
+    }
+
+    public static function getPostagensCompletadas($cod_usuario){
+        // $postagens = PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)->get();
+
+        $postagens=\DB::table('Postagem_do_animal')
+            ->where('cod_usuario_adotante', $cod_usuario)
+            ->whereNotNull('avaliacao')
+            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
+            ->get();
+        // dd($postagens);
+        return $postagens;
     }
 
     public static function getSolicitacoes($cod_usuario){

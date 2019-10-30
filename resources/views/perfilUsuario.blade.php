@@ -86,22 +86,22 @@
 @section('conteudo')
 
 @php
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\ListaController;
+    use App\Http\Controllers\PerfilController;
+    use App\Http\Controllers\ListaController;
 
 
-$donoPerfil = False;
+    $donoPerfil = False;
 
-if (Auth::check()){
-$usuarioLogado =(Auth::user());
-if($usuarioLogado->cod_usuario==$cod_usuario){
-$donoPerfil = True;
-}
-}
+    if (Auth::check()){
+        $usuarioLogado =(Auth::user());
+        if($usuarioLogado->cod_usuario==$cod_usuario){
+            $donoPerfil = True;
+        }
+    }
 
-$avaliacao = PerfilController::getAvaliacao($cod_usuario);
-$notificaçoes =
-PerfilController::getSolicitacoes($cod_usuario);
+    $avaliacao = PerfilController::getAvaliacao($cod_usuario);
+    $notificaçoes =
+    PerfilController::getSolicitacoes($cod_usuario);
 
 @endphp
 
@@ -113,80 +113,85 @@ PerfilController::getSolicitacoes($cod_usuario);
     <div align="center" style="align:center; color:black;">
         <b>Avaliação:</b>
         @php
-        if ($avaliacao==0) {
-        echo 'Sem avaliações';
-        }
-        for($i =0; $i<$avaliacao; $i++){
-            echo '<i class="material-icons">pets</i>' ; }
-            @endphp </div> </div> <div class="row"
-            id="campo">
-            <div style="margin-left: 5%">
-                <br><br>
-                <b>Nome:</b>
-                <h2>{{  $usuario[0]->nome  }}</h2><br>
-                <b>Cidade:</b>
-                @php
-
-                // dd($usuario[0]->cod_cidade);
-                $cidade =
-                PerfilController::getCidade($usuario[0]->cod_cidade);
-                // dd('dsa')
-                @endphp
-
-                <h4>{{$cidade[0]}} - {{$cidade[1]}}</h4><br>
-
-            </div>
-            @if ($donoPerfil==True)
-
-            <div style="margin-left: 2%"
-                class="container-fluid">
-                <a
-                    href="{{url($cod_usuario.'/solicitacoes')}}">
-                    <button class="btn btn-primary"><i
-                            class="material-icons"
-                            style>announcement</i>
-                        Solicitações <span
-                            class="dot">{{ $notificaçoes }}</span></button>
-
-                </a>
-                <a
-                    href="{{url('perfil/'.$cod_usuario.'/editar')}}">
-
-                    <button class="btn btn-alert"><i
-                            class="material-icons"
-                            style>edit</i>
-                        Editar</button>
-                </a>
-                <a href="{{url($cod_usuario.'/postar')}}">
-                    <button class=" btn btn-success"><i
-                            class="material-icons"
-                            style>library_add</i>
-                        Novo post</button>
-                </a>
-
-
-                <button class=" btn btn-danger"
-                    type="button" data-toggle="modal"
-                    data-target="#myModal">
-                    <i class="material-icons"
-                        style>delete</i>
-                    Deletar</button>
-
-
-
-            </div>
-            @endif
+            if ($avaliacao==0) {
+            echo 'Sem avaliações';
+            }
+            for($i =0; $i<$avaliacao; $i++){
+            echo '<i class="material-icons">pets</i>' ;
+            }
+        @endphp
     </div>
-    <div class="row" id="campo">
-        <div class="container-fluid">
-            <br>
-            <h2>Descrição:</h2>
-            <p>
-                {{  $usuario[0]->descricao  }}
+</div>
+<div class=" card" >
+    <div  class="card-body" style="margin-left: 5%">
+        <br><br>
+        <b>Nome:</b>
+        <h2>{{  $usuario[0]->nome  }}</h2><br>
+        <b>Cidade:</b>
+        @php
 
-            </p>
+            // dd($usuario[0]->cod_cidade);
+            $cidade =
+            PerfilController::getCidade($usuario[0]->cod_cidade);
+            // dd('dsa')
+        @endphp
+
+        <h4>{{$cidade[0]}} - {{$cidade[1]}}</h4><br>
+
+    </div>
+    {{-- mostrar os botões de ações --}}
+    @if ($donoPerfil==True)
+
+        <div style="margin-left: 2%"
+            class="container-fluid">
+            <a
+                href="{{url($cod_usuario.'/solicitacoes')}}">
+                <button class="btn btn-primary"><i
+                        class="material-icons"
+                        style>announcement</i>
+                    Solicitações <span
+                        class="dot">{{ $notificaçoes }}</span></button>
+
+            </a>
+            <a
+                href="{{url('perfil/'.$cod_usuario.'/editar')}}">
+
+                <button class="btn btn-alert"><i
+                        class="material-icons"
+                        style>edit</i>
+                    Editar</button>
+            </a>
+            <a href="{{url($cod_usuario.'/postar')}}">
+                <button class=" btn btn-success"><i
+                        class="material-icons"
+                        style>library_add</i>
+                    Novo post</button>
+            </a>
+
+
+            <button class=" btn btn-danger"
+                type="button" data-toggle="modal"
+                data-target="#myModal">
+                <i class="material-icons"
+                    style>delete</i>
+                Deletar</button>
+
+
+
         </div>
+    @endif
+</div>
+<br>
+<div class="card" >
+    <div class="card-body">
+        <br>
+        <h2>Descrição:</h2>
+        <p>
+            {{  $usuario[0]->descricao  }}
+
+        </p>
     </div>
+</div>
 
 
     {{-- modal --}}
@@ -251,9 +256,11 @@ PerfilController::getSolicitacoes($cod_usuario);
     @endphp
 
 
-
-    <div id="campo" align="center">
-        <h2>Doações publicadas:</h2>
+    <br>
+    <div class="card" >
+        <div class="card-header">
+            <h2>Animais publicados</h2>
+        </div>
     </div>
     <br>
 
@@ -266,72 +273,153 @@ PerfilController::getSolicitacoes($cod_usuario);
     @else
 
     @foreach ($postagens as $postagem)
-    @if($postagem->listagem_postagem=='sim')
-    @php
-    $foto =
-    \DB::table('Foto_postagem')->where('cod_postagem',
-    $postagem->cod_postagem)->first();
-    @endphp
-    <div class="card">
-        <div class="card-body row">
-            <div class="col-3">
-                {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
-                --}}
-                @if ($foto==NULL)
-                <img src="{{url('img/animal_sem_foto.png')}}"
-                    id="foto" class="">
+        @if($postagem->listagem_postagem=='sim')
+            @php
+                $foto =
+                \DB::table('Foto_postagem')->where('cod_postagem',
+                $postagem->cod_postagem)->first();
+            @endphp
+        <div class="card">
+            <div class="card-body row">
+                <div class="col">
+                    {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+                    --}}
+                    @if ($foto==NULL)
+                        <img src="{{url('img/animal_sem_foto.png')}}"
+                        id="foto" class="">
 
-                @else
-                <img src="{{url(''.$foto->link_foto_postagem)}}"
-                    id="foto" class="img-fluid rounded">
-                @endif
-                {{-- </a> --}}
-            </div>
-            <div class="col-6">
-                <a
-                    href="{{url('/postagem/'.$postagem->cod_postagem)}}">
-                    <h2>{{$postagem->nome_animal}}</h2>
-                </a>
-                <br>
-                {{-- sexo --}}
-                {{$postagem->sexo}} <br>
-
-                @php
-                    if ($postagem->nascimento!=NULL) {
-
-                    $idade=ListaController::calcIdade($postagem->nascimento);
-                    if ($idade<1.0) { echo 'Menos de um ano<br>'
-                        ; }elseif ($idade==1.0) {
-                        echo '1 ano<br>' ; }else{ echo (int)
-                        $idade." anos<br>";
-                        }
-                        }
-                @endphp
-
-                    Porte {{$postagem->tipo_porte}} <br>
-                    {{-- Porte {{}} <br> --}}
-            </div>
-            <div class="col-3">
-                <br><br>
-
-                @if ($postagem->avaliacao==NULL)
-
-                @else
-                Avaliação:
-                @for ($i = 0; $i < $postagem->avaliacao;
-                    $i++)
-                    <i class=" material-icons">pets</i>
-                    @endfor
+                    @else
+                        <img src="{{url                         (''.$foto->link_foto_postagem)}}"
+                        id="foto" class="img-fluid rounded">
                     @endif
-            </div>
+                    {{-- </a> --}}
+                </div>
+                <div class="col">
+                    <a
+                        href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+                        <h2>{{$postagem->nome_animal}}</h2>
+                    </a>
+                    <br>
+                    {{-- sexo --}}
+                    {{$postagem->sexo}} <br>
 
+                    @php
+                        if ($postagem->nascimento!=NULL) {
+
+                        $idade=ListaController::calcIdade($postagem->nascimento);
+                        if ($idade<1.0) { echo 'Menos de um ano<br>'
+                            ; }elseif ($idade==1.0) {
+                            echo '1 ano<br>' ; }else{ echo (int)
+                            $idade." anos<br>";
+                            }
+                            }
+                    @endphp
+
+                        Porte {{$postagem->tipo_porte}} <br>
+                        {{-- Porte {{}} <br> --}}
+                </div>
+                <div class="col">
+                    <br><br>
+
+                    @if ($postagem->avaliacao==NULL)
+                        Não avaliado ainda
+                    @else
+                        Avaliação:
+                        @for ($i = 0; $i < $postagem->avaliacao;
+                            $i++)
+                            <i class=" material-icons">pets</i>
+                        @endfor
+                    @endif
+                </div>
+
+            </div>
         </div>
-    </div>
-    <br>
-    @endif
+        <br>
+        @endif
     @endforeach
 
+<div class="card">
+    <div class="card-body">
+
+        <h2>Animais adotados</h2>
+    </div>
+
+
+</div>
+<br>
+
+    @php
+        $postagens =PerfilController::getPostagensCompletadas($cod_usuario);
+        // dd($postagens);
+    @endphp
+
     @endif
+
+@foreach ($postagens as $postagem)
+@if($postagem->listagem_postagem=='sim')
+@php
+$foto =
+\DB::table('Foto_postagem')->where('cod_postagem',
+$postagem->cod_postagem)->first();
+@endphp
+<div class="card">
+    <div class="card-body row">
+        <div class="col">
+            {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+            --}}
+            @if ($foto==NULL)
+            <img src="{{url('img/animal_sem_foto.png')}}"
+                id="foto" class="">
+
+            @else
+            <img src="{{url(''.$foto->link_foto_postagem)}}"
+                id="foto" class="img-fluid rounded">
+            @endif
+            {{-- </a> --}}
+        </div>
+        <div class="col">
+            <a
+                href="{{url('/postagem/'.$postagem->cod_postagem)}}">
+                <h2>{{$postagem->nome_animal}}</h2>
+            </a>
+            <br>
+            {{-- sexo --}}
+            {{$postagem->sexo}} <br>
+
+            @php
+                if ($postagem->nascimento!=NULL) {
+
+                $idade=ListaController::calcIdade($postagem->nascimento);
+                if ($idade<1.0) { echo 'Menos de um ano<br>'
+                    ; }elseif ($idade==1.0) {
+                    echo '1 ano<br>' ; }else{ echo (int)
+                    $idade." anos<br>";
+                    }
+                    }
+            @endphp
+
+                Porte {{$postagem->tipo_porte}} <br>
+                {{-- Porte {{}} <br> --}}
+        </div>
+        {{-- <div class="col-3">
+            <br><br>
+
+            @if ($postagem->avaliacao==NULL)
+
+            @else
+            Avaliação:
+            @for ($i = 0; $i < $postagem->avaliacao;
+                $i++)
+                <i class=" material-icons">pets</i>
+                @endfor
+                @endif
+        </div> --}}
+
+    </div>
+</div>
+<br>
+@endif
+@endforeach
 
 
     @endsection
