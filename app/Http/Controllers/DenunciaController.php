@@ -40,7 +40,7 @@ class DenunciaController extends Controller
             $postagem->save();
 
             if($r->descricao!=NULL){
-                $denuncia->descricao_denuncia=$r->descricao;
+                $denuncia->descricao_denuncia_outro=$r->descricao;
             }
 
             $denuncia->save();

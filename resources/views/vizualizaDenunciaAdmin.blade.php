@@ -1,3 +1,6 @@
+@php
+    // dd($denunciasDP);
+@endphp
 @extends('template')
 @section("titulo", "Denúncias de Postagens")
 @section('conteudo')
@@ -40,7 +43,11 @@ $i=0;$j=0;
           </div>
           <div class="col">
 
-            Motivo: {{$denuncia->descricao_denuncia}}
+            @if ($denuncia->descricao_denuncia == 'Outro')
+                <b>Motivo:</b> {{$denuncia->descricao_denuncia_outro}}
+            @else
+                <b>Motivo:</b> {{$denuncia->descricao_denuncia}}
+            @endif
             &nbsp;
           </div>
           <div class="col">
@@ -74,6 +81,11 @@ $i=0;$j=0;
               <img id="foto-postagem"
                 src="{{url($fotoDP[$i]->link_foto_postagem)}}"
                 class="img-fluid rounded">
+                @php
+                    $i++;
+                @endphp
+
+
               @endif
             </div>
           </div>
@@ -104,9 +116,7 @@ $i=0;$j=0;
             _
         </div>
         <br>
-        @php
-        $i++;;
-        @endphp
+
 
 
         @endif
@@ -150,8 +160,15 @@ $i=0;$j=0;
                 <div class="col">Dono da Postagem:
                     {{$denuncia->nome}}&nbsp;
                 </div >
-                <div class="col">Motivo: {{$denuncia->descricao_denuncia}}
-                        &nbsp;</div >
+
+                <div class="col">
+                    @if ($denuncia->descricao_denuncia == 'Outro')
+                        <b>Motivo:</b> {{$denuncia->descricao_denuncia_outro}}
+                    @else
+                        <b>Motivo:</b> {{$denuncia->descricao_denuncia}}
+                    @endif
+                &nbsp;
+                </div >
 
                         <div class="col">
                             <a
