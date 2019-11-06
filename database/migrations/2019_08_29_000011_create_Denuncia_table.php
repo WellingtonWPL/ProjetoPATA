@@ -24,7 +24,7 @@ class CreateDenunciaTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('cod_denuncia');
             $table->dateTime('data_denuncia');
-            $table->text('descricao_denuncia')->nullable();
+            $table->text('descricao_denuncia_outro')->nullable();
             $table->unsignedInteger('cod_usuario_denunciante');
             $table->unsignedInteger('cod_postagem_denunciada');
             $table->unsignedInteger('cod_motivo_denuncia');
