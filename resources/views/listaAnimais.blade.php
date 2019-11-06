@@ -64,6 +64,9 @@ use \app\Http\Controllers\ListaController;
 
 @section('conteudo')
 
+ <div class="card ">
+   <div class="card-body">
+
 
 <form action="/lista/{{ $pagina}}" method="POST">
     @csrf
@@ -186,6 +189,9 @@ use \app\Http\Controllers\ListaController;
         class="btn btn-primary">
 
 </form>
+
+</div>
+</div>
 <br>
 
 @if (isset($pesquisa))
