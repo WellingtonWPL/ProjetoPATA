@@ -50,35 +50,63 @@
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 
-  <style>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('icone/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('icone/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('icone/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('icone/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('icone/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('icone/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('icone/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('icone/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('icone/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{asset('icone/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icone/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('icone/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('icone/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('icone/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style>
 
 
-     i {
-        font-size: 24px !important;
-        vertical-align: middle;
-    }
+        i {
+           font-size: 24px !important;
+           vertical-align: middle;
+       }
 
-    ul li {
-      list-style: none;
-    }
+       ul li {
+         list-style: none;
+       }
 
-    ul li a {
-      color: aliceblue;
-    }
+       ul li a {
+         color: aliceblue;
+       }
 
-    #titulo{
-      font-family: 'Alegreya', serif;
-      color: white;
-      margin-left:10%;
+       #titulo{
+         font-family: 'Alegreya', serif;
+         color: white;
+         margin-left:10%;
 
-    }
+       }
 
-    #background{
-        background-image: url({{ asset('/img/patinhas.png') }});
-        background-size: 200px;
-    }
+       #background{
+            background-image: url({{ asset("/img/patinhas.png")}});
+           background-size: 200px;
+       }
 
-  </style>
+       h1{
+           font-size: 30px;
+
+       }
+
+       #logo-proj{
+           /* height: 100%; */
+            width: 150px;
+       }
+
+     </style>
 </head>
 @php
   use App\Http\Controllers\PerfilController;
@@ -113,12 +141,15 @@
   <nav
     id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">
-            <img style="max-width:10%; height:auto; " src="{{asset('/img/logo.png')}}" alt="pata">
+      <a class="navbar-item{{--brand--}}" href="#" id="logo-proj">
+            <img style="max-width:10%; {{--height:auto;--}} " src="{{asset('/img/logo.png')}}" alt="pata">
       </a>
-      <div id="titulo" name="titulo" class="title m-1"><h2>@yield("titulo")</h2></div>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <div id="titulo" name="titulo" class="title m-1"><h1>@yield("titulo")</h1></div>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+      style="float:left"
+      >
             <span class="navbar-toggler-icon"></span>
           </button>
       {{-- <a class="navbar-brand" href="{{url('/lista')}}"><img style="max-width: 30%; height: auto;" src="{{asset('/img/teste.png')}}" alt="pata"></a> --}}
@@ -129,7 +160,7 @@
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button> --}}
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav">
             <div class="collapse navbar-collapse" id="navbarResponsive">
         <li class="nav-item">
           <a class="nav-link"
@@ -168,6 +199,7 @@
         class="material-icons">face</i></a>
     </li>
 
+
     <li class="nav-item dropdown">
 
       <a id="navbarDropdown"
@@ -177,12 +209,14 @@
         {{ Auth::user()->nome }} <span class="caret"></span>
       </a>
 
+
+
       <div class="dropdown-menu dropdown-menu-right"
         aria-labelledby="navbarDropdown">
         <a class="dropdown-item"
           href="{{ url('sair') }}"
           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+          document.getElementById('logout-form').submit();">
           {{ __('Sair') }}
         </a>
 
@@ -193,6 +227,15 @@
         </form>
       </div>
     </li>
+
+    @if (App\Http\Controllers\AdminController::ehAdmin())
+        <li class="nav-item">
+            <a class="nav-link" id="perfil"
+            href="{{url('admin/')}}">
+                Administrativo
+            </a>
+        </li>
+    @endif
     </ul>
     @endguest
     </div>
