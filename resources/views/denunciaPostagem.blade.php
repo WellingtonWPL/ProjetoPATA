@@ -20,8 +20,9 @@
                 @endforeach
             </select>
             <br>
-
-            <input type="hidden" class="form-control" id="barraDescricao" name="descricao">
+            {{-- <label type="hidden" class="form-control" id="barraDescricaoLabel" name="descricao">Descreva:</label>
+            <br> --}}
+            <input type="hidden" class="form-control" placeholder="Descreva..." id="barraDescricao" name="descricao">
             <br>
 
             <button type="submit" class="btn btn-primary ">Denunciar</button>
