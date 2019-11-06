@@ -281,7 +281,7 @@
             @endphp
         <div class="card">
             <div class="card-body row">
-                <div class="col">
+                <div class="col-md">
                     {{-- <a href="{{url('/postagem/'.$postagem->cod_postagem)}}">
                     --}}
                     @if ($foto==NULL)

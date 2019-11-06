@@ -57,7 +57,7 @@
 <div class="card-body">
 
     <div class="row ">
-        <div class="col-3 " style="align:center;">
+        <div class="col-md-4 " style="align:center;">
             @if ($foto==NULL)
             <img id="foto-postagem" src="{{url('img/animal_sem_foto.png')}}" class="img-fluid rounded" >
             @else
@@ -65,7 +65,7 @@
             @endif
             </div>
 
-            <div class="col-6 " style="float: left;">
+            <div class="col-md " style="float: left;">
                 <br>
                 @if ($adotado)
                 <div class="alert alert-info" role="alert">
