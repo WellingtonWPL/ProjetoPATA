@@ -22,7 +22,9 @@
             <br>
             {{-- <label type="hidden" class="form-control" id="barraDescricaoLabel" name="descricao">Descreva:</label>
             <br> --}}
-            <input type="hidden" class="form-control" placeholder="Descreva..." id="barraDescricao" name="descricao">
+            <input type="hidden" class="form-control" placeholder="Descreva..." id="barraDescricao" name="descricao"
+            maxlength="65535"
+            >
             <br>
 
             <button type="submit" class="btn btn-primary ">Denunciar</button>

@@ -43,7 +43,9 @@
     <div class="row form-group">
         <div class="form-group col-md-6">
                 <b> Nome</b>
-            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome">
+            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome"
+            maxlength="50"
+            >
             <div class="col-md-6">
                 @if ($errors->has('nome'))
                     <span class="invalid-feedback" role="alert">
@@ -54,7 +56,10 @@
         </div>
         <div class="form-group col-md-6">
                 <b> Sobrenome</b>
-            <input type="text" class="form-control{{ $errors->has('sobrenome') ? ' is-invalid' : '' }}" name="sobrenome" value="{{ old('sobrenome') }}" required autocomplete="sobrenome" autofocus placeholder="Sobrenome">
+            <input type="text" class="form-control{{ $errors->has('sobrenome') ? ' is-invalid' : '' }}" name="sobrenome" value="{{ old('sobrenome') }}" required autocomplete="sobrenome" autofocus placeholder="Sobrenome"
+            maxlength="50"
+            >
+
             <div class="col-md-6">
                 @if ($errors->has('sobrenome'))
                     <span class="invalid-feedback" role="alert">
@@ -67,7 +72,9 @@
     <div class="form-group row">
         <div class="form-group col-md-6">
                 <b>E-mail</b>
-            <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="email" required>
+            <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="email" required
+            maxlength="100"
+            >
             <div class="col-md-6">
                 @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
@@ -83,13 +90,17 @@
     </div>
     <div class="form-group">
             <b>Contato
-            <input id="contato" type="text" name="contato" class="form-control" required placeholder="Ex: WhatsApp - (99) 99999-9999 ou E-mail - pata@pata.com">
+            <input id="contato" type="text" name="contato" class="form-control" required placeholder="Ex: WhatsApp - (99) 99999-9999 ou E-mail - pata@pata.com"
+            maxlength="50"
+            >
             <small id="contatoHelp" class="form-text text-muted">Aqui você deve inserir sua forma de contato para o doador poder conversar com você. </small>
     </div>
     <div class="form-group row">
         <div class="form-group col-md-6">
                 <b> Senha</b>
-            <input id="senha" type="password" class="form-control{{ $errors->has('senha') ? ' is-invalid' : '' }}" name="senha" required autocomplete="new-password" placeholder="Senha">
+            <input id="senha" type="password" class="form-control{{ $errors->has('senha') ? ' is-invalid' : '' }}" name="senha" required autocomplete="new-password" placeholder="Senha"
+            maxlength="50"
+            >
             <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
             @if ($errors->has('senha'))
                 <span class="invalid-feedback" role="alert">
@@ -99,13 +110,15 @@
         </div>
         <div class="form-group col-md-6">
                 <b>Repetir senha</b>
-            <input id="password-confirm" type="password" placeholder="senha" class="form-control" name="password_confirmation" required autocomplete="new-password">
+            <input id="password-confirm" type="password" placeholder="senha" class="form-control" name="password_confirmation" required autocomplete="new-password"
+            maxlength="50"
+            >
             <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
             <span id='message'></span>
         </div>
     </div>
-   
-    
+
+
     {{-- <div class="row"> --}}
     <div class="form-group row">
         <div class="form-group col-md-6">
@@ -143,7 +156,9 @@
     </div>
     <div class="form-group">
             <b>Descrição pessoal</b>
-        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5" ></textarea>
+        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5"
+        maxlength="65535"
+        ></textarea>
 
     </div>
 

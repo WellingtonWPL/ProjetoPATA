@@ -72,7 +72,8 @@ $cod_usuario = $url[1];
                 <div class="form-group">
                     <b>Nome</b> <br>
                     <small>Este campo se refere ao nome do animal, caso ele(a) não tenha um você pode colocar algo interessante (ex: Filhote de cachorro)</small>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required>
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required
+                    maxlength="100">
                     <div class="col-sm-12 alert alert-danger" id="div_erro_nome" style="display: none; margin-top: 20px;">
                             Informe o nome do animal.
                     </div>
@@ -156,7 +157,9 @@ $cod_usuario = $url[1];
                 {{-- DESCRIÇÃO --}}
                 <div class="form-group">
                     <b>Descrição</b> <br>
-                    <textarea class="form-control" name="descricao" id="descricao" rows="5"></textarea>
+                    <textarea class="form-control" name="descricao" id="descricao" rows="5"
+                    maxlength="65535"
+                    ></textarea>
                     <div class="col-sm-12 alert alert-danger" id="div_erro_descricao" style="display: none; margin-top: 20px;">
                             Diga algo sobre o animal.
                     </div>
@@ -199,7 +202,7 @@ $cod_usuario = $url[1];
                     <b>Descrição de Saúde</b> <br>
                     <small>Aqui você pode colocar qualquer cuidado especial que o animal precisa</small>
                     <textarea class="form-control" name="descricaoSaude" id="descricaoSaude" rows="5"
-                    placeholder="Ex: O animal não possue uma das patas e necessita de cuidados."></textarea>
+                    placeholder="Ex: O animal não possue uma das patas e necessita de cuidados." maxlength="65535"></textarea>
                     <div class="col-sm-12 alert alert-danger" id="div_erro_descricaoS" style="display: none; margin-top: 20px;">
                             Informe algo sobre a saúde do animal.
                     </div>
@@ -209,7 +212,7 @@ $cod_usuario = $url[1];
                         <button class="btn btn-success salva">Postar</button>
                 </div>
                 <div id="resultado" name="resultado" >
-                    
+
                 </div>
 
                 {{-- <button type="submit" class="btn btn-success salva">Postar</button> --}}
@@ -267,7 +270,7 @@ $cod_usuario = $url[1];
         resize.croppie('result', {
             type: 'canvas',
             size:'viewport'
-            
+
         }).then(function (img) {
             if(flag === 1){
                 count++;
