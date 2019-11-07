@@ -60,7 +60,7 @@ Route::get('/postagem/{cod_postagem}/avaliar_adotante', function($cod_postagem){
 Route::get('lista', 'ListaController@mostrar');
 Route::post('lista/{pagina}', 'ListaController@pesquisa');
 Route::get('lista/{pagina}', 'ListaController@mostrarPagina');
-Route::post('lista_filtro/{pagina}', "ListaController@listaFiltro");
+Route::get('lista_filtro/{pagina}', "ListaController@listaFiltro");
 // Route::post('lista', 'ListaController@pesquisa');
 
 

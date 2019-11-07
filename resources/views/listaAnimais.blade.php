@@ -2,6 +2,24 @@
 // dd('oi');
 // dd($estados);
 
+$url =explode ( '/' ,$_SERVER["REQUEST_URI"]) ;
+if(isset($url[3])){
+
+    $primeira = 'lista_filtro/1/'.$url[3];
+    $prox = 'lista_filtro/'.($pagina+1).'/'.$url[3];
+    $ant = 'lista_filtro/'.($pagina-1).'/'.$url[3];
+    $ultima = 'lista_filtro/'.$numPaginas.'/'.$url[3];
+}
+
+// dd(intval($numPaginas)+1);
+// if ($pagina > $numPaginas) {
+//     return redirect($ultima);
+// }
+// if ($pagina < 1) {
+//     return redirect($primeira);
+// }
+
+
 use \app\Http\Controllers\ListaController;
 
 @endphp
@@ -31,9 +49,10 @@ use \app\Http\Controllers\ListaController;
         border-style: solid;
         border-width: 1px;
         border-color: #F5F5F5;
-        width: 80%;
+        /* width: 80%; */
         max-height: 200px;
         padding: 15px;
+        margin-right: 100px;
     }
 
     /* } */
@@ -68,12 +87,12 @@ use \app\Http\Controllers\ListaController;
    <div class="card-body">
 
 
-<form action="/lista/{{ $pagina}}" method="POST">
+<form action="/lista_filtro/1/" method="GET">
     @csrf
     {{-- <div class="col"> --}}
     {{-- <div class="input-group-prepend"> --}}
     <input class="form-control" name='pesquisa'
-           id="barraDePesquisa" placeholder="Pesquise aqui">
+           id="barraDePesquisa" placeholder="Pesquise aqui" maxlength="65535">
     <br>
     {{-- <div class="input-group-text"><i class="material-icons">search</i></div> --}}
     {{-- </div> --}}
@@ -90,7 +109,7 @@ use \app\Http\Controllers\ListaController;
 						<div class="card-body" id=""> --}}
 
     <div class="row">
-        <div class="col">
+        <div class="col-md">
             Estado
             <select name="estado" class="estado form-control">
                 <option value="estado" selected>Selecione</option>
@@ -194,34 +213,52 @@ use \app\Http\Controllers\ListaController;
 </div>
 <br>
 
+            @php
+                // $url =explode ( '/' ,$_SERVER["REQUEST_URI"]) ;
+                // $primeira = 'lista_filtro/1/'.$url[3];
+                // $prox = 'lista_filtro/'.($pagina+1).'/'.$url[3];
+                // $ant = 'lista_filtro/'.($pagina-1).'/'.$url[3];
+                // $ultima = 'lista_filtro/'.$numPaginas.'/'.$url[3];
+
+                // dd($ultima);
+            @endphp
 @if (isset($pesquisa))
     <div class="row">
 
         @if ($pagina != 1)
-            <a style="margin-right:1em" href = "{{url("lista/1")}} ">
+            <a style="margin-right:1em" href = "{{ url('/')}}/{{$primeira}} ">
                 <button class="btn btn-sm"> Primeira </button>
             </a>
+            <a style="margin-right:1em" href = "{{url('/')}}/{{$ant}}">
+                <button class="btn btn-sm"> < </button>
+            </a>
 
-            <form class="form"action="{{ url('lista_filtro/'.($pagina-1) )}}" method= "POST" >
+
+            {{-- <form class="form"action="{{ url('lista_filtro/'.($pagina-1).'/'.$url[3] )}}" method= "POST" >
                 @csrf
                 <button class="btn btn-sm" type="submit"> < </button>
-                <input type="hidden" name="Query" value="{{$query}}">
-            </form>
+                {{-- <input type="hidden" name="Query" value="{{$query}}">
+            </form> --}}
         @endif
 
 
-        <button style="margin-top: 0" class="btn btn-sm"> {{$pagina }}</button>
+        <button style="margin-top: 0" class="btn btn-sm"> {{$pagina}}</button>
 
         @if ($pagina != $numPaginas)
-            <form class="form"action="{{ url('lista_filtro/'.($pagina+1) )}}" method= "POST" >
+            {{-- <form class="form"action="{{ url('lista_filtro/'.($pagina+1) )}}" method= "POST" >
                 @csrf
                 <button class="btn btn-sm" type="submit"> > </button>
-                <input type="hidden" name="Query" value="{{$query}}">
-            </form>
-
+                {{-- <input type="hidden" name="Query" value="{{$query}}">
+            </form> --}}
+            <a style="margin-right:1em" href = "{{ url('/')}}/{{$prox}}">
+                <button class="btn btn-sm"> > </button>
+            </a>
+            <a style="margin-right:1em" href = "{{ url('/')}}/{{$ultima}}">
+                <button class="btn btn-sm"> Ultima </button>
+            {{-- </a>
             <a style="margin-left:1em" href="{{url("lista/".$numPaginas)}}">
                 <button class="btn btn-sm" > Ultima </button>
-            </a>
+            </a> --}}
         @endif
         {{--
             @if ($pagina != $numPaginas)
@@ -274,7 +311,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 
 <div class="card">
     <div class="row " id="" class="card-body">
-        <div class="col-3">
+        <div class="col-md-3">
             <a
             href="{{url('/postagem/'.$postagem->cod_postagem)}}">
 
@@ -334,28 +371,83 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 @endif
 @endforeach
 
-@if ($pagina != 1)
-<a  href = "{{url("lista/1")}}">
-    <button class="btn"> Primeira </button>
-</a>
-<a  href = "{{url("lista/".($pagina-1))}}">
-    <button class="btn"> < </button>
-</a>
+{{-- paginação --}}
+@if (isset($pesquisa))
+    <div class="row">
+
+        @if ($pagina != 1)
+            <a style="margin-right:1em" href = "{{ url('/')}}/{{$primeira}} ">
+                <button class="btn btn-sm"> Primeira </button>
+            </a>
+            <a style="margin-right:1em" href = "{{url('/')}}/{{$ant}}">
+                <button class="btn btn-sm"> < </button>
+            </a>
+
+
+            {{-- <form class="form"action="{{ url('lista_filtro/'.($pagina-1).'/'.$url[3] )}}" method= "POST" >
+                @csrf
+                <button class="btn btn-sm" type="submit"> < </button>
+                {{-- <input type="hidden" name="Query" value="{{$query}}">
+            </form> --}}
+        @endif
+
+
+        <button style="margin-top: 0" class="btn btn-sm"> {{$pagina}}</button>
+
+        @if ($pagina != $numPaginas)
+            {{-- <form class="form"action="{{ url('lista_filtro/'.($pagina+1) )}}" method= "POST" >
+                @csrf
+                <button class="btn btn-sm" type="submit"> > </button>
+                {{-- <input type="hidden" name="Query" value="{{$query}}">
+            </form> --}}
+            <a style="margin-right:1em" href = "{{ url('/')}}/{{$prox}}">
+                <button class="btn btn-sm"> > </button>
+            </a>
+            <a style="margin-right:1em" href = "{{ url('/')}}/{{$ultima}}">
+                <button class="btn btn-sm"> Ultima </button>
+            {{-- </a>
+            <a style="margin-left:1em" href="{{url("lista/".$numPaginas)}}">
+                <button class="btn btn-sm" > Ultima </button>
+            </a> --}}
+        @endif
+        {{--
+            @if ($pagina != $numPaginas)
+
+            <a href="{{url("lista/".$numPaginas)}}">
+                <button class="btn btn-sm" > Ultima </button>
+            </a>
+
+
+        @endif --}}
+
+
+
+    </div>
+@else
+    @if ($pagina != 1)
+    <a  href = "{{url("lista/1")}}">
+        <button class="btn btn-sm"> Primeira </button>
+    </a>
+    <a  href = "{{url("lista/".($pagina-1))}}">
+        <button class="btn btn-sm"> < </button>
+    </a>
+    @endif
+
+
+    <button class="btn btn-sm"> {{$pagina }}</button>
+
+
+    @if ($pagina != $numPaginas)
+
+            <a  href = "{{url("lista/".($pagina+1))}}">
+                <button class="btn btn-sm" > > </button>
+            </a>
+
+        <a href="{{url("lista/".$numPaginas)}}">
+            <button class="btn btn-sm" > Ultima </button>
+        </a>
+        @endif
 @endif
-
-
-<button class="btn"> {{$pagina }}</button>
-
-@if ($pagina != $numPaginas)
-<a  href = "{{url("lista/".($pagina+1))}}">
-    <button class="btn"> > </button>
-</a>
-
-<a href="{{url("lista/".$numPaginas)}}">
-    <button class="btn" > Ultima </button>
-</a>
-@endif
-
 <script>
 
     $(document).ready(function(){
