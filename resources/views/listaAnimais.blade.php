@@ -265,7 +265,7 @@ use \app\Http\Controllers\ListaController;
 
 {{-- mostrar os posts --}}
 @foreach ($postagens as $postagem)
-@if ( ($postagem->listagem_postagem)=='sim' && $postagem->avaliacao==NULL)
+@if ( ($postagem->listagem_postagem)=='sim' && ($postagem->avaliacao_doador==NULL ||$postagem->avaliacao_adotante==NULL))
 
 @php
 $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);

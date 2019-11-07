@@ -40,12 +40,21 @@ Route::get('/postagem/{cod_postagem}/solicitar', 'SolicitacaoController@mostrar'
 
 Route::post('/postagem/{cod_postagem}/solicitar', 'SolicitacaoController@solicitar');
 
-Route::get('/postagem/{cod_postagem}/avaliar', function($cod_postagem){
-  return view('avaliarPostagem', ['cod_postagem'=>$cod_postagem]);
+Route::get('/postagem/{cod_postagem}/avaliar_doador', function($cod_postagem){
+  return view('avaliarPostagem', ['cod_postagem'=>$cod_postagem, 'avaliado'=>'doador']);
 });
 
 
-Route::post('/postagem/{cod_postagem}/avaliar', 'SolicitacaoController@avaliar');
+Route::post('/postagem/{cod_postagem}/avaliar_doador', 'SolicitacaoController@avaliarDoador');
+
+Route::get('/postagem/{cod_postagem}/avaliar_adotante', function($cod_postagem){
+    return view('avaliarPostagem', ['cod_postagem'=>$cod_postagem, 'avaliado'=>'adotante']);
+  });
+
+
+  Route::post('/postagem/{cod_postagem}/avaliar_adotante', 'SolicitacaoController@avaliarAdotante');
+
+
 
 
 Route::get('lista', 'ListaController@mostrar');

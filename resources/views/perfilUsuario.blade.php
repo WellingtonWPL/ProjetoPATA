@@ -321,11 +321,12 @@
                 <div class="col">
                     <br><br>
 
-                    @if ($postagem->avaliacao==NULL)
+                    @if ($postagem->avaliacao_doador==NULL)
                         Não avaliado ainda
                     @else
-                        Avaliação:
-                        @for ($i = 0; $i < $postagem->avaliacao;
+                        Avaliação recebida:
+                        <br>
+                        @for ($i = 0; $i < $postagem->avaliacao_doador;
                             $i++)
                             <i class=" material-icons">pets</i>
                         @endfor
@@ -401,19 +402,20 @@ $postagem->cod_postagem)->first();
                 Porte {{$postagem->tipo_porte}} <br>
                 {{-- Porte {{}} <br> --}}
         </div>
-        {{-- <div class="col-3">
+        <div class="col-3">
             <br><br>
 
-            @if ($postagem->avaliacao==NULL)
+            @if ($postagem->avaliacao_adotante==NULL)
 
             @else
-            Avaliação:
-            @for ($i = 0; $i < $postagem->avaliacao;
-                $i++)
-                <i class=" material-icons">pets</i>
-                @endfor
-                @endif
-        </div> --}}
+            Avaliação recebida:
+                        <br>
+                        @for ($i = 0; $i < $postagem->avaliacao_adotante;
+                            $i++)
+                            <i class=" material-icons">pets</i>
+                        @endfor
+            @endif
+        </div>
 
     </div>
 </div>

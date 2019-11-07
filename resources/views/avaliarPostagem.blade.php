@@ -16,7 +16,7 @@
         </div>
 
 
-        <form method="POST" action="{{url('/postagem/'.$cod_postagem.'/avaliar')}} ">
+        <form method="POST" action="{{url('/postagem/'.$cod_postagem.'/avaliar_'.$avaliado)}} ">
             @csrf
             <input type="hidden" value="0" class="nota" name="nota">
             <button type="submit" class="btn btn-primary">Avaliar</button>
