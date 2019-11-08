@@ -230,7 +230,7 @@
 
     @if (App\Http\Controllers\AdminController::ehAdmin())
         <li class="nav-item">
-            <a class="nav-link" id="perfil"
+            <a class="nav-link" id=""
             href="{{url('admin/')}}">
                 Administrativo
             </a>
