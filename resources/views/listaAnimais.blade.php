@@ -1,6 +1,6 @@
 @php
 // dd('oi');
-// dd($estados);
+//  dd($postagens==null);
 
 $url =explode ( '/' ,$_SERVER["REQUEST_URI"]) ;
 if(isset($url[3])){
@@ -114,18 +114,24 @@ use \app\Http\Controllers\ListaController;
             <select name="estado" class="estado form-control">
                 <option value="estado" selected>Selecione</option>
                 @foreach ($estados as $estado)
-                <option value="{{ $estado->cod_estado }}">
+                <option value="{{ $estado->cod_estado }}"
+                    @if(isset($_GET['estado'] ) && $_GET['estado']==$estado->cod_estado)
+                        selected
+                    @endif>
                         {{$estado->sigla_estado}}
                 </option>
                 @endforeach
             </select>
-            <div name="div_cidade" style="display: none;">
+            <div name="div_cidade" style="display: ;" id="div_cidade">
                 Cidade
                 <select name="cidade" id="cidade" class="form-control">
                     <option value="cidade" selected>Selecione</option>
                     @foreach ($cidades as $cidade)
                     <option class="cidade {{$cidade->cod_estado}}"
-                            value="{{$cidade->cod_cidade}}">
+                            value="{{$cidade->cod_cidade}}"
+                            @if(isset($_GET['cidade'])&&$_GET['cidade']==$cidade->cod_cidade)
+                                selected
+                            @endif>
                             {{$cidade->nome_cidade}}
                     </option>
                     @endforeach
@@ -140,36 +146,54 @@ use \app\Http\Controllers\ListaController;
 
                 <option selected>Selecione</option>
                 @foreach ($especies as $especie)
-                <option value="{{$especie->cod_especie}}">
+                <option value="{{$especie->cod_especie}}"
+                        @if(isset($_GET['especie']) && $_GET['especie']==$especie->cod_especie)
+                        selected
+                    @endif>
                     {{$especie->nome_especie}}</option>
                 @endforeach
                 {{-- <option>Ponta Grossa</option> --}}
             </select>
 
         </div>
+        @php
 
+            // dd(isset($_GET['0-1']))
+        @endphp
         <div class="col">
             Idade
             <div class="form-check">
                 <input type="checkbox"
                     class="form-check-input"
                     id="exampleCheck1" name="0-1"
-                    value="0-1">
+                    value="0-1"
+                    @if (isset($_GET['0-1']))
+                        checked
+                    @endif
+                    >
                 <label class="form-check-label"
-                    for="exampleCheck1">0-1 ano</label>
+                    for="exampleCheck1" >0-1 ano</label>
             </div>
             <div class="form-check">
                 <input type="checkbox"
                     class="form-check-input"
                     id="exampleCheck1" name="1-3"
-                    value="1-3">
+                    value="1-3"
+                    @if (isset($_GET['1-3']))
+                        checked
+                    @endif
+                    >
                 <label class="form-check-label"
                     for="exampleCheck1">1-3 anos</label>
             </div>
             <div class="form-check">
                 <input type="checkbox"
                     class="form-check-input"
-                    id="exampleCheck1" name="3+" value="3+">
+                    id="exampleCheck1" name="3+" value="3+"
+                    @if (isset($_GET['3+']))
+                        checked
+                    @endif
+                    >
                 <label class="form-check-label"
                     for="exampleCheck1">mais 3 anos</label>
             </div>
@@ -180,21 +204,31 @@ use \app\Http\Controllers\ListaController;
             <div class="form-check">
                 <input type="checkbox"
                     class="form-check-input" name="pequeno"
-                    value="1">
+                    value="1"
+                    @if (isset($_GET['pequeno']))
+                        checked
+                    @endif
+                    >
                 <label class="form-check-label"
                     for="exampleCheck1">Pequeno</label>
             </div>
             <div class="form-check">
                 <input type="checkbox"
                     class="form-check-input" name="medio"
-                    value="2">
+                    value="2"
+                    @if (isset($_GET['medio']))
+                        checked
+                    @endif>
                 <label class="form-check-label"
                     for="exampleCheck1">Médio</label>
             </div>
             <div class="form-check">
                 <input type="checkbox"
                     class="form-check-input" name="grande"
-                    value="3">
+                    value="3"
+                    @if (isset($_GET['grande']))
+                    checked
+                @endif>
                 <label class="form-check-label"
                     for="exampleCheck1">Grande</label>
             </div>
@@ -222,6 +256,18 @@ use \app\Http\Controllers\ListaController;
 
                 // dd($ultima);
             @endphp
+
+@if ($postagens==null)
+    <div class="card ">
+      <div class="card-body">
+        <h4>Nenhum animal encontrado</h4>
+      </div>
+    </div>
+@else
+
+
+
+
 @if (isset($pesquisa))
     <div class="row">
 
@@ -448,22 +494,34 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
         </a>
         @endif
 @endif
+
+@endif
 <script>
 
     $(document).ready(function(){
         $('.cidade').hide()
-         //alert('ta ok')
+
+        // var display = document.getElementById('div_cidade').style.display;
+        if({{!isset($_GET['cidade']) }}){
+            document.getElementById('div_cidade').style.display = 'none';
+        }
+
+        // $('.cidade').show()
+        // $('[name="cidades"] option').css('display', '');
+
+        // alert('ta ok')
         $('.estado').click(function(){
             let id_estado = $(this).val();
             $('#cidade').val('cidade');
             if (id_estado === 'estado'){
                 $("div[name='div_cidade']").hide();
+                // alert('aqui tb')
             } else {
                 $("div[name='div_cidade']").show();
                 // console.log(id_estado)
                 $('.cidade').hide()
                 $('.' + id_estado).show()
-                //  alert('dsa');
+                // alert('dsa');
             }
         })
     })
