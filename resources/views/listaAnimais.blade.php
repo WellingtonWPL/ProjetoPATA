@@ -94,148 +94,139 @@ use \app\Http\Controllers\ListaController;
     <input class="form-control" name='pesquisa'
            id="barraDePesquisa" placeholder="Pesquise aqui" maxlength="65535">
     <br>
-    {{-- <div class="input-group-text"><i class="material-icons">search</i></div> --}}
-    {{-- </div> --}}
-    {{-- </div> --}}
+    <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="text-decoration: none; color:black;">
+    <h4>Filtro  <i class="material-icons">keyboard_arrow_down</i> </h4>
+    </a>
 
-    {{-- <div id="accordion">
-				<div class="align-center">
-						<button class="btn btn-default btn-block "
-						 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-						 style="width: 96%">  --}}
-    <h4>Filtro</h4>
-    {{-- </button> --}}
-    {{-- <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-						<div class="card-body" id=""> --}}
-
-    <div class="row">
-        <div class="col-md">
-            Estado
-            <select name="estado" class="estado form-control">
-                <option value="estado" selected>Selecione</option>
-                @foreach ($estados as $estado)
-                <option value="{{ $estado->cod_estado }}"
-                    @if(isset($_GET['estado'] ) && $_GET['estado']==$estado->cod_estado)
-                        selected
-                    @endif>
-                        {{$estado->sigla_estado}}
-                </option>
-                @endforeach
-            </select>
-            <div name="div_cidade" style="display: ;" id="div_cidade">
-                Cidade
-                <select name="cidade" id="cidade" class="form-control">
-                    <option value="cidade" selected>Selecione</option>
-                    @foreach ($cidades as $cidade)
-                    <option class="cidade {{$cidade->cod_estado}}"
-                            value="{{$cidade->cod_cidade}}"
-                            @if(isset($_GET['cidade'])&&$_GET['cidade']==$cidade->cod_cidade)
-                                selected
-                            @endif>
-                            {{$cidade->nome_cidade}}
+    <div class="collapse" id="collapseExample">
+        <div class="row">
+            <div class="col-md">
+                Estado
+                <select name="estado" class="estado form-control">
+                    <option value="estado" selected>Selecione</option>
+                    @foreach ($estados as $estado)
+                    <option value="{{ $estado->cod_estado }}"
+                        @if(isset($_GET['estado'] ) && $_GET['estado']==$estado->cod_estado)
+                            selected
+                        @endif>
+                            {{$estado->sigla_estado}}
                     </option>
+                    @endforeach
+                </select>
+                <div name="div_cidade" style="display: ;" id="div_cidade">
+                    Cidade
+                    <select name="cidade" id="cidade" class="form-control">
+                        <option value="cidade" selected>Selecione</option>
+                        @foreach ($cidades as $cidade)
+                        <option class="cidade {{$cidade->cod_estado}}"
+                                value="{{$cidade->cod_cidade}}"
+                                @if(isset($_GET['cidade'])&&$_GET['cidade']==$cidade->cod_cidade)
+                                    selected
+                                @endif>
+                                {{$cidade->nome_cidade}}
+                        </option>
+                        @endforeach
+                        {{-- <option>Ponta Grossa</option> --}}
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                Espécie
+
+                <select name="especie" class="form-control">
+
+                    <option selected>Selecione</option>
+                    @foreach ($especies as $especie)
+                    <option value="{{$especie->cod_especie}}"
+                            @if(isset($_GET['especie']) && $_GET['especie']==$especie->cod_especie)
+                            selected
+                        @endif>
+                        {{$especie->nome_especie}}</option>
                     @endforeach
                     {{-- <option>Ponta Grossa</option> --}}
                 </select>
-            </div>
-        </div>
-        <div class="col">
-            Espécie
 
-            <select name="especie" class="form-control">
-
-                <option selected>Selecione</option>
-                @foreach ($especies as $especie)
-                <option value="{{$especie->cod_especie}}"
-                        @if(isset($_GET['especie']) && $_GET['especie']==$especie->cod_especie)
-                        selected
-                    @endif>
-                    {{$especie->nome_especie}}</option>
-                @endforeach
-                {{-- <option>Ponta Grossa</option> --}}
-            </select>
-
-        </div>
-        @php
-
-            // dd(isset($_GET['0-1']))
-        @endphp
-        <div class="col">
-            Idade
-            <div class="form-check">
-                <input type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1" name="0-1"
-                    value="0-1"
-                    @if (isset($_GET['0-1']))
-                        checked
-                    @endif
-                    >
-                <label class="form-check-label"
-                    for="exampleCheck1" >0-1 ano</label>
             </div>
-            <div class="form-check">
-                <input type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1" name="1-3"
-                    value="1-3"
-                    @if (isset($_GET['1-3']))
-                        checked
-                    @endif
-                    >
-                <label class="form-check-label"
-                    for="exampleCheck1">1-3 anos</label>
-            </div>
-            <div class="form-check">
-                <input type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1" name="3+" value="3+"
-                    @if (isset($_GET['3+']))
-                        checked
-                    @endif
-                    >
-                <label class="form-check-label"
-                    for="exampleCheck1">mais 3 anos</label>
-            </div>
-        </div>
+            @php
 
-        <div class="col">
-            Porte
-            <div class="form-check">
-                <input type="checkbox"
-                    class="form-check-input" name="pequeno"
-                    value="1"
-                    @if (isset($_GET['pequeno']))
-                        checked
-                    @endif
-                    >
-                <label class="form-check-label"
-                    for="exampleCheck1">Pequeno</label>
+                // dd(isset($_GET['0-1']))
+            @endphp
+            <div class="col">
+                Idade
+                <div class="form-check">
+                    <input type="checkbox"
+                        class="form-check-input"
+                        id="exampleCheck1" name="0-1"
+                        value="0-1"
+                        @if (isset($_GET['0-1']))
+                            checked
+                        @endif
+                        >
+                    <label class="form-check-label"
+                        for="exampleCheck1" >0-1 ano</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox"
+                        class="form-check-input"
+                        id="exampleCheck1" name="1-3"
+                        value="1-3"
+                        @if (isset($_GET['1-3']))
+                            checked
+                        @endif
+                        >
+                    <label class="form-check-label"
+                        for="exampleCheck1">1-3 anos</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox"
+                        class="form-check-input"
+                        id="exampleCheck1" name="3+" value="3+"
+                        @if (isset($_GET['3+']))
+                            checked
+                        @endif
+                        >
+                    <label class="form-check-label"
+                        for="exampleCheck1">mais 3 anos</label>
+                </div>
             </div>
-            <div class="form-check">
-                <input type="checkbox"
-                    class="form-check-input" name="medio"
-                    value="2"
-                    @if (isset($_GET['medio']))
+
+            <div class="col">
+                Porte
+                <div class="form-check">
+                    <input type="checkbox"
+                        class="form-check-input" name="pequeno"
+                        value="1"
+                        @if (isset($_GET['pequeno']))
+                            checked
+                        @endif
+                        >
+                    <label class="form-check-label"
+                        for="exampleCheck1">Pequeno</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox"
+                        class="form-check-input" name="medio"
+                        value="2"
+                        @if (isset($_GET['medio']))
+                            checked
+                        @endif>
+                    <label class="form-check-label"
+                        for="exampleCheck1">Médio</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox"
+                        class="form-check-input" name="grande"
+                        value="3"
+                        @if (isset($_GET['grande']))
                         checked
                     @endif>
-                <label class="form-check-label"
-                    for="exampleCheck1">Médio</label>
+                    <label class="form-check-label"
+                        for="exampleCheck1">Grande</label>
+                </div>
             </div>
-            <div class="form-check">
-                <input type="checkbox"
-                    class="form-check-input" name="grande"
-                    value="3"
-                    @if (isset($_GET['grande']))
-                    checked
-                @endif>
-                <label class="form-check-label"
-                    for="exampleCheck1">Grande</label>
-            </div>
-        </div>
 
+        </div>
     </div>
-
     <br>
 
     <input type="submit" value='Pesquisar'
@@ -371,7 +362,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
             </a>
         </div>
 
-        <div class="col">
+        <div class="col-md">
             <br>
             {{-- nome --}}
             <a
