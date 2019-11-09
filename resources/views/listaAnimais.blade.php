@@ -500,7 +500,7 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
         $('.cidade').hide()
 
         // var display = document.getElementById('div_cidade').style.display;
-        if({{!isset($_GET['cidade']) }}){
+        if({{!isset($_GET['cidade']) ? "true":"false"}}){
             document.getElementById('div_cidade').style.display = 'none';
         }
 
