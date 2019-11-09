@@ -94,7 +94,14 @@ use \app\Http\Controllers\ListaController;
     <input class="form-control" name='pesquisa'
            id="barraDePesquisa" placeholder="Pesquise aqui" maxlength="65535">
     <br>
-    <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="text-decoration: none; color:black;">
+    <a class="" data-toggle="collapse" href="#collapseExample"
+    @if(isset($pesquisa))
+        aria-expanded="true"
+    @else
+        aria-expanded="false"
+    @endif
+    aria-controls="collapseExample"
+    style="text-decoration: none; color:black;">
     <h4>Filtro  <i class="material-icons">keyboard_arrow_down</i> </h4>
     </a>
 
