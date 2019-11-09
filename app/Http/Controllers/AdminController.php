@@ -33,7 +33,7 @@ class AdminController extends Controller
             // dd($denuncia);
 
 
-            $foto[$i] =
+            $fotoDP[$i] =
             FotoPostagem::where('cod_postagem', '=',  $denuncia->cod_postagem)->first();
             $i++;
             // dd(FotoPostagem::where('cod_postagem', $denuncia->cod_postagem_)->first());

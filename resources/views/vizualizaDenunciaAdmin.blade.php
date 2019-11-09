@@ -7,6 +7,8 @@
 
 @php
 // dd($foto);
+
+// dd($fotoDP);
 $i=0;$j=0;
 @endphp
 
