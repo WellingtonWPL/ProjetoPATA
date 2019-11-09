@@ -141,8 +141,8 @@
   <nav
     id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-item{{--brand--}}" href="#" id="logo-proj">
-            <img style="max-width:10%; {{--height:auto;--}} " src="{{asset('/img/logo.png')}}" alt="pata">
+      <a class="navbar-item{{--brand--}}" href="#" >
+            <img style="max-width:30px; {{--height:auto;--}} " src="{{asset('/img/logo.png')}}" alt="pata">
       </a>
 
       <div id="titulo" name="titulo" class="title m-1"><h1>@yield("titulo")</h1></div>
