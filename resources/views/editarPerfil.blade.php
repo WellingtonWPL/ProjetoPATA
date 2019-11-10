@@ -143,3 +143,24 @@
 
 
 @endsection
+
+
+@section('titulo_help')
+Página de edição do perfil
+
+@endsection
+@section('help')
+Página de edição da informações do perfil. Mostra todos os campos que o usuário pode editar. São eles:   <br>
+Nome  <br>
+E-mail  <br>
+Estado  <br>
+Cidade  <br>
+Foto  <br>
+Descrição   <br>
+
+
+
+
+@endsection
+
+

@@ -101,3 +101,12 @@
         }*/
     </style>
 @endsection
+
+@section('titulo_help')
+Página de avaliação de uma postagem
+
+@endsection
+@section('help')
+Nessa página o usuário avalia uma adoção que já foi completada. Para tal ele deve marcar a estrela que confere a nota (de um total de 5 estrelas) do outro usuário no processo de adoção e submeter sua nota.
+
+@endsection

@@ -536,3 +536,18 @@ $fotos = ListaController::getFotosAnimal($postagem->cod_postagem);
 
 </script>
 @endsection
+
+
+
+@section('titulo_help')
+Listagem de animais
+
+@endsection
+@section('help')
+Esta página mostra as postagens dos animais registrados no sistema, o parte de paginação e o filtro. As postagens no topo são as mais recentes <br>
+Postagens: mostra as informações básicas de uma postagem. Ao clicar no nome da postagem o usuário é redirecionado a página desta postagem. <br>
+Paginação mostra em que página o usuário está. Em cada página é mostrado 10 postagens. <br>
+Filtro: no filtro o usuário pode escolher quais características serão relevantes na postagem. Ele pode selecionar a localidade em que o animal está, a idade, a espécie e o porte, além de poder pesquisar palavras chaves, presentes na descrição e nome da postagem do animal.
+
+
+@endsection
