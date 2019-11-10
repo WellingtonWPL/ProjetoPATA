@@ -57,9 +57,15 @@
 
 
     }
+
+    #foto_user{
+        margin: 2%;
+        /* border-style: solid; */
+        /* width: 100%; */
+        max-height: 250px;
+        padding: 10px;
+    }
     
-
-
     .dot {
         margin-left: 3px;
         height: 25px;
@@ -97,15 +103,26 @@ if (Auth::check()){
     }
 }
 
+
+
 $avaliacao = PerfilController::getAvaliacao($cod_usuario);
 $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
+$foto_usuario = PerfilController::getFotoUsuario($cod_usuario);
+//dd($foto_usuario->link_foto_usuario);
 
 @endphp
 
 
 <div id="perfil" style="float: right; align:center;">
-    <img id="foto" src="{{url('img/perfil.jpg')}}"
-        class="img-fluid rounded">
+    <div class="col-12">
+            @if ($foto_usuario==NULL)
+                <img src="{{url('img/animal_sem_foto.png')}}" id="foto_user"  class="" >
+                
+            @else
+                <img src="{{url(''.$foto_usuario->link_foto_usuario)}}" id="foto_user"  class="img-fluid rounded" >
+            @endif
+            {{-- </a> --}}
+    </div>
     <br>
     <div align="center" style="align:center; color:black;">
         <b>Avaliação:</b>

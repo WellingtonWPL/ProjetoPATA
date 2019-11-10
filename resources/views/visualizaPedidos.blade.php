@@ -131,7 +131,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
                 </div>
                 <div class="col-4">
                     <a href="{{url('/postagem/'.$suasSol->cod_postagem.'/avaliar')}}">
-                        <button class="btn ">Finalizar</button>
+                        <button id="btn_s" class="btn ">Finalizar</button>
                     </a>
                 </div>
 
@@ -163,7 +163,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
                 </div>
                 <div class="col-4">
                     <a href="{{url('/postagem/'.$suasSol->cod_postagem.'/avaliar')}}">
-                        <button class="btn btn-block">Editar avaliação</button>
+                        <button  id="btn_s" class="btn btn-block">Editar avaliação</button>
                     </a>
                 </div>
 
@@ -185,7 +185,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
 
 @section('css')
 <style>
-	button {
+	#btn_s {
 		width: 100px;
 	}
 

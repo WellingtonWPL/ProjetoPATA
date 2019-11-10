@@ -54,7 +54,7 @@
     
 
      i {
-        font-size: 24px !important;
+        font-size: 24px !important; 
         vertical-align: middle;
     }
 
@@ -110,7 +110,7 @@
   <nav
     id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/lista">
             <img style="max-width:10%; height:auto; " src="{{asset('/img/logo.png')}}" alt="pata">
       </a>
       <div id="titulo" name="titulo" class="title m-1"><h2>@yield("titulo")</h2></div>
@@ -204,7 +204,8 @@
 
   <!-- Footer -->
   <footer class="py-3 bg-black fixed-bottom">
-    <fieldset id="cores" style="margin-top: -10px">
+    <fieldset id="cores" style="margin-top: -10px;">
+      <h6 id="title_cor">Cor do Fundo:</h6>
       <button type="button" id="botao"
         onclick="changeBackGround('lightblue')"
         {{-- onclick="changeBG('#B39DDB')"  --}}
@@ -214,13 +215,17 @@
         onclick="changeBackGround('lightgreen')"
         class="btn btn-success"></button>
       <button type="button" id="botao"
+        {{-- onclick="changeBG('#FFF59D')" --}}
+        onclick="changeBackGround('#FFF59D')"
+        class="btn btn-warning"></button>
+      <button type="button" id="botao"
         {{-- onclick="changeBG('#ef9a9a')" --}}
         onclick="changeBackGround('#ef9a9a')"
         class="btn btn-danger"></button>
       <button type="button" id="botao"
-        {{-- onclick="changeBG('#FFF59D')" --}}
-        onclick="changeBackGround('#FFF59D')"
-        class="btn btn-warning"></button>
+        {{-- onclick="changeBG('#E6EE9C')" --}}
+        onclick="changeBackGround('orange')"
+        class="btn" style="background-color: orange;"></button>
       <button type="button" id="botao"
         {{-- onclick="changeBG('#eeeeee')" --}}
         onclick="changeBackGround('lightgrey')"
