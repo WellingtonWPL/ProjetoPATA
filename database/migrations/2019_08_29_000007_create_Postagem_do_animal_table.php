@@ -31,7 +31,8 @@ class CreatePostagemDoAnimalTable extends Migration
             $table->enum('vacinacao_em_dia', ['sim', 'nao', 'indefinido'])->nullable();
             $table->enum('vermifugado', ['sim', 'nao', 'indefinido'])->nullable();
             $table->text('descricao_saude');
-            $table->decimal('avaliacao', 3, 2)->nullable();
+            $table->decimal('avaliacao_adotante', 3, 2)->nullable();
+            $table->decimal('avaliacao_doador', 3, 2)->nullable();
             $table->unsignedInteger('cod_usuario_adotante')->nullable();
             $table->unsignedInteger('cod_usuario_postagem');
             $table->unsignedInteger('cod_porte');

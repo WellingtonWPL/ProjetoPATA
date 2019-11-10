@@ -8,4 +8,6 @@ class FotoPostagem extends Model
 {
     protected $table = 'Foto_postagem';
     protected $primaryKey = 'cod_foto_postagem';
+    public $timestamps = false;
+    
 }

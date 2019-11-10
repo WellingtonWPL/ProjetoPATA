@@ -14,4 +14,4 @@ Vagrantfile
 after.sh
 aliases
 /.vagrant
-
+/public/upload

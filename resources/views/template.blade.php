@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -13,19 +13,19 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" type="text/css"
-    href="/css/teste.css">
+    href="{{ asset('/css/teste.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap.css">
+    href="{{ asset('/css/bootstrap.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap.min.css">
+    href="{{ asset('/css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-grid.css">
+    href="{{ asset('/css/bootstrap-grid.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-grid.min.css">
+    href="{{ asset('/css/bootstrap-grid.min.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-reboot.css">
+    href="{{ asset('/css/bootstrap-reboot.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-reboot.min.css">
+    href="{{ asset('/css/bootstrap-reboot.min.css') }}">
 
   <!-- Custom fonts for this template -->
   <link
@@ -35,12 +35,13 @@
     href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
     rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Alegreya&display=swap" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="/css/one-page-wonder.css" rel="stylesheet">
+  <link href="{{ asset('/css/one-page-wonder.css') }}" rel="stylesheet">
 
   <!-- Function JS -->
-  <script type="text/javascript" src="/js/functions.js">
+  <script type="text/javascript" src="{{ asset('/js/functions.js') }}">
   </script>
   @yield('css')
 
@@ -49,24 +50,63 @@
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 
-  <style>
 
-     i {
-        font-size: 24px !important;
-        vertical-align: middle;
-    }
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('icone/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('icone/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('icone/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('icone/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('icone/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('icone/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('icone/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('icone/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('icone/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{asset('icone/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icone/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('icone/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('icone/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('icone/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style>
 
-    ul li {
-      list-style: none;
-    }
 
-    ul li a {
-      color: aliceblue;
-    }
+        i {
+           font-size: 24px !important;
+           vertical-align: middle;
+       }
 
+       ul li {
+         list-style: none;
+       }
 
+       ul li a {
+         color: aliceblue;
+       }
 
-  </style>
+       #titulo{
+         font-family: 'Alegreya', serif;
+         color: white;
+         margin-left:10%;
+
+       }
+
+       #background{
+            background-image: url({{ asset("/img/patinhas.png")}});
+           background-size: 200px;
+       }
+
+       h1{
+           font-size: 30px;
+
+       }
+
+       #logo-proj{
+           /* height: 100%; */
+            width: 150px;
+       }
+
+     </style>
 </head>
 @php
   use App\Http\Controllers\PerfilController;
@@ -90,7 +130,7 @@
 @endif
 
 
-<body style="background-image: url('/img/patas.png'); ">
+<body id="background" >
 
   <script>
     // window.addEventListener('load', function() {
@@ -101,10 +141,15 @@
   <nav
     id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">
-            <img style="max-width:10%; height:auto; " src="{{asset('/img/logo.png')}}" alt="pata">
+      <a class="navbar-item{{--brand--}}" href="#" >
+            <img style="max-width:30px; {{--height:auto;--}} " src="{{asset('/img/logo.png')}}" alt="pata">
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
+      <div id="titulo" name="titulo" class="title m-1"><h1>@yield("titulo")</h1></div>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+      style="float:left"
+      >
             <span class="navbar-toggler-icon"></span>
           </button>
       {{-- <a class="navbar-brand" href="{{url('/lista')}}"><img style="max-width: 30%; height: auto;" src="{{asset('/img/teste.png')}}" alt="pata"></a> --}}
@@ -115,7 +160,7 @@
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button> --}}
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav">
             <div class="collapse navbar-collapse" id="navbarResponsive">
         <li class="nav-item">
           <a class="nav-link"
@@ -135,7 +180,7 @@
           id="navbarResponsive">
           {{-- <ul class="navbar-nav ml-auto"> --}}
           <li class="nav-item">
-            <a class="nav-link" 
+            <a class="nav-link"
               href="{{url('register')}}">Cadastrar-se <i
               class="material-icons">assignment</i></a>
           </li>
@@ -154,6 +199,7 @@
         class="material-icons">face</i></a>
     </li>
 
+
     <li class="nav-item dropdown">
 
       <a id="navbarDropdown"
@@ -163,12 +209,14 @@
         {{ Auth::user()->nome }} <span class="caret"></span>
       </a>
 
+
+
       <div class="dropdown-menu dropdown-menu-right"
         aria-labelledby="navbarDropdown">
         <a class="dropdown-item"
           href="{{ url('sair') }}"
           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+          document.getElementById('logout-form').submit();">
           {{ __('Sair') }}
         </a>
 
@@ -179,6 +227,15 @@
         </form>
       </div>
     </li>
+
+    @if (App\Http\Controllers\AdminController::ehAdmin())
+        <li class="nav-item">
+            <a class="nav-link" id=""
+            href="{{url('admin/')}}">
+                Administrativo
+            </a>
+        </li>
+    @endif
     </ul>
     @endguest
     </div>

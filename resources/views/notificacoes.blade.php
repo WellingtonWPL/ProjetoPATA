@@ -1,10 +1,11 @@
 @extends('template')
+@section("titulo", "Solicitações de Adoção")
 @section('css')
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-      
+
 <style>
     i {
         font-size: 24px !important;
@@ -66,7 +67,7 @@
 
 
     }
-    
+
 
 
     .dot {
@@ -94,8 +95,8 @@
 
 @php
 use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\NotificacoesController; 
-use App\Http\Controllers\ListaController; 
+use App\Http\Controllers\NotificacoesController;
+use App\Http\Controllers\ListaController;
 
 
 $donoPerfil = False;
@@ -107,7 +108,7 @@ if (Auth::check()){
     }
 }
 
-$avaliacao = PerfilController::getAvaliacao($cod_usuario);
+// $avaliacao = PerfilController::getAvaliacao($cod_usuario);
 $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
 
 @endphp
@@ -177,9 +178,9 @@ Porte {{$postagem->tipo_porte}} <br>
 
 @else
 Avaliação:
-    @for ($i = 0; $i < $postagem->avaliacao; $i++)
+    {{-- @for ($i = 0; $i < $postagem->avaliacao; $i++)
         <i class=" material-icons">pets</i>
-    @endfor
+    @endfor --}}
 @endif
 </div>
 

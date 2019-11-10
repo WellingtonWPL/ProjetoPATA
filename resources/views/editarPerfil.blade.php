@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Editar Perfil")
 @section('conteudo')
 
 
@@ -41,6 +41,7 @@
     <div class="form-group">
         Nome
     <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value=" {{$usuario->nome}}" required autocomplete="name" autofocus
+    maxlength="100"
         >
         <div class="col-md-6">
             @if ($errors->has('nome'))
@@ -52,7 +53,10 @@
     </div>
     <div class="form-group">
         E-mail
-        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $usuario->email}}" required autocomplete="email" id="email" placeholder="email" required>
+        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $usuario->email}}" required autocomplete="email" id="email" placeholder="email" required
+        maxlength="100">
+
+
         <div class="col-md-6">
             @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">
@@ -97,7 +101,9 @@
     @endphp
     <div class="form-group">
         Descrição pessoal
-        <textarea name="desc" class="form-control"  rows="5" value = " ">{{$usuario->descricao}}</textarea>
+        <textarea name="desc" class="form-control"  rows="5" value = " "
+        maxlength="65535"
+        >{{$usuario->descricao}}</textarea>
 
     </div>
 

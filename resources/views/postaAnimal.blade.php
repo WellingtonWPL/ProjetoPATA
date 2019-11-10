@@ -7,6 +7,7 @@ use \app\Http\Controllers\PostagemController;
 @endphp
 
 @extends('template')
+@section("titulo", "Publicar Nova Adoção")
 
 @section('conteudo')
 <head>
@@ -71,7 +72,8 @@ $cod_usuario = $url[1];
                 <div class="form-group">
                     <b>Nome</b> <br>
                     <small>Este campo se refere ao nome do animal, caso ele(a) não tenha um você pode colocar algo interessante (ex: Filhote de cachorro)</small>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required>
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required
+                    maxlength="100">
                     <div class="col-sm-12 alert alert-danger" id="div_erro_nome" style="display: none; margin-top: 20px;">
                             Informe o nome do animal.
                     </div>
@@ -155,7 +157,9 @@ $cod_usuario = $url[1];
                 {{-- DESCRIÇÃO --}}
                 <div class="form-group">
                     <b>Descrição</b> <br>
-                    <textarea class="form-control" name="descricao" id="descricao" rows="5"></textarea>
+                    <textarea class="form-control" name="descricao" id="descricao" rows="5"
+                    maxlength="65535"
+                    ></textarea>
                     <div class="col-sm-12 alert alert-danger" id="div_erro_descricao" style="display: none; margin-top: 20px;">
                             Diga algo sobre o animal.
                     </div>
@@ -198,7 +202,7 @@ $cod_usuario = $url[1];
                     <b>Descrição de Saúde</b> <br>
                     <small>Aqui você pode colocar qualquer cuidado especial que o animal precisa</small>
                     <textarea class="form-control" name="descricaoSaude" id="descricaoSaude" rows="5"
-                    placeholder="Ex: O animal não possue uma das patas e necessita de cuidados."></textarea>
+                    placeholder="Ex: O animal não possue uma das patas e necessita de cuidados." maxlength="65535"></textarea>
                     <div class="col-sm-12 alert alert-danger" id="div_erro_descricaoS" style="display: none; margin-top: 20px;">
                             Informe algo sobre a saúde do animal.
                     </div>
@@ -208,7 +212,7 @@ $cod_usuario = $url[1];
                         <button class="btn btn-success salva">Postar</button>
                 </div>
                 <div id="resultado" name="resultado" >
-                    TESTE:
+
                 </div>
 
                 {{-- <button type="submit" class="btn btn-success salva">Postar</button> --}}
@@ -265,22 +269,20 @@ $cod_usuario = $url[1];
     $('.upload-image').on('click', function (ev) {
         resize.croppie('result', {
             type: 'canvas',
-            size:{
-                width: 100,
-                height: 100
-            }
+            size:'viewport'
+
         }).then(function (img) {
             if(flag === 1){
                 count++;
                 img_id++;
-                if(count<=4){
-                    html = '<div id="img' + img_id + '" class="col-md-2 m-3 teste"><img  src="' + img + '" /> <span class="close" onclick="deleta(img' + img_id + ')">&times;</span></div>';
+                if(count<=1){
+                    html = '<div style="" id="img' + img_id + '" class="col-md-2 m-3 teste"><img style="max-width: 100px;" src="' + img + '" /> <span class="close" onclick="deleta(img' + img_id + ')">&times;</span></div>';
                     $("#preview-crop-image").append(html);
                     imagens.push(img);
                 }
                 else{
-                    count = 4;
-                    alert("Valor máximo de fotos atingidas");
+                    count = 1;
+                    alert("Você só pode inserir uma imagem no sistema!");
                 }
             }
         });
@@ -430,7 +432,7 @@ $cod_usuario = $url[1];
                 url: "/salvaPost",
                 type: "POST",
                 data: {"nome": nome,
-                    //"fotos": imagens,
+                    "fotos": imagens,
                     "dataN": dataN,
                     "sexo": op_sexo,
                     "porte": op_porte,
@@ -445,7 +447,7 @@ $cod_usuario = $url[1];
                 // cache: false,
                 // contentType: false,
                 success: function( data ) {
-                    $("#resultado").html(data);
+                    //$("#resultado").html(data);
                     //console.log(data);
                     window.location = '/perfil/' + '{{$cod_usuario}}';
                 }

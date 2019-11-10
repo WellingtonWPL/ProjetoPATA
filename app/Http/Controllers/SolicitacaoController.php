@@ -37,10 +37,10 @@ class SolicitacaoController extends Controller
         ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
         ->join('Usuario', 'Postagem_do_animal.cod_usuario_postagem', '=', 'Usuario.cod_usuario')
         ->first();
-
+        $foto = \DB::table('Foto_postagem')->where('cod_postagem', $cod_postagem)->first();
 
         return view('solicitacaoPostagem', ['cod_postagem'=> $cod_postagem,
-        'postagem'=> $postagem]
+        'postagem'=> $postagem , 'foto'=>$foto]
         );
     }
 
@@ -65,7 +65,10 @@ class SolicitacaoController extends Controller
         ->get();
         // dd($suasSolicitacoes);
 
-
+        // $doacoes= \DB::table('Postagem_do_animal')
+        // ->join('Usuario', 'Usuario.cod_usuario', '=', 'Postagem_do_animal.cod_usuario_postagem')
+        // ->where('cod_usuario_postagem', $usuarioLogado->cod_usuario)
+        // ->get();
 
         return view('visualizaPedidos',compact('cod_usuario', 'solicitacoes', 'suasSolicitacoes'));
 
@@ -105,12 +108,21 @@ class SolicitacaoController extends Controller
 
     }
 
-    public function avaliar($cod_postagem, Request $r){
+    public function avaliarDoador($cod_postagem, Request $r){
         // dd($r->nota);
         $usuario= Auth::user();
         \DB::table('Postagem_do_animal')
         ->where('cod_postagem', $cod_postagem)
-        ->update(['avaliacao'=> $r->nota]);
+        ->update(['avaliacao_doador'=> $r->nota]);
+        return redirect($usuario->cod_usuario.'/solicitacoes');
+    }
+
+    public function avaliarAdotante($cod_postagem, Request $r){
+        // dd($r->nota);
+        $usuario= Auth::user();
+        \DB::table('Postagem_do_animal')
+        ->where('cod_postagem', $cod_postagem)
+        ->update(['avaliacao_adotante'=> $r->nota]);
         return redirect($usuario->cod_usuario.'/solicitacoes');
     }
 

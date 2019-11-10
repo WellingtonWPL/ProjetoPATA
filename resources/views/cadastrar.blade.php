@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Cadastro de Novo Usuário")
 @section('conteudo')
 
 @php
@@ -40,67 +40,100 @@
 <h1>Cadastro</h1>
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
-    <div class="form-group">
-            <b> Nome</b>
-        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome">
-        <div class="col-md-6">
-            @if ($errors->has('nome'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('nome') }}</strong>
-                </span>
-            @endif
+    <div class="row form-group">
+        <div class="form-group col-md-6">
+                <b> Nome</b>
+            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nome"
+            maxlength="50"
+            >
+            <div class="col-md-6">
+                @if ($errors->has('nome'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('nome') }}</strong>
+                    </span>
+                @endif
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-            <b>E-mail</b>
-        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="email" required>
-        <div class="col-md-6">
-            @if ($errors->has('email'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-            @endif
-        </div>
-    </div>
-    <div class="form-group">
-            <b> Senha</b>
-        <input id="senha" type="password" class="form-control{{ $errors->has('senha') ? ' is-invalid' : '' }}" name="senha" required autocomplete="new-password" placeholder="Senha">
-        <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
-        @if ($errors->has('senha'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('senha') }}</strong>
-            </span>
-        @endif
-    </div>
-    <div class="form-group">
-            <b>Repetir senha</b>
-        <input id="password-confirm" type="password" placeholder="senha" class="form-control" name="password_confirmation" required autocomplete="new-password">
-        <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
-        <span id='message'></span>
-    </div>
+        <div class="form-group col-md-6">
+                <b> Sobrenome</b>
+            <input type="text" class="form-control{{ $errors->has('sobrenome') ? ' is-invalid' : '' }}" name="sobrenome" value="{{ old('sobrenome') }}" required autocomplete="sobrenome" autofocus placeholder="Sobrenome"
+            maxlength="50"
+            >
 
-    <div class="form-group">
-            <b>Celular</b>
-        <input id="fone" type="text" name="fone" class="form-control" placeholder="(99) 9999-9999"required>
+            <div class="col-md-6">
+                @if ($errors->has('sobrenome'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('sobrenome') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="form-group col-md-6">
+                <b>E-mail</b>
+            <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="email" required
+            maxlength="100"
+            >
+            <div class="col-md-6">
+                @if ($errors->has('email'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+                <b>Celular</b>
+            <input id="fone" type="text" name="fone" class="form-control" placeholder="(99) 9999-9999"required>
+        </div>
     </div>
     <div class="form-group">
             <b>Contato
-            <input id="contato" type="text" name="contato" class="form-control" required placeholder="Ex: WhatsApp - (99) 99999-9999 ou E-mail - pata@pata.com">
+            <input id="contato" type="text" name="contato" class="form-control" required placeholder="Ex: WhatsApp - (99) 99999-9999 ou E-mail - pata@pata.com"
+            maxlength="50"
+            >
             <small id="contatoHelp" class="form-text text-muted">Aqui você deve inserir sua forma de contato para o doador poder conversar com você. </small>
     </div>
-    {{-- <div class="row"> --}}
+    <div class="form-group row">
+        <div class="form-group col-md-6">
+                <b> Senha</b>
+            <input id="senha" type="password" class="form-control{{ $errors->has('senha') ? ' is-invalid' : '' }}" name="senha" required autocomplete="new-password" placeholder="Senha"
+            maxlength="50"
+            >
+            <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
+            @if ($errors->has('senha'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('senha') }}</strong>
+                </span>
+            @endif
+        </div>
+        <div class="form-group col-md-6">
+                <b>Repetir senha</b>
+            <input id="password-confirm" type="password" placeholder="senha" class="form-control" name="password_confirmation" required autocomplete="new-password"
+            maxlength="50"
+            >
+            <small id="emailHelp" class="form-text text-muted">mínimo 8 caracteres</small>
+            <span id='message'></span>
+        </div>
+    </div>
 
+
+    {{-- <div class="row"> --}}
+    <div class="form-group row">
+        <div class="form-group col-md-6">
             <b>Estado</b>
             <select class="estado form-control">
                 <option value="estado" selected>Selecione
                 </option>
                 @foreach ($estados as $estado)
                 <option value="{{ $estado->cod_estado }}">
-                    {{$estado->sigla_estado}}</option>
+                        {{$estado->nome_estado}} - {{$estado->sigla_estado}}</option>
                 @endforeach
             </select>
             {{-- {{dd($cidades)}} --}}
-            <br>
+        </div>
+        <div class="form-group col-md-6">
             <b>Cidade</b>
             <select name="cidade" class="form-control">
 
@@ -113,7 +146,8 @@
                 @endforeach
                 {{-- <option>Ponta Grossa</option> --}}
             </select>
-
+        </div>
+    </div>
     {{-- </div> --}}
     <div class="form-group">
             <b>Foto</b>
@@ -122,7 +156,9 @@
     </div>
     <div class="form-group">
             <b>Descrição pessoal</b>
-        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5" ></textarea>
+        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5"
+        maxlength="65535"
+        ></textarea>
 
     </div>
 

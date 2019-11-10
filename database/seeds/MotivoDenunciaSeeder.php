@@ -13,22 +13,22 @@ class MotivoDenunciaSeeder extends Seeder
     {
         DB::table('Motivos_Denuncia')->insert(
             [
-                'descricao'=> 'Venda de animais'
+                'descricao_denuncia'=> 'Venda de animais'
             ]
         );
         DB::table('Motivos_Denuncia')->insert(
             [
-                'descricao'=> 'Conteudo impróprio'
+                'descricao_denuncia'=> 'Conteudo impróprio'
             ]
         );
         DB::table('Motivos_Denuncia')->insert(
             [
-                'descricao'=> 'Postagem falsa'
+                'descricao_denuncia'=> 'Postagem falsa'
             ]
         );
         DB::table('Motivos_Denuncia')->insert(
             [
-                'descricao'=> 'Outro'
+                'descricao_denuncia'=> 'Outro'
             ]
         );
     }

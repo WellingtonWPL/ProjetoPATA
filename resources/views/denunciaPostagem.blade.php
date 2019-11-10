@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Denúncia de Postagem")
 @section('conteudo')
 @php
     // dd($motivosDenuncia)
@@ -16,12 +16,15 @@
             <select class="custom-select my-1 mr-sm-2" onchange="checkOpcao()" id="options" name="motivo">
                 <option selected>Selecione...</option>
                 @foreach ($motivosDenuncia as $motivo)
-                    <option value="{{$motivo->cod_motivo_denuncia}}">{{$motivo->descricao}}</option>
+                    <option value="{{$motivo->cod_motivo_denuncia}}">{{$motivo->descricao_denuncia}}</option>
                 @endforeach
             </select>
             <br>
-
-            <input type="hidden" class="form-control" id="barraDescricao" name="descricao">
+            {{-- <label type="hidden" class="form-control" id="barraDescricaoLabel" name="descricao">Descreva:</label>
+            <br> --}}
+            <input type="hidden" class="form-control" placeholder="Descreva..." id="barraDescricao" name="descricao"
+            maxlength="65535"
+            >
             <br>
 
             <button type="submit" class="btn btn-primary ">Denunciar</button>
