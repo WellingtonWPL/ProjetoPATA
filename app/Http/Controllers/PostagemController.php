@@ -110,4 +110,15 @@ class PostagemController extends Controller
         return view('postaAnimal', compact('especies'));
 
     }
+
+    public function mostrarEdicao($cod_postagem){
+        $postagem = PostagemDoAnimal::where('cod_postagem', $cod_postagem)->first();
+        $especies = Especie::orderBy('nome_especie')->get();
+        return view('editarPostagem', compact('postagem', 'cod_postagem', 'especies'));
+
+    }
+
+    public function editar(Request $r){
+
+    }
 }

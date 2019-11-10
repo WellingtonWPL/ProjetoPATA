@@ -34,6 +34,9 @@ Route::get('/postagem/{cod_postagem}', 'PostagemController@mostrar');
 Route::get('/postagem/{cod_postagem}/denunciar', 'DenunciaController@mostrar')->middleware('auth');
 Route::post('/postagem/{cod_postagem}/denunciar', 'DenunciaController@fazerDenuncia')->middleware('auth');
 
+Route::get('/postagem/{cod_postagem}/editar', 'PostagemController@mostrarEdicao' );
+Route::post('/postagem/{cod_postagem}/editar', 'PostagemController@editar' );
+
 
 
 Route::get('/postagem/{cod_postagem}/solicitar', 'SolicitacaoController@mostrar')->middleware('auth');
@@ -52,7 +55,7 @@ Route::get('/postagem/{cod_postagem}/avaliar_adotante', function($cod_postagem){
   });
 
 
-  Route::post('/postagem/{cod_postagem}/avaliar_adotante', 'SolicitacaoController@avaliarAdotante');
+Route::post('/postagem/{cod_postagem}/avaliar_adotante', 'SolicitacaoController@avaliarAdotante');
 
 
 
@@ -105,5 +108,4 @@ Auth::routes();
 
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
-
 
