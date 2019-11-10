@@ -67,7 +67,6 @@
         $('#fone').mask(SPMaskBehavior, spOptions);
     });
 })( jQuery);
-
 </script> 
 
 <body> 
@@ -193,7 +192,6 @@
                 </div>
             </div>
         </div>
-        
         {{-- FOTO --}}
         <div class="form-group"> 
             <b>Foto</b> <br>
@@ -227,6 +225,7 @@
         </div>
         <div class="form-group">
                 <button class="btn btn-success salva">Cadastrar</button>
+
         </div>
 
 
@@ -245,6 +244,11 @@
     </div>
     <div class="alert alert-warning" role="alert" id="alerta_email2" name="alerta_email2" style="display: none" >
         O email informado já está cadastrado! 
+    <div class="form-group">
+            <b>Descrição pessoal</b>
+        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5"
+        maxlength="65535"
+        ></textarea>
     </div>
 
 

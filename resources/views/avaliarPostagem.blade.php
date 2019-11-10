@@ -1,22 +1,28 @@
 @extends('template')
 @section("titulo", "Avaliação")
 @section('conteudo')
-<!-- alternate codepen version https://codepen.io/mad-d/pen/aJMPWr?editors=0010 -->
-<h1>Avaliação da postagem #{{$cod_postagem}}</h1>
-<div class="stars" data-rating="1">
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
+
+<div class="card">
+    <div class="card-body">
+
+        <!-- alternate codepen version https://codepen.io/mad-d/pen/aJMPWr?editors=0010 -->
+        <h1>Avaliação da postagem #{{$cod_postagem}}</h1>
+        <div class="stars" data-rating="1">
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+        </div>
+
+
+        <form method="POST" action="{{url('/postagem/'.$cod_postagem.'/avaliar_'.$avaliado)}} ">
+            @csrf
+            <input type="hidden" value="0" class="nota" name="nota">
+            <button type="submit" class="btn btn-primary">Avaliar</button>
+        </form>
+    </div>
 </div>
-
-
-<form method="POST" action="{{url('/postagem/'.$cod_postagem.'/avaliar')}} ">
-    @csrf
-    <input type="hidden" value="0" class="nota" name="nota">
-    <button type="submit" class="btn btn-primary">Avaliar</button>
-</form>
 
 <script >
     //DOMContenteLoaded é uma evento adicionado depos do html ser complempletamente lido

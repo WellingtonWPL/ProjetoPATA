@@ -16,11 +16,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PerfilController extends Controller
 {
-    public static function getAvaliacao($cod){
+    public static function getAvaliacaoAdotante($cod){
         // // // dd($cod);
         $avaliacoes = \DB::table('Postagem_do_animal')
         ->where('cod_usuario_postagem', $cod)
-        ->where('avaliacao', '!=', NULL)
+        ->where('avaliacao_adotante', '!=', NULL)
+        // ->where('avaliacao_doador', '!=', NULL)
         ->get();
 
         if($avaliacoes==NULL){
@@ -34,9 +35,77 @@ class PerfilController extends Controller
             //     return $avaliacoes;
             // }
             foreach ($avaliacoes as $avaliacao) {
-                $aux+=$avaliacao->avaliacao;
+                $aux+=$avaliacao->avaliacao_adotante;
                 $cont++;
             }
+            // dd($aux);
+            if($cont==0){   return 0;   }
+            return ($aux/$cont);
+        }
+    }
+
+    public static function getAvaliacaoDoador($cod){
+        // // // dd($cod);
+        $avaliacoes = \DB::table('Postagem_do_animal')
+        ->where('cod_usuario_postagem', $cod)
+        // ->where('avaliacao_adotante', '!=', NULL)
+        ->where('avaliacao_doador', '!=', NULL)
+        ->get();
+
+        if($avaliacoes==NULL){
+            return $avaliacoes;
+        }else{
+
+            $cont=0;
+            $aux=0;
+            // if(!is_array($avaliacoes)){
+            //     dd()
+            //     return $avaliacoes;
+            // }
+            foreach ($avaliacoes as $avaliacao) {
+                $aux+=$avaliacao->avaliacao_doador;
+                $cont++;
+            }
+            // dd($aux);
+            if($cont==0){   return 0;   }
+            return ($aux/$cont);
+        }
+    }
+    public static function getAvaliacao($cod){
+        // // // dd($cod);
+        $avaliacoes1 = \DB::table('Postagem_do_animal')
+        ->where('cod_usuario_postagem', $cod)
+        ->where('avaliacao_adotante', '!=', NULL)
+        // ->where('avaliacao_doador', '!=', NULL)
+        ->get();
+
+        $avaliacoes2 = \DB::table('Postagem_do_animal')
+        ->where('cod_usuario_postagem', $cod)
+        // ->where('avaliacao_adotante', '!=', NULL)
+        ->where('avaliacao_doador', '!=', NULL)
+        ->get();
+
+        if($avaliacoes1==NULL && $avaliacoes2==NULL){
+            return NULL;
+        }else{
+
+            $cont=0;
+            $aux=0;
+            // if(!is_array($avaliacoes)){
+            //     dd()
+            //     return $avaliacoes;
+            // }
+            foreach ($avaliacoes1 as $avaliacao) {
+                $aux+=$avaliacao->avaliacao_adotante;
+                $cont++;
+            }
+
+            foreach ($avaliacoes2 as $avaliacao) {
+                $aux+=$avaliacao->avaliacao_doador;
+                $cont++;
+            }
+
+
             // dd($aux);
             if($cont==0){   return 0;   }
             return ($aux/$cont);
@@ -56,16 +125,31 @@ class PerfilController extends Controller
     public static function getPostagens($cod_usuario){
         // $postagens = PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)->get();
         $postagens=\DB::table('Postagem_do_animal')
-            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')->where('cod_usuario_postagem', $cod_usuario)->get();
+            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
+            ->where('cod_usuario_postagem', $cod_usuario)
+            ->get();
         return $postagens;
 
 
     }
 
+
     public static function getFotoUsuario($cod_usuario){
         $foto = FotoUsuario::where('cod_usuario', $cod_usuario)->get();
         $foto = $foto[0];
-        return $foto;
+     return $foto;
+
+    public static function getPostagensCompletadas($cod_usuario){
+        // $postagens = PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)->get();
+
+        $postagens=\DB::table('Postagem_do_animal')
+            ->where('cod_usuario_adotante', $cod_usuario)
+            ->whereNotNull('avaliacao_doador')
+            ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
+            ->get();
+        // dd($postagens);
+        return $postagens;
+
     }
 
     public static function getSolicitacoes($cod_usuario){
