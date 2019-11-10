@@ -118,7 +118,25 @@ class PostagemController extends Controller
 
     }
 
-    public function editar(Request $r){
+    public function editar(Request $r, $cod_postagem){
+        // dd($_POST);
+        $postagem = PostagemDoAnimal::where('cod_postagem', $cod_postagem)->first();
+        // dd($postagem);
+        $postagem->nome_animal= $r->nome;
+        $postagem->sexo= $r->sexo;
+        $postagem->nascimento= $r->dataNascimento;
+        $postagem->descricao= $r->descricao;
+        $postagem->castrado= $r->castrado;
+        $postagem->vacinacao_em_dia= $r->vacinado;
+        $postagem->vermifugado= $r->vermifugado;
+        $postagem->descricao_saude= $r->descricaoSaude;
+
+        $postagem->cod_porte= $r->porte;
+        $postagem->cod_especie= $r->especie;
+        $postagem->listagem_postagem= 'sim';
+
+        $postagem->save();
+        return redirect('postagem/'.$cod_postagem);
 
     }
 }

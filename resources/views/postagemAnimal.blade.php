@@ -7,6 +7,8 @@
     if ($postagem->cod_usuario_adotante != NULL){
         $adotado = True;
     }
+    $usuario = Auth::user();
+    // dd($usuario);
 
 @endphp
 
@@ -119,13 +121,18 @@
         @if ($adotado ||  $postagem->listagem_postagem=='nao')
 
         @else
-
-        <a href="{{url('postagem/'.$postagem->cod_postagem.'/solicitar')}}">
-            <button class="btn btn-success">Solicitar adoção</button>
-        </a>
-        <a href="{{url('postagem/'.$postagem->cod_postagem.'/denunciar')}}">
-            <button class =" btn btn-danger"> Denunciar</button>
-        </a>
+            @if ($usuario!=null && $usuario->cod_usuario == $postagem->cod_usuario_postagem)
+                <a href="{{url('postagem/'.$postagem->cod_postagem.'/editar')}}">
+                    <button type="button" class="btn btn-primary">Editar</button>
+                </a>
+            @else
+            <a href="{{url('postagem/'.$postagem->cod_postagem.'/solicitar')}}">
+                <button class="btn btn-success">Solicitar adoção</button>
+            </a>
+            <a href="{{url('postagem/'.$postagem->cod_postagem.'/denunciar')}}">
+                <button class =" btn btn-danger"> Denunciar</button>
+            </a>
+            @endif
         @endif
     </div>
 
