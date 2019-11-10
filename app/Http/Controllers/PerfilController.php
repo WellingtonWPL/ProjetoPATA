@@ -6,6 +6,7 @@ use App\Cidade;
 use App\Estado;
 use App\PostagemDoAnimal;
 use App\User;
+use App\FotoUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Hash;
@@ -132,6 +133,12 @@ class PerfilController extends Controller
 
     }
 
+
+    public static function getFotoUsuario($cod_usuario){
+        $foto = FotoUsuario::where('cod_usuario', $cod_usuario)->get();
+        $foto = $foto[0];
+     return $foto;
+
     public static function getPostagensCompletadas($cod_usuario){
         // $postagens = PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)->get();
 
@@ -142,6 +149,7 @@ class PerfilController extends Controller
             ->get();
         // dd($postagens);
         return $postagens;
+
     }
 
     public static function getSolicitacoes($cod_usuario){

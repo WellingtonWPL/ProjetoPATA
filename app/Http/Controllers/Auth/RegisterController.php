@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Cidade;
 use App\Estado;
 use App\User;
+use App\FotoUsuario;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -67,17 +68,44 @@ class RegisterController extends Controller
          */
         protected function create(array $data)
         {
-            return User::create([
+            $user = User::create([
                 'nome' => $data['nome'],
                 'email' => $data['email'],
                 'telefone' => $this->arrumaTelefone($data['fone']),
                 'contato' => $data['contato'],
-                'descricao' => $data['desc'],
+                'descricao' => $data['desc'], 
                 'admin' => 'nao',
                 'cod_cidade' => $data['cidade'],
-                'senha' => Hash::make($data['senha'])
-
+                'senha' => Hash::make($data['senha']),
+                
+                
             ]);
+            $foto = $data['fotos'][0];
+            $cod_usuario = $user->cod_usuario;
+            $this->insereFoto($foto, $cod_usuario);
+
+            return $user;
+        }
+
+
+        private function insereFoto($imag, $cod_usuario){
+            $foto = new FotoUsuario();
+ 
+                $image = $imag;
+                list($type, $image) = explode(";", $image);
+                list(, $image)      = explode(",", $image);
+                $image = base64_decode($image);
+                $image_name= time().'.jpg';
+                $path = public_path('uploadUsuario\\'.$image_name);
+                $link = 'uploadUsuario\\'.$image_name;
+        
+                file_put_contents($path, $image);
+        
+                $foto->link_foto_usuario= $link;
+                $foto->cod_usuario= $cod_usuario;
+        
+                $foto->save();
+
         }
 
         private function arrumaTelefone($fone){

@@ -139,8 +139,10 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
                     Contato: {{ $suasSol->contato}} <br>
                 </div>
                 <div class="col-4">
+
                     <a href="{{url('/postagem/'.$suasSol->cod_postagem.'/avaliar_doador')}}">
                         <button class="btn ">Concluir</button>
+
                     </a>
                 </div>
 
@@ -172,6 +174,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
                     Contato: {{ $suasSol->contato}} <br>
                 </div>
                 <div class="col-4">
+
                     <div style="    text-align: center;">
                         @for ($i = 0; $i < $suasSol->avaliacao_doador; $i++)
                             <i class=" material-icons">pets</i>
@@ -181,6 +184,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
 
                     <a href="{{url('/postagem/'.$suasSol->cod_postagem.'/avaliar_doador')}}">
                         <button class="btn btn-block">Editar avaliação</button>
+
                     </a>
                 </div>
 
@@ -255,7 +259,7 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
 
 @section('css')
 <style>
-	button {
+	#btn_s {
 		width: 100px;
 	}
 

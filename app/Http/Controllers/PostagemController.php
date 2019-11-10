@@ -79,7 +79,7 @@ class PostagemController extends Controller
 
         $image = $data->fotos[0];
         list($type, $image) = explode(';', $image);
-        list(, $image)      = explode(',', $image);
+        list($teste, $image)      = explode(',', $image);
         $image = base64_decode($image);
         $image_name= time().'.jpg';
         $path = public_path('upload/'.$image_name);
