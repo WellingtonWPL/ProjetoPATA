@@ -22,6 +22,8 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         'nome', 'email', 'senha', 'telefone', 'contato', 'descricao', 'admin', 'cod_cidade'
     ];
 
+    public $timestamps = false;
+
     /**
      * The attributes that should be hidden for arrays.
      *

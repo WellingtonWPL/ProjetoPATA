@@ -300,11 +300,11 @@
         class="btn btn-danger"></button>
       <button type="button" id="botao"
         {{-- onclick="changeBG('#E6EE9C')" --}}
-        onclick="changeBackGround('orange')"
-        class="btn" style="background-color: orange;"></button>
+        onclick="changeBackGround('white')"
+        class="btn" style="background-color: white;"></button>
       <button type="button" id="botao"
         {{-- onclick="changeBG('#eeeeee')" --}}
-        onclick="changeBackGround('lightgrey')"
+        onclick="changeBackGround('DimGrey')"
         class="btn btn-secondary"></button>
     </fieldset>
     <div class="container">
@@ -323,7 +323,7 @@
   $(document).ready(function(){
         var cor = localStorage.getItem('cor');
         if(cor === null){
-          cor = 'lightgrey'
+          cor = 'white'
         }
         //alert(cor);
         document.body.style.backgroundColor = cor;
