@@ -67,34 +67,50 @@
     </div>
      Estado
             <select class="estado form-control">
-                <option value="estado" selected>Selecione
+                <option value="estado" >Selecione
                 </option>
                 @foreach ($estados as $estado)
-                <option value="{{ $estado->cod_estado }}">
+                <option value="{{ $estado->cod_estado }}"
+                    @if ($estado->cod_estado == $cod_estado)
+
+                        selected
+                    @endif
+                    >
                     {{$estado->sigla_estado}}</option>
                 @endforeach
             </select>
             {{-- {{dd($cidades)}} --}}
             <br>
             Cidade
+                    {{-- @php
+                    dd($usuario);
+                        if(($estado->cod_cidade == $usuario->cod_cidade))
+                        {
+                            dd('dhsau');
+                        }
+                    @endphp --}}
             <select name="cidade" class="form-control">
 
-                <option selected>Selecione</option>
+                <option >Selecione</option>
                 @foreach ($cidades as $cidade)
                 <option
                     class="cidade {{$cidade->cod_estado}}"
-                    value="{{$cidade->cod_cidade}}" >
+                    value="{{$cidade->cod_cidade}}"
+                    @if ($cidade->cod_cidade == $usuario->cod_cidade)
+                        selected
+                    @endif
+                    >
                     {{$cidade->nome_cidade}}</option>
                 @endforeach
                 {{-- <option>Ponta Grossa</option> --}}
             </select>
 
     {{-- </div> --}}
-    <div class="form-group">
+    {{-- <div class="form-group">
         Foto
         <input type="file" class="form-control-file">
 
-    </div>
+    </div> --}}
 
     @php
         //  dd($usuario->descricao);
@@ -116,7 +132,7 @@
 <script>
 
         $(document).ready(function(){
-                            $('.cidade').hide()
+                            // $('.cidade').hide()
                             // alert('ta ok')
                             $('.estado').focusout(function(){
                                     let id_estado = $(this).val()
