@@ -7,11 +7,16 @@ use App\Solicitacao;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use vendor\autoload;
+
 
 class SolicitacaoController extends Controller
 {
     public function solicitar($cod_postagem){
-
+    
         //  dd($_POST);
 
 
@@ -24,9 +29,9 @@ class SolicitacaoController extends Controller
         $solicitacao->cod_postagem = $cod_postagem;
 
         $solicitacao->save();
-
-
-
+        $assunto = 'Solicitação de Adoção';
+        $mensagem = '<p>Teste</p>';
+        $this->enviaEmail($usuario->email, $assunto, $mensagem);
 
         return view('sucesso', ['msg'=> 'Solicitação realizada com sucesso :)']);
     }
@@ -124,6 +129,49 @@ class SolicitacaoController extends Controller
         ->where('cod_postagem', $cod_postagem)
         ->update(['avaliacao_adotante'=> $r->nota]);
         return redirect($usuario->cod_usuario.'/solicitacoes');
+    }
+
+    public function enviaEmail($email_usuario, $assunto, $mensagem){
+        //require 'vendor/autoload.php';
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail = new PHPMailer();
+            $mail->IsSMTP();  // telling the class to use SMTP
+            $mail->SMTPDebug = false;
+            $mail->Mailer = "smtp";
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = gethostbyname('smtp.gmail.com');
+            $mail->Port = 465;                                    // Send using SMTP
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'projeto.pata2019@gmail.com';                     // SMTP username
+            $mail->Password   = 'laravel58';       
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );                        // SMTP password
+            //$Mail->Priority = 1;
+
+        
+            //Recipients
+            $mail->setFrom('projeto.pata2019@gmail.com', 'Projeto PATA');
+            $mail->addAddress($email_usuario);     // Add a recipient
+            $mail->addAddress('ellen@example.com');               // Name is optional
+        
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $assunto;
+            $mail->Body    = $mensagem;
+                   
+            $mail->send();
+            //echo 'Message has been sent';
+        } catch (Exception $e) {
+            //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
 

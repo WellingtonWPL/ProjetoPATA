@@ -243,12 +243,7 @@
         A sua senha parece ter menos carácteres que o exigido!
     </div>
     <div class="alert alert-warning" role="alert" id="alerta_email2" name="alerta_email2" style="display: none" >
-        O email informado já está cadastrado!
-    <div class="form-group">
-            <b>Descrição pessoal</b>
-        <textarea name="desc" class="form-control" placeholder="Você poderá editar este campo depois! ;)" rows="5"
-        maxlength="65535"
-        ></textarea>
+        O email informado já está cadastrado! 
     </div>
 
 
@@ -489,8 +484,7 @@
                     //$("#resultado").html(data);
                     //console.log(data);
                     $("#alerta_email2").css('display', 'none');
-                    window.location = '/lista';
-
+                    window.location = '/login';
                 },
                 error: function( data ){
                     $("#alerta_email2").css('display', 'block');
