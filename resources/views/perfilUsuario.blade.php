@@ -445,4 +445,33 @@ $postagem->cod_postagem)->first();
 @endforeach
 
 
-    @endsection
+@endsection
+
+
+
+@section('titulo_help')
+Página de perfil do usuário
+
+@endsection
+@section('help')
+
+Página que mostra as ações possíveis ao usuário e suas informações. São elas:
+Ações:
+&emsp;Notificações: Acessa a pagina de notificações.   <br>
+    &emsp;Editar: Acessa a página de edição de perfil  <br>
+    &emsp;Novo post: Acessa a página de criação de novo post  <br>
+    &emsp;Deletar: Acessa a página de deletar perfil  <br>
+Informações  <br>
+&emsp;Nome  <br>
+&emsp;Cidade e estado  <br>
+&emsp;Descrição  <br>
+&emsp;Posts realizados.  <br>
+
+
+
+@endsection
+
+
+
+
+

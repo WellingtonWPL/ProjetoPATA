@@ -290,3 +290,27 @@
 
 
 @endsection
+
+
+
+
+@section('titulo_help')
+Página de edição da postagem
+@endsection
+@section('help')
+Página de edição da informações de uma postagem. Mostra todos os campos que o usuário pode editar. São eles: <br>
+Nome  <br>
+Sexo <br>
+Porte <br>
+Especie <br>
+Nascimento <br>
+Descrição <br>
+Castrado <br>
+Vacinação em dia <br>
+Vermifugado <br>
+Descrição de saúde <br>
+
+
+@endsection
+
+

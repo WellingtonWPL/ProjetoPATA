@@ -180,11 +180,28 @@ class PerfilController extends Controller
     }
 
     public function editar($cod_usuario){
+
+
+        if(Auth::check()){
+            $user = Auth::user();
+            if($user->cod_usuario != $cod_usuario){
+                // dd('epa');
+                $msg= "Apenas o dono dessa conta pode alterá-la";
+                return view('sucesso', compact('msg') );
+            }
+        }
+
         $usuario= User::where('cod_usuario',$cod_usuario)->first();
-        // dd($usuario);
-        $cidades = Cidade::all();
-        $estados = Estado::all();
-        return view('editarPerfil', compact('usuario', 'estados', 'cidades'));
+
+        //   dd($usuario);
+
+        $cidades = Cidade::orderBy('cod_cidade')->get();
+        $estados = Estado::orderBy('sigla_estado')->get();
+
+        $cidade=Cidade::where('cod_estado', $usuario->cod_cidade)->first();
+        $cod_estado = $cidade->cod_estado;
+        // dd($cod_estado);
+        return view('editarPerfil', compact('usuario', 'estados', 'cidades', 'cod_estado'));
 
     }
     public function inserirEdicao($cod_usuario, Request $r){

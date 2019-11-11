@@ -473,3 +473,27 @@ $cod_usuario = $url[1];
 </body>
 @endsection
 
+@section('titulo_help')
+Página de postagem de animal
+@endsection
+@section('help')
+Página que contém o formulário para fazer um post de adoção de um animal. Ele contém os campos que se referem à:   <br>
+Nome: onde é colocado o nome do animal;  <br>
+Foto: foto do animal.  <br>
+Sexo: sexo do animal (se souber).  <br>
+Porte: porte do animal.  <br>
+Especie: especie (contém todas as espécies de animais domésticos permitidos)  <br>
+Data de nascimento: data de nascimento do animal (se souber)  <br>
+Descrição: uma descrição do animal e seu estado;  <br>
+Castrado: se o animal é castrado (se souber)  <br>
+Vacinação em dia: se a vacinação do animal está em dia (se soube)  <br>
+Vermifigado: se o animal é vermifugado (se souber)  <br>
+Descrição saúde: campos específico para explicar o estado de saúdo do animal e qualquer cuidado especial que ele deva ter.  <br>
+
+
+
+
+
+@endsection
+
+

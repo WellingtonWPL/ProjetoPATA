@@ -108,3 +108,12 @@
         </div>
       </section> -->
 @endsection
+
+
+@section('titulo_help')
+    Home Page
+@endsection
+
+@section('help')
+Esta página apresenta uma mensagem que explica o que é o intuito do projeto. O usuário pare clicar no botão “Conheça os animais cadastrados!” para ter acesso a lista contendo os animais registrados no sistema
+@endsection

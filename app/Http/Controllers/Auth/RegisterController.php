@@ -73,12 +73,12 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'telefone' => $this->arrumaTelefone($data['fone']),
                 'contato' => $data['contato'],
-                'descricao' => $data['desc'], 
+                'descricao' => $data['desc'],
                 'admin' => 'nao',
                 'cod_cidade' => $data['cidade'],
                 'senha' => Hash::make($data['senha']),
-                
-                
+
+
             ]);
             $foto = $data['fotos'][0];
             $cod_usuario = $user->cod_usuario;
@@ -90,7 +90,7 @@ class RegisterController extends Controller
 
         private function insereFoto($imag, $cod_usuario){
             $foto = new FotoUsuario();
- 
+
                 $image = $imag;
                 list($type, $image) = explode(";", $image);
                 list(, $image)      = explode(",", $image);
@@ -98,12 +98,12 @@ class RegisterController extends Controller
                 $image_name= time().'.jpg';
                 $path = public_path('uploadUsuario\\'.$image_name);
                 $link = 'uploadUsuario\\'.$image_name;
-        
+
                 file_put_contents($path, $image);
-        
+
                 $foto->link_foto_usuario= $link;
                 $foto->cod_usuario= $cod_usuario;
-        
+
                 $foto->save();
 
         }
@@ -116,7 +116,7 @@ class RegisterController extends Controller
         }
 
         public function showRegistrationForm(){
-            $estados = Estado::all()->sortBy('sigla_estado');
+            $estados = Estado::all()->sortBy('nome_estado');
             $cidades = Cidade::all()->sortBy('nome_cidade');
             return view('cadastrar', compact('estados', 'cidades'));
         }

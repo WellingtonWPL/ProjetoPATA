@@ -241,3 +241,22 @@ $i=0;$j=0;
 </div>
 
 @endsection
+
+
+
+
+
+
+@section('titulo_help')
+Página de administrador do sistema
+
+@endsection
+@section('help')
+Existem dois campos na página de administrador: <br>
+Denuncias Pendentes
+Essa parte mostra as denúncias realizadas no sistema, mostrando as informações relevantes do post denunciado e as opções de aceitar ou recusar a denúncia. Caso a denúncia seja aceita ela fica invisível no sistema, podendo ser vista apenas por administradores e a postagem passa à parte de Postagens Impróprias. Caso a denúncia seja recusada ela volta a ser mostrada no sistema. <br>
+Postagens Impróprias
+Onde as postagens já classificadas impróprias ficam. Mostra as mesmas informações sobre o post do campo anterior, porém com apenas a opção de restaurar a postagem, isso é fazer a postagem voltar a ser exibida no sistema.
+
+
+@endsection
