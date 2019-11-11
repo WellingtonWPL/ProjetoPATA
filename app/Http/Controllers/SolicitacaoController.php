@@ -37,7 +37,7 @@ class SolicitacaoController extends Controller
                 <div class="card-body"  >
                     <h1 class="masthead-heading mb-0">Projeto PATA</h1>
                     <div id="texto-card">
-                        <p><b>Olá,</b> parece que alguém sem interessou na sua postagem, clique no link abixo e veja: </p>
+                        <p><b>Olá,</b> parece que alguém sem interessou na sua postagem, clique no link abaixo e veja: </p>
                         <a href="localhost/home" class="btn btn-primary btn-lg rounded-pill mt-5">Clique aqui</a>
                     </div>
                 </div>
