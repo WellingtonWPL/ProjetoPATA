@@ -39,6 +39,8 @@ class CreatePostagemDoAnimalTable extends Migration
             $table->unsignedInteger('cod_especie');
             $table->enum('listagem_postagem', ['sim', 'nao']);
 
+            $table->enum('excluido', ['sim', 'nao'])->nullable()->default('nao');
+
             $table->index(["cod_especie"], 'cod_especie_idx');
 
             $table->index(["cod_usuario_adotante"], 'cod_adotante_idx');

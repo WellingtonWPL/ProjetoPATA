@@ -20,7 +20,9 @@ class PostagemController extends Controller
 		->join('Postagem_do_animal', 'cod_postagem_denunciada' , '=', 'Postagem_do_animal.cod_postagem')
 		->join('Usuario', 'Postagem_do_animal.cod_usuario_postagem', '=', 'Usuario.cod_usuario')
 		->join('Motivos_Denuncia', 'Denuncia.cod_motivo_denuncia', '=', 'Motivos_Denuncia.cod_motivo_denuncia')
-		->get(); */
+        ->get(); */
+
+
 
 		$denuncia= Denuncia
 		::join('Postagem_do_animal', 'cod_postagem_denunciada' , '=', 'Postagem_do_animal.cod_postagem')
@@ -36,7 +38,13 @@ class PostagemController extends Controller
 		->where('cod_postagem', $cod_postagem)
 		->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
 		->join('Usuario', 'Postagem_do_animal.cod_usuario_postagem', '=', 'Usuario.cod_usuario')
-		->first();
+        ->first();
+
+        if($postagem->excluido == "sim"){
+            $msg = "Postagem Excluida";
+            return view('sucesso', compact('msg'));
+        }
+
 		$foto = \DB::table('Foto_postagem')->where('cod_postagem', $cod_postagem)->first();
 
 		$usuario = User::where('cod_usuario', $postagem->cod_usuario)->get();
@@ -131,7 +139,7 @@ class PostagemController extends Controller
 	public function editar(Request $r, $cod_postagem){
 		$postagem = PostagemDoAnimal::where('cod_postagem', $cod_postagem)->first();
 		if(Auth::check()){
-			dd("epa");
+			// dd("epa");
 			$user = Auth::user();
 			if($user->cod_usuario != $postagem->cod_usuario_postagem){
 				// dd('epa');
@@ -157,6 +165,27 @@ class PostagemController extends Controller
 		$postagem->listagem_postagem= 'sim';
 
 		$postagem->save();
+		return redirect('postagem/'.$cod_postagem);
+
+    }
+
+    public function excluirPostagem($cod_postagem){
+		$postagem = PostagemDoAnimal::where('cod_postagem', $cod_postagem)->first();
+		if(Auth::check()){
+			// dd("epa");
+			$user = Auth::user();
+			if($user->cod_usuario != $postagem->cod_usuario_postagem){
+				// dd('epa');
+				$msg= "Apenas o dono dessa postagem pode excluí-la";
+				return view('sucesso', compact('msg') );
+			}
+		}
+
+        $postagem->listagem_postagem= 'nao';
+        $postagem->excluido= 'sim';
+
+        $postagem->save();
+
 		return redirect('postagem/'.$cod_postagem);
 
 	}

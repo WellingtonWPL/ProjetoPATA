@@ -125,6 +125,36 @@
                 <a href="{{url('postagem/'.$postagem->cod_postagem.'/editar')}}">
                     <button type="button" class="btn btn-primary">Editar</button>
                 </a>
+
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExemplo2">
+                    Excluir
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="modalExemplo2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Você tem certeza que quer excluir essa postagem?</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <div class="modal-footer">
+                        <a href="{{url('postagem/'.$postagem->cod_postagem.'/excluir')}}">
+                            <button type="button" class="btn btn-primary">Sim</button>
+                        </a>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
             @else
             <a href="{{url('postagem/'.$postagem->cod_postagem.'/solicitar')}}">
                 <button class="btn btn-success">Solicitar adoção</button>
