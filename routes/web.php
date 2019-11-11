@@ -77,8 +77,8 @@ Route::get('/admin/restaurar/{cod_postagem}', 'AdminController@restaurar')->midd
 Route::get('/{cod_usuario}/postar', 'PostagemController@novaPostagem');
 
 
-Route::get('crop-image', 'ImageController@index');
-Route::post('crop-image', ['as'=>'upload.image','uses'=>'ImageController@uploadImage']);
+// Route::get('crop-image', 'ImageController@index');
+// Route::post('crop-image', ['as'=>'upload.image','uses'=>'ImageController@uploadImage']);
 
 
 Route::get('/{cod_usuario}/solicitacoes', 'SolicitacaoController@mostrarPedidos');
@@ -104,6 +104,15 @@ Route::post('/sair', 'UsuarioController@loggedOut')->name('sair');
 
 Route::post('/logar', 'UsuarioController@login')->name('logar')->middleware('guest');
 
+Route::get('/sucessoPessoa', function () {
+  $msg = "Usuário cadastrado com sucesso.";
+  return view('sucesso', compact('msg'));
+});
+
+Route::get('/sucessoAnimal', function () {
+  $msg = "Postagem cadastrada com sucesso.";
+  return view('sucesso', compact('msg'));
+});
 
 Auth::routes(['verify' => true]);
 

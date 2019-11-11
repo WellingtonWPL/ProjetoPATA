@@ -466,7 +466,7 @@ $cod_usuario = $url[1];
                 success: function( data ) {
                     //$("#resultado").html(data);
                     //console.log(data);
-                    window.location = '/perfil/' + '{{$cod_usuario}}';
+                    window.location = '/sucessoAnimal';
                 }
                 // },
                 // error: function (request, status, error) {

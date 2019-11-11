@@ -13,7 +13,7 @@
 </div>
 
 <script>
-setTimeout(function(){location.href = "{{url('/lista')}}"}, 3000);
+setTimeout(function(){location.href = "{{url('/lista')}}"}, 2000);
 </script>
 
 

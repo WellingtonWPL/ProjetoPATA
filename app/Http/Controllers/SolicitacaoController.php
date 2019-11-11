@@ -33,7 +33,22 @@ class SolicitacaoController extends Controller
 
         $solicitacao->save();
         $assunto = 'Solicitação de Adoção';
-        $mensagem = '<p>Teste</p>';
+
+        $mensagem = '<div style="text-align:center;" >
+          <div class="container">
+            <div class="card"  style="position: center; margin:auto;">
+                <div class="card-body"  >
+                    <h1 class="masthead-heading mb-0">Projeto PATA</h1>
+                    <div id="texto-card">
+                        <p><b>Olá,</b> parece que alguém sem interessou na sua postagem, clique no link abaixo e veja: </p>
+                        <a href="localhost/home" class="btn btn-primary btn-lg rounded-pill mt-5">Clique aqui</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>';
+
+
         $this->enviaEmail($usuario->email, $assunto, $mensagem);
 
         return view('sucesso', ['msg'=> 'Solicitação realizada com sucesso :)']);
@@ -144,6 +159,8 @@ class SolicitacaoController extends Controller
             $mail->IsSMTP();  // telling the class to use SMTP
             $mail->SMTPDebug = false;
             $mail->Mailer = "smtp";
+            $mail->CharSet = "UTF-8";
+            $mail->Encoding = "base64";
             $mail->SMTPSecure = 'ssl';
             $mail->Host = gethostbyname('smtp.gmail.com');
             $mail->Port = 465;                                    // Send using SMTP
@@ -163,7 +180,6 @@ class SolicitacaoController extends Controller
             //Recipients
             $mail->setFrom('projeto.pata2019@gmail.com', 'Projeto PATA');
             $mail->addAddress($email_usuario);     // Add a recipient
-            $mail->addAddress('ellen@example.com');               // Name is optional
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
