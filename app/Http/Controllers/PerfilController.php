@@ -145,7 +145,7 @@ class PerfilController extends Controller
 
     public static function getPostagensCompletadas($cod_usuario){
         // $postagens = PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)->get();
-
+        
         $postagens=\DB::table('Postagem_do_animal')
             ->where('cod_usuario_adotante', $cod_usuario)
             ->whereNotNull('avaliacao_doador')
