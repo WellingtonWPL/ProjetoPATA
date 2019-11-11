@@ -122,7 +122,7 @@
 <div id="perfil" style="float: right; align:center;">
     <div class="col-12">
             @if ($foto_usuario==NULL)
-                <img src="{{url('img/animal_sem_foto.png')}}" id="foto_user"  class="" >
+                <img src="{{url('img/perfil.jpg')}}" id="foto_user"  class="" >
 
             @else
                 <img src="{{url(''.$foto_usuario->link_foto_usuario)}}" id="foto_user"  class="img-fluid rounded" >

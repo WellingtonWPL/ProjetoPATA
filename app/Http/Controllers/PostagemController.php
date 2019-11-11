@@ -131,7 +131,7 @@ class PostagemController extends Controller
 	public function editar(Request $r, $cod_postagem){
 		$postagem = PostagemDoAnimal::where('cod_postagem', $cod_postagem)->first();
 		if(Auth::check()){
-			dd("epa");
+			//dd("epa");
 			$user = Auth::user();
 			if($user->cod_usuario != $postagem->cod_usuario_postagem){
 				// dd('epa');
