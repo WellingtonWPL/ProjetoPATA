@@ -180,6 +180,17 @@ class PerfilController extends Controller
     }
 
     public function editar($cod_usuario){
+
+
+        if(Auth::check()){
+            $user = Auth::user();
+            if($user->cod_usuario != $cod_usuario){
+                // dd('epa');
+                $msg= "Apenas o dono dessa conta pode alterá-la";
+                return view('sucesso', compact('msg') );
+            }
+        }
+
         $usuario= User::where('cod_usuario',$cod_usuario)->first();
 
         //   dd($usuario);
