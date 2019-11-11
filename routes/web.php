@@ -104,7 +104,7 @@ Route::post('/sair', 'UsuarioController@loggedOut')->name('sair');
 Route::post('/logar', 'UsuarioController@login')->name('logar')->middleware('guest');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
