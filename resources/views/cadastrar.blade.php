@@ -484,7 +484,7 @@
                     //$("#resultado").html(data);
                     //console.log(data);
                     $("#alerta_email2").css('display', 'none');
-                    window.location = '/login';
+                    window.location = '/sucessoPessoa';
                 },
                 error: function( data ){
                     $("#alerta_email2").css('display', 'block');

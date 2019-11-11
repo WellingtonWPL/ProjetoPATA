@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'projeto.pata2019@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Email de Confirmação PATA'),
+        'name' => env('MAIL_FROM_NAME', 'Projeto PATA'),
     ],
 
     /*
