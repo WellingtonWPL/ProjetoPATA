@@ -143,7 +143,7 @@
     id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
 
-      <a class="navbar-item{{--brand--}}" href="#" >
+      <a class="navbar-item{{--brand--}}" href="{{url('/lista')}}" >
             <img style="max-width:30px; {{--height:auto;--}} " src="{{asset('/img/logo.png')}}" alt="pata">
 
       </a>
