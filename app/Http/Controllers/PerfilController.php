@@ -137,11 +137,12 @@ class PerfilController extends Controller
     public static function getFotoUsuario($cod_usuario){
         $foto = FotoUsuario::where('cod_usuario', $cod_usuario)->get();
         $foto = $foto[0];
-     return $foto;
+        return $foto;
+    }
 
     public static function getPostagensCompletadas($cod_usuario){
         // $postagens = PostagemDoAnimal::where('cod_usuario_postagem', $cod_usuario)->get();
-
+        
         $postagens=\DB::table('Postagem_do_animal')
             ->where('cod_usuario_adotante', $cod_usuario)
             ->whereNotNull('avaliacao_doador')
