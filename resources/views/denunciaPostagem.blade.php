@@ -52,3 +52,13 @@
 
 
 @endsection
+
+
+@section('titulo_help')
+Página de denúncia de uma postagem
+
+@endsection
+@section('help')
+Página que é acessada ao denunciar uma postagem, apresenta os motivos mais comuns para denunciar uma postagem. Caso o motivo pelo qual o usuário deseja denunciar a postagem não conste na lista ele pode escolher a opção “Outro” e dissertar sobre”.
+
+@endsection

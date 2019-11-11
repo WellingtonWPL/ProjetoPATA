@@ -27,10 +27,22 @@
         </div>
         <small>
             <a href="{{ route('password.request') }}">Esqueci minha senha </a><br>
-        </small> 
+        </small>
 
         <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
 </div>
 
 @endsection
+
+
+@section('titulo_help')
+Página de login
+@endsection
+@section('help')
+Página onde o usuário fornece seu email e senha para entrar no sistema. É a partir dessa página que o usuário pode redefinir sua senha ou restaurar sua conta.
+
+
+@endsection
+
+

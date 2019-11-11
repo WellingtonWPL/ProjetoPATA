@@ -7,6 +7,8 @@
     if ($postagem->cod_usuario_adotante != NULL){
         $adotado = True;
     }
+    $usuario = Auth::user();
+    // dd($usuario);
 
 @endphp
 
@@ -119,13 +121,18 @@
         @if ($adotado ||  $postagem->listagem_postagem=='nao')
 
         @else
-
-        <a href="{{url('postagem/'.$postagem->cod_postagem.'/solicitar')}}">
-            <button class="btn btn-success">Solicitar adoção</button>
-        </a>
-        <a href="{{url('postagem/'.$postagem->cod_postagem.'/denunciar')}}">
-            <button class =" btn btn-danger"> Denunciar</button>
-        </a>
+            @if ($usuario!=null && $usuario->cod_usuario == $postagem->cod_usuario_postagem)
+                <a href="{{url('postagem/'.$postagem->cod_postagem.'/editar')}}">
+                    <button type="button" class="btn btn-primary">Editar</button>
+                </a>
+            @else
+            <a href="{{url('postagem/'.$postagem->cod_postagem.'/solicitar')}}">
+                <button class="btn btn-success">Solicitar adoção</button>
+            </a>
+            <a href="{{url('postagem/'.$postagem->cod_postagem.'/denunciar')}}">
+                <button class =" btn btn-danger"> Denunciar</button>
+            </a>
+            @endif
         @endif
     </div>
 
@@ -178,5 +185,27 @@
 </div>
 </div>
 
+
+@endsection
+
+@section('titulo_help')
+Pagina de uma postagem
+@endsection
+
+@section('help')
+Página onde será mostrada as informações do animal que está registrado no sistema e as ações a serem tomadas pelo usuário em relação ao animal.
+As informações mostradas são:  <br>
+Nome: o nome do animal. <br>
+Sexo: o sexo (se souber) do animal. <br>
+Idade: a idade do animal. <br>
+Porte: o porte do animal. <br>
+Dono da postagem: qual usuario postou o animal. <br>
+Avaliação do dono da postagem: a avaliação que o dono da postagem tem no site. <br>
+Descrição: Descrição do animal. <br>
+Saúde: descreve diversos aspectos da saúde do animal. <br>
+E as ações que o usuário pode tomar: <br>
+Solicitar adoção: realiza uma solicitação ao dono da postagem mostrando o interesse em adotar o animal. <br>
+Denunciar: denuncia a postagem tirando-a da listagem. <br>
+Acessar perfil do dono da postagem: redireciona o usuário ao dono da postagem. <br>
 
 @endsection

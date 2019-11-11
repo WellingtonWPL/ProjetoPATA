@@ -67,7 +67,7 @@
         max-height: 250px;
         padding: 10px;
     }
-    
+
     .dot {
         margin-left: 3px;
         height: 25px;
@@ -108,19 +108,22 @@
 
 
 
-$avaliacao = PerfilController::getAvaliacao($cod_usuario);
-$notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
-$foto_usuario = PerfilController::getFotoUsuario($cod_usuario);
+    $avaliacao = PerfilController::getAvaliacao($cod_usuario);
+    $notificaçoes = PerfilController::getSolicitacoes($cod_usuario);
+    // dd('fwefwe');
+    $foto_usuario = PerfilController::getFotoUsuario($cod_usuario);
 //dd($foto_usuario->link_foto_usuario);
 
 @endphp
 
+        @php
+        @endphp
 
 <div id="perfil" style="float: right; align:center;">
     <div class="col-12">
             @if ($foto_usuario==NULL)
                 <img src="{{url('img/animal_sem_foto.png')}}" id="foto_user"  class="" >
-                
+
             @else
                 <img src="{{url(''.$foto_usuario->link_foto_usuario)}}" id="foto_user"  class="img-fluid rounded" >
             @endif
@@ -144,6 +147,7 @@ $foto_usuario = PerfilController::getFotoUsuario($cod_usuario);
         <br><br>
         <b>Nome:</b>
         <h2>{{  $usuario[0]->nome  }}</h2><br>
+
         <b>Cidade:</b>
         @php
 
@@ -441,4 +445,33 @@ $postagem->cod_postagem)->first();
 @endforeach
 
 
-    @endsection
+@endsection
+
+
+
+@section('titulo_help')
+Página de perfil do usuário
+
+@endsection
+@section('help')
+
+Página que mostra as ações possíveis ao usuário e suas informações. São elas:
+Ações:
+&emsp;Notificações: Acessa a pagina de notificações.   <br>
+    &emsp;Editar: Acessa a página de edição de perfil  <br>
+    &emsp;Novo post: Acessa a página de criação de novo post  <br>
+    &emsp;Deletar: Acessa a página de deletar perfil  <br>
+Informações  <br>
+&emsp;Nome  <br>
+&emsp;Cidade e estado  <br>
+&emsp;Descrição  <br>
+&emsp;Posts realizados.  <br>
+
+
+
+@endsection
+
+
+
+
+

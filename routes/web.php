@@ -34,8 +34,8 @@ Route::get('/postagem/{cod_postagem}', 'PostagemController@mostrar');
 Route::get('/postagem/{cod_postagem}/denunciar', 'DenunciaController@mostrar')->middleware('auth');
 Route::post('/postagem/{cod_postagem}/denunciar', 'DenunciaController@fazerDenuncia')->middleware('auth');
 
-Route::get('/postagem/{cod_postagem}/editar', 'PostagemController@mostrarEdicao' );
-Route::post('/postagem/{cod_postagem}/editar', 'PostagemController@editar' );
+Route::get('/postagem/{cod_postagem}/editar', 'PostagemController@mostrarEdicao' )->middleware('auth');
+Route::post('/postagem/{cod_postagem}/editar', 'PostagemController@editar' )->middleware('auth');
 
 
 
@@ -85,8 +85,8 @@ Route::post('/{cod_usuario}/solicitacoes', 'SolicitacaoController@aceitarSolicit
 
 
 Route::get('/perfil/{cod_usuario}', 'PerfilController@mostrar');
-Route::get('/perfil/{cod_usuario}/editar', 'PerfilController@editar');
-Route::post('/perfil/{cod_usuario}/editar', 'PerfilController@inserirEdicao');
+Route::get('/perfil/{cod_usuario}/editar', 'PerfilController@editar')->middleware('auth');
+Route::post('/perfil/{cod_usuario}/editar', 'PerfilController@inserirEdicao')->middleware('auth');
 Route::post('/perfil/{cod_usuario}/excluir', 'PerfilController@excluirPerfil');
 
 Route::get('/{cod_usuario}/notificacoes', 'NotificacoesController@mostraNotificacoes')->middleware('auth');

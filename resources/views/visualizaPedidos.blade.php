@@ -273,3 +273,25 @@ if($cod_usuario!=$usuarioLogado->cod_usuario){
 	}
 </style>
 @endsection
+
+
+
+@section('titulo_help')
+Página de notificações do usuario
+
+@endsection
+@section('help')
+Apresenta os seguintes campos: <br>
+Solicitações de adoção:
+Mostra as solicitações que as postagens do usuário recebem. Pode-se aceitar ou recusar. <br>
+Adoções em andamento:
+Caso uma solicitação seja aceita o nome e contato do dono do animal aparecerão nessa sessão. Quando a  adoção for concluída pode-se acessar a página de avaliação a partir deste campo.<br>
+Suas adoções em andamento:
+Mostra as pessoas que o usuário aceitou para doar um animal e o contato das mesmas.<br>
+Sua adoções concluidas:
+	Mostra os adoções concluídas do usuário
+
+
+@endsection
+
+

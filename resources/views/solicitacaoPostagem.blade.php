@@ -35,7 +35,7 @@
 
     @if ($foto==NULL)
         <img src="{{url('img/animal_sem_foto.png')}}" id="foto"  class="" >
-        
+
     @else
         <img src="{{url(''.$foto->link_foto_postagem)}}" id="foto"  class="img-fluid rounded" >
     @endif
@@ -56,5 +56,13 @@
 </div>
 
 
+
+@endsection
+@section('titulo_help')
+Página de solicitação de uma postagem
+
+@endsection
+@section('help')
+Essa página apenas confirma a solicitação do usuário a uma postagem. Se o usuário realmente deseja fazer a solicitação pode clicar em “Solicitar”, caso contrário ele pode apertar o botão “cancelar”
 
 @endsection

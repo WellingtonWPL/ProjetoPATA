@@ -143,7 +143,7 @@
     id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
 
-      <a class="navbar-item{{--brand--}}" href="#" >
+      <a class="navbar-item{{--brand--}}" href="{{url('/lista')}}" >
             <img style="max-width:30px; {{--height:auto;--}} " src="{{asset('/img/logo.png')}}" alt="pata">
 
       </a>
@@ -241,8 +241,35 @@
     @endif
     </ul>
     @endguest
+    <a data-toggle="modal" data-target="#modalExemplo">
+            <i class="material-icons" style="color:aliceblue">
+                help
+            </i>
+        </a>
     </div>
   </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                  @yield('titulo_help')
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              @yield("help")
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
   {{-- CONTEUDO --}}

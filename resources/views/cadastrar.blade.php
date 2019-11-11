@@ -48,7 +48,7 @@
     .teste:hover .close {
         opacity: 1;
     }
-    
+
 </style>
 
 <script type="text/javascript">
@@ -67,12 +67,12 @@
         $('#fone').mask(SPMaskBehavior, spOptions);
     });
 })( jQuery);
-</script> 
+</script>
 
-<body> 
+<body>
 
     <div class="card" style="padding:5%;">
-    <h1>Cadastro</h1>  
+    <h1>Cadastro</h1>
     <form method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
         <div class="row form-group">
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="form-group row">
             <div class="form-group col-md-6">
                 <b>Estado</b>
@@ -175,7 +175,7 @@
                 <div class="col-sm-12 alert alert-danger" id="div_erro_estado" style="display: none; margin-top: 20px;">
                         Informe o seu Estado.
                 </div>
-            </div> 
+            </div>
             <div class="form-group col-md-6">
                 <b>Cidade</b>
                 <select name="cidade" id="cidade" class="form-control">
@@ -193,7 +193,7 @@
             </div>
         </div>
         {{-- FOTO --}}
-        <div class="form-group"> 
+        <div class="form-group">
             <b>Foto</b> <br>
             <div class="container">
                 <div class="panel panel-info">
@@ -237,23 +237,23 @@
         As senhas devem der iguais!
     </div>
     <div class="alert alert-warning" role="alert" id="alerta_email" name="alerta_email" style="display: none" >
-        O seu email parece ser inválido! 
+        O seu email parece ser inválido!
     </div>
     <div class="alert alert-warning" role="alert" id="alerta_senha2" name="alerta_senha2" style="display: none" >
-        A sua senha parece ter menos carácteres que o exigido! 
+        A sua senha parece ter menos carácteres que o exigido!
     </div>
     <div class="alert alert-warning" role="alert" id="alerta_email2" name="alerta_email2" style="display: none" >
         O email informado já está cadastrado! 
     </div>
 
 
-</div> 
+</div>
 </body>
 
 
 <script>
     // Compara as Senhas
-    
+
     $(document).ready(function(){
         $('#password_confirmation, #senha').keyup(function () {
             // alert('ok')
@@ -264,7 +264,7 @@
         });
     })
 </script>
-    
+
 
 
 <script type="text/javascript">
@@ -311,7 +311,7 @@
         resize.croppie('result', {
             type: 'canvas',
             size:'viewport'
-            
+
         }).then(function (img) {
             if(flag === 1){
                 count++;
@@ -332,7 +332,7 @@
     $(".salva").click(function(e){
         //alert("teste");
         e.preventDefault();
-        
+
         var nome = $("input[name=nome]").val();
         var sobrenome = $("input[name=sobrenome]").val();
         var nome_completo = nome + " " + sobrenome;
@@ -460,7 +460,7 @@
          else {
              $("#div_erro_descricao").css('display', 'none');
          }
-         
+
 
         if(erro == 0){
             // alert("teste");
@@ -471,8 +471,8 @@
                     "fotos": imagens,
                     "email": email,
                     "fone": celular,
-                    "contato": contato, 
-                    "senha": senha, 
+                    "contato": contato,
+                    "senha": senha,
                     "cidade": cidade,
                     "password_confirmation": senha2,
                     "desc": desc,
@@ -485,7 +485,6 @@
                     //console.log(data);
                     $("#alerta_email2").css('display', 'none');
                     window.location = '/login';
-                   
                 },
                 error: function( data ){
                     $("#alerta_email2").css('display', 'block');
@@ -504,7 +503,7 @@
 
 </script>
 
- 
+
 
 <script>
 
@@ -531,5 +530,26 @@
 
 </script>
 
+
+@endsection
+@section('titulo_help')
+Página de Cadastro
+
+@endsection
+@section('help')
+Nessa página é realizado o cadastro de um novo usuário, este deve preencher os seguintes campos: <br>
+Nome: se refere ao primeiro nome do usuário. <br>
+Sobrenome: se refere ao sobrenome do usuário. <br>
+E-mail: E-mail valido, o qual será usado para verificação de conta. <br>
+Celular: número de celular. <br>
+Contato: contato, o qual será usado para conversar com outros usuários do sistema ao realizar uma adoção. <br>
+Senha: senha com mínimo de 8 caracteres. <br>
+Repetir senha: a mesma senha inserida anteriormente. <br>
+Estado: estado em que o usuário reside. <br>
+Cidade: cidade em que o usuário reside. <br>
+Foto: foto para ser usada no perfil do usuário. <br>
+Descrição pessoal: uma descrição para mostrar que o usuário é um bom candidato a adoção de um animal do sistema. <br>
+
+E clicando em cadastrar a nova conta será criada, se todos os campos obrigatórios forem preenchidos. <br>
 
 @endsection
