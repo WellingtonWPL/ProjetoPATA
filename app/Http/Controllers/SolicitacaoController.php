@@ -28,8 +28,9 @@ class SolicitacaoController extends Controller
         $solicitacao->cod_usuario_solicitante = $usuario->cod_usuario;
         $solicitacao->cod_postagem = $cod_postagem;
 
-        $postagem=PostagemDoAnimal::where('cod_usuario', $cod_postagem);
-        $usuario = Usuario::where('cod_usuario', $postagem->cod_usuario_postagem);
+        $postagem=PostagemDoAnimal::where('cod_postagem', $cod_postagem)->first();
+        // dd()
+        $usuario = Usuario::where('cod_usuario', $postagem->cod_usuario_postagem)->first();
 
         $solicitacao->save();
         $assunto = 'Solicitação de Adoção';
