@@ -38,7 +38,7 @@
 
                         <div id="texto-card">
 
-                            <p>o <b>Projeto PATA</b> tem o intuito de possibilitar a adoção detodos os animais que precisam de um lar, sem distinção de raça ou especie</p>
+                            <p>o <b>Projeto PATA</b> tem o intuito de possibilitar a adoção de todos os animais que precisam de um lar, sem distinção de raça ou especie</p>
                         </div>
                     </div>
                     <a href="/lista" class="btn btn-primary btn-lg rounded-pill mt-5">Conheça os animais cadastrados!</a>
