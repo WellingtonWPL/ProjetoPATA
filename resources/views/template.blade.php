@@ -241,7 +241,7 @@
     @endif
     </ul>
     @endguest
-    <a data-toggle="modal" data-target="#modalExemplo">
+    <a data-toggle="modal" data-target="#modalExemplo"  style="cursor: pointer;">
             <i class="material-icons" style="color:aliceblue">
                 help
             </i>
