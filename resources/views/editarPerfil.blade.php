@@ -1,5 +1,5 @@
 @extends('template')
-
+@section("titulo", "Editar Perfil")
 @section('conteudo')
 
 
@@ -41,6 +41,7 @@
     <div class="form-group">
         Nome
     <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value=" {{$usuario->nome}}" required autocomplete="name" autofocus
+    maxlength="100"
         >
         <div class="col-md-6">
             @if ($errors->has('nome'))
@@ -52,7 +53,10 @@
     </div>
     <div class="form-group">
         E-mail
-        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $usuario->email}}" required autocomplete="email" id="email" placeholder="email" required>
+        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $usuario->email}}" required autocomplete="email" id="email" placeholder="email" required
+        maxlength="100">
+
+
         <div class="col-md-6">
             @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">
@@ -63,41 +67,59 @@
     </div>
      Estado
             <select class="estado form-control">
-                <option value="estado" selected>Selecione
+                <option value="estado" >Selecione
                 </option>
                 @foreach ($estados as $estado)
-                <option value="{{ $estado->cod_estado }}">
+                <option value="{{ $estado->cod_estado }}"
+                    @if ($estado->cod_estado == $cod_estado)
+
+                        selected
+                    @endif
+                    >
                     {{$estado->sigla_estado}}</option>
                 @endforeach
             </select>
             {{-- {{dd($cidades)}} --}}
             <br>
             Cidade
+                    {{-- @php
+                    dd($usuario);
+                        if(($estado->cod_cidade == $usuario->cod_cidade))
+                        {
+                            dd('dhsau');
+                        }
+                    @endphp --}}
             <select name="cidade" class="form-control">
 
-                <option selected>Selecione</option>
+                <option >Selecione</option>
                 @foreach ($cidades as $cidade)
                 <option
                     class="cidade {{$cidade->cod_estado}}"
-                    value="{{$cidade->cod_cidade}}" >
+                    value="{{$cidade->cod_cidade}}"
+                    @if ($cidade->cod_cidade == $usuario->cod_cidade)
+                        selected
+                    @endif
+                    >
                     {{$cidade->nome_cidade}}</option>
                 @endforeach
                 {{-- <option>Ponta Grossa</option> --}}
             </select>
 
     {{-- </div> --}}
-    <div class="form-group">
+    {{-- <div class="form-group">
         Foto
         <input type="file" class="form-control-file">
 
-    </div>
+    </div> --}}
 
     @php
         //  dd($usuario->descricao);
     @endphp
     <div class="form-group">
         Descrição pessoal
-        <textarea name="desc" class="form-control"  rows="5" value = " ">{{$usuario->descricao}}</textarea>
+        <textarea name="desc" class="form-control"  rows="5" value = " "
+        maxlength="65535"
+        >{{$usuario->descricao}}</textarea>
 
     </div>
 
@@ -110,7 +132,7 @@
 <script>
 
         $(document).ready(function(){
-                            $('.cidade').hide()
+                            // $('.cidade').hide()
                             // alert('ta ok')
                             $('.estado').focusout(function(){
                                     let id_estado = $(this).val()
@@ -137,3 +159,24 @@
 
 
 @endsection
+
+
+@section('titulo_help')
+Página de edição do perfil
+
+@endsection
+@section('help')
+Página de edição da informações do perfil. Mostra todos os campos que o usuário pode editar. São eles:   <br>
+Nome  <br>
+E-mail  <br>
+Estado  <br>
+Cidade  <br>
+Foto  <br>
+Descrição   <br>
+
+
+
+
+@endsection
+
+

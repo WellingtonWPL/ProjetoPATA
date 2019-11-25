@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EspecieSeeder::class);
         $this->call(UsuarioSeeder::class);
         $this->call(PostagemSeeder::class);
-
+        $this->call(MotivoDenunciaSeeder::class);
 
 
 

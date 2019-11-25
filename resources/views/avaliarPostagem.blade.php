@@ -1,22 +1,28 @@
 @extends('template')
-
+@section("titulo", "Avaliação")
 @section('conteudo')
-<!-- alternate codepen version https://codepen.io/mad-d/pen/aJMPWr?editors=0010 -->
-<h1>Avaliação da postagem #{{$cod_postagem}}</h1>
-<div class="stars" data-rating="1">
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
-    <span class="star">&nbsp;</span>
+
+<div class="card">
+    <div class="card-body">
+
+        <!-- alternate codepen version https://codepen.io/mad-d/pen/aJMPWr?editors=0010 -->
+        <h1>Avaliação da postagem #{{$cod_postagem}}</h1>
+        <div class="stars" data-rating="1">
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+            <span class="star">&nbsp;</span>
+        </div>
+
+
+        <form method="POST" action="{{url('/postagem/'.$cod_postagem.'/avaliar_'.$avaliado)}} ">
+            @csrf
+            <input type="hidden" value="0" class="nota" name="nota">
+            <button type="submit" class="btn btn-primary">Avaliar</button>
+        </form>
+    </div>
 </div>
-
-
-<form method="POST" action="{{url('/postagem/'.$cod_postagem.'/avaliar')}} ">
-    @csrf
-    <input type="hidden" value="0" class="nota" name="nota">
-    <button type="submit" class="btn btn-primary">Avaliar</button>
-</form>
 
 <script >
     //DOMContenteLoaded é uma evento adicionado depos do html ser complempletamente lido
@@ -94,4 +100,13 @@
             content: counter(rateme) '/5';
         }*/
     </style>
+@endsection
+
+@section('titulo_help')
+Página de avaliação de uma postagem
+
+@endsection
+@section('help')
+Nessa página o usuário avalia uma adoção que já foi completada. Para tal ele deve marcar a estrela que confere a nota (de um total de 5 estrelas) do outro usuário no processo de adoção e submeter sua nota.
+
 @endsection

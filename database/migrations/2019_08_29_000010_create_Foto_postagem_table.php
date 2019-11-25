@@ -22,7 +22,7 @@ class CreateFotoPostagemTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedInteger('cod_foto_postagem');
+            $table->increments('cod_foto_postagem');
             $table->string('link_foto_postagem', 100);
             $table->unsignedInteger('cod_postagem');
 
@@ -30,7 +30,7 @@ class CreateFotoPostagemTable extends Migration
 
 
             $table->foreign('cod_postagem')
-                ->references('cod_usuario_adotante')->on('Postagem_do_animal')
+                ->references('cod_postagem')->on('Postagem_do_animal')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

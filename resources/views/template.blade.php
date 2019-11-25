@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -13,19 +13,19 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" type="text/css"
-    href="/css/teste.css">
+    href="{{ asset('/css/teste.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap.css">
+    href="{{ asset('/css/bootstrap.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap.min.css">
+    href="{{ asset('/css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-grid.css">
+    href="{{ asset('/css/bootstrap-grid.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-grid.min.css">
+    href="{{ asset('/css/bootstrap-grid.min.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-reboot.css">
+    href="{{ asset('/css/bootstrap-reboot.css') }}">
   <link rel="stylesheet" type="text/css"
-    href="/css/bootstrap-reboot.min.css">
+    href="{{ asset('/css/bootstrap-reboot.min.css') }}">
 
   <!-- Custom fonts for this template -->
   <link
@@ -34,12 +34,14 @@
   <link
     href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Alegreya&display=swap" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="/css/one-page-wonder.css" rel="stylesheet">
+  <link href="{{ asset('/css/one-page-wonder.css') }}" rel="stylesheet">
 
   <!-- Function JS -->
-  <script type="text/javascript" src="/js/functions.js">
+  <script type="text/javascript" src="{{ asset('/js/functions.js') }}">
   </script>
   @yield('css')
 
@@ -48,40 +50,125 @@
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 
-  <style>
-    ul li {
-      list-style: none;
-    }
 
-    ul li a {
-      color: aliceblue;
-    }
-  </style>
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('icone/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('icone/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('icone/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('icone/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('icone/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('icone/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('icone/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('icone/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('icone/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{asset('icone/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icone/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('icone/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('icone/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('icone/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+
+
+        i {
+           font-size: 24px !important;
+           vertical-align: middle;
+       }
+
+       ul li {
+         list-style: none;
+       }
+
+
+       ul li a {
+         color: aliceblue;
+       }
+
+       #titulo{
+         font-family: 'Alegreya', serif;
+         color: white;
+         margin-left:10%;
+
+       }
+
+       #background{
+            background-image: url({{ asset("/img/patinhas.png")}});
+           background-size: 200px;
+       }
+
+       h1{
+           font-size: 30px;
+
+       }
+
+       #logo-proj{
+           /* height: 100%; */
+            width: 150px;
+       }
+
+     </style>
 </head>
+@php
+  use App\Http\Controllers\PerfilController;
+  if (Auth::check()){
+    $notificaçoes = PerfilController::getSolicitacoes(Auth::user()->cod_usuario);
+  }
+  else{
+    $notificaçoes = 0;
+  }
 
-<body>
+
+@endphp
+
+@if ($notificaçoes >= 1)
+    <style>
+      #perfil{
+        color: tomato;
+      }
+    </style>
+
+@endif
+
+
+<body id="background" >
+
   <script>
-    window.addEventListener('load', function() {
-        changeBG('#eeeeee');
-    });
+    // window.addEventListener('load', function() {
+    //     changeBG('#eeeeee');
+    // });
   </script>
   <!-- Navigation -->
   <nav
-    class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    id="navegador" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand"
-        href="{{url('/lista')}}">Pata</a>
-      <button class="navbar-toggler" data-toggle="collapse"
+
+      <a class="navbar-item{{--brand--}}" href="{{url('/lista')}}" >
+            <img style="max-width:30px; {{--height:auto;--}} " src="{{asset('/img/logo.png')}}" alt="pata">
+
+      </a>
+
+      <div id="titulo" name="titulo" class="title m-1"><h1>@yield("titulo")</h1></div>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+      style="float:left"
+      >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      {{-- <a class="navbar-brand" href="{{url('/lista')}}"><img style="max-width: 30%; height: auto;" src="{{asset('/img/teste.png')}}" alt="pata"></a> --}}
+      {{-- <button class="navbar-toggler" data-toggle="collapse"
         data-target="#navbarResponsive"
         aria-controls="navbarResponsive"
         aria-expanded="false"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <ul class="navbar-nav ml-auto">
+      </button> --}}
+      <ul class="navbar-nav">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
         <li class="nav-item">
           <a class="nav-link"
-            href="{{url('/lista')}}">Lista</a>
+            href="{{url('/lista')}}">Lista <i
+            class="material-icons">pets</i></a>
 
         </li>
 
@@ -89,25 +176,32 @@
         {{-- </ul> --}}
 
         @guest
+
+
+
         <div class="collapse navbar-collapse"
           id="navbarResponsive">
           {{-- <ul class="navbar-nav ml-auto"> --}}
           <li class="nav-item">
             <a class="nav-link"
-              href="{{url('register')}}">Cadastrar-se</a>
+              href="{{url('register')}}">Cadastrar-se <i
+              class="material-icons">assignment</i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link"
-              href="{{url('login')}}">Entrar</a>
+              href="{{url('login')}}">Entrar <i
+              class="material-icons">input</i></a>
           </li>
       </ul>
     </div>
     @else
     {{-- <ul class="navbar-nav ml-auto"> --}}
     <li class="nav-item">
-      <a class="nav-link"
-        href="{{url('perfil/'.Auth::user()->cod_usuario)}}">Perfil</a>
+      <a class="nav-link" id="perfil"
+        href="{{url('perfil/'.Auth::user()->cod_usuario)}}">Perfil <i
+        class="material-icons">face</i></a>
     </li>
+
 
     <li class="nav-item dropdown">
 
@@ -118,26 +212,64 @@
         {{ Auth::user()->nome }} <span class="caret"></span>
       </a>
 
+
+
       <div class="dropdown-menu dropdown-menu-right"
         aria-labelledby="navbarDropdown">
         <a class="dropdown-item"
-          href="{{ route('logout') }}"
+          href="{{ url('sair') }}"
           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-          {{ __('Logout') }}
+          document.getElementById('logout-form').submit();">
+          {{ __('Sair') }}
         </a>
 
         <form id="logout-form"
-          action="{{ route('logout') }}" method="POST"
+          action="{{ url('sair') }}" method="POST"
           style="display: none;">
           @csrf
         </form>
       </div>
     </li>
+
+    @if (App\Http\Controllers\AdminController::ehAdmin())
+        <li class="nav-item">
+            <a class="nav-link" id=""
+            href="{{url('admin/')}}">
+                Administrativo
+            </a>
+        </li>
+    @endif
     </ul>
     @endguest
+    <a data-toggle="modal" data-target="#modalExemplo">
+            <i class="material-icons" style="color:aliceblue">
+                help
+            </i>
+        </a>
     </div>
   </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                  @yield('titulo_help')
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              @yield("help")
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
   {{-- CONTEUDO --}}
@@ -148,21 +280,31 @@
 
   <!-- Footer -->
   <footer class="py-3 bg-black fixed-bottom">
-    <fieldset id="cores" style="margin-top: -10px">
+    <fieldset id="cores" style="margin-top: -10px;">
+      <h6 id="title_cor">Cor do Fundo:</h6>
       <button type="button" id="botao"
-        onclick="changeBG('#B39DDB')"
+        onclick="changeBackGround('lightblue')"
+        {{-- onclick="changeBG('#B39DDB')"  --}}
         class="btn btn-primary"></button>
       <button type="button" id="botao"
-        onclick="changeBG('#E6EE9C')"
+        {{-- onclick="changeBG('#E6EE9C')" --}}
+        onclick="changeBackGround('lightgreen')"
         class="btn btn-success"></button>
       <button type="button" id="botao"
-        onclick="changeBG('#ef9a9a')"
-        class="btn btn-danger"></button>
-      <button type="button" id="botao"
-        onclick="changeBG('#FFF59D')"
+        {{-- onclick="changeBG('#FFF59D')" --}}
+        onclick="changeBackGround('#FFF59D')"
         class="btn btn-warning"></button>
       <button type="button" id="botao"
-        onclick="changeBG('#eeeeee')"
+        {{-- onclick="changeBG('#ef9a9a')" --}}
+        onclick="changeBackGround('#ef9a9a')"
+        class="btn btn-danger"></button>
+      <button type="button" id="botao"
+        {{-- onclick="changeBG('#E6EE9C')" --}}
+        onclick="changeBackGround('white')"
+        class="btn" style="background-color: white;"></button>
+      <button type="button" id="botao"
+        {{-- onclick="changeBG('#eeeeee')" --}}
+        onclick="changeBackGround('DimGrey')"
         class="btn btn-secondary"></button>
     </fieldset>
     <div class="container">
@@ -176,6 +318,22 @@
   <!-- Bootstrap core JavaScript -->
   <script
     src="/vendor/bootstrap/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+  $(document).ready(function(){
+        var cor = localStorage.getItem('cor');
+        if(cor === null){
+          cor = 'white'
+        }
+        //alert(cor);
+        document.body.style.backgroundColor = cor;
+  });
+
+  function changeBackGround(cor){
+    document.body.style.backgroundColor = cor;
+    localStorage.setItem('cor', cor);
+  }
+
   </script>
 
 </body>

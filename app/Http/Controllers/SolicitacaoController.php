@@ -7,11 +7,17 @@ use App\Solicitacao;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use vendor\autoload;
+
 
 class SolicitacaoController extends Controller
 {
     public function solicitar($cod_postagem){
-
+    
+        //  dd($_POST);
 
 
         // dd($cod_postagem);
@@ -23,9 +29,24 @@ class SolicitacaoController extends Controller
         $solicitacao->cod_postagem = $cod_postagem;
 
         $solicitacao->save();
+        $assunto = 'Solicitação de Adoção';
+
+        $mensagem = '<div style="text-align:center;" >
+          <div class="container">
+            <div class="card"  style="position: center; margin:auto;">
+                <div class="card-body"  >
+                    <h1 class="masthead-heading mb-0">Projeto PATA</h1>
+                    <div id="texto-card">
+                        <p><b>Olá,</b> parece que alguém sem interessou na sua postagem, clique no link abaixo e veja: </p>
+                        <a href="localhost/home" class="btn btn-primary btn-lg rounded-pill mt-5">Clique aqui</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>';
 
 
-
+        $this->enviaEmail($usuario->email, $assunto, $mensagem);
 
         return view('sucesso', ['msg'=> 'Solicitação realizada com sucesso :)']);
     }
@@ -36,15 +57,14 @@ class SolicitacaoController extends Controller
         ->join('Porte', 'Postagem_do_animal.cod_porte', '=', 'Porte.cod_porte')
         ->join('Usuario', 'Postagem_do_animal.cod_usuario_postagem', '=', 'Usuario.cod_usuario')
         ->first();
-
+        $foto = \DB::table('Foto_postagem')->where('cod_postagem', $cod_postagem)->first();
 
         return view('solicitacaoPostagem', ['cod_postagem'=> $cod_postagem,
-        'postagem'=> $postagem]
+        'postagem'=> $postagem , 'foto'=>$foto]
         );
     }
 
     public function mostrarPedidos($cod_usuario){
-
         #solicitações para o usuario logado
         $solicitacoes = \DB::table('Solicitacao')
         ->join('Postagem_do_animal', 'Postagem_do_animal.cod_postagem', '=', 'Solicitacao.cod_postagem')
@@ -65,7 +85,10 @@ class SolicitacaoController extends Controller
         ->get();
         // dd($suasSolicitacoes);
 
-
+        // $doacoes= \DB::table('Postagem_do_animal')
+        // ->join('Usuario', 'Usuario.cod_usuario', '=', 'Postagem_do_animal.cod_usuario_postagem')
+        // ->where('cod_usuario_postagem', $usuarioLogado->cod_usuario)
+        // ->get();
 
         return view('visualizaPedidos',compact('cod_usuario', 'solicitacoes', 'suasSolicitacoes'));
 
@@ -105,13 +128,66 @@ class SolicitacaoController extends Controller
 
     }
 
-    public function avaliar($cod_postagem, Request $r){
+    public function avaliarDoador($cod_postagem, Request $r){
         // dd($r->nota);
         $usuario= Auth::user();
         \DB::table('Postagem_do_animal')
         ->where('cod_postagem', $cod_postagem)
-        ->update(['avaliacao'=> $r->nota]);
+        ->update(['avaliacao_doador'=> $r->nota]);
         return redirect($usuario->cod_usuario.'/solicitacoes');
+    }
+
+    public function avaliarAdotante($cod_postagem, Request $r){
+        // dd($r->nota);
+        $usuario= Auth::user();
+        \DB::table('Postagem_do_animal')
+        ->where('cod_postagem', $cod_postagem)
+        ->update(['avaliacao_adotante'=> $r->nota]);
+        return redirect($usuario->cod_usuario.'/solicitacoes');
+    }
+
+    public function enviaEmail($email_usuario, $assunto, $mensagem){
+        //require 'vendor/autoload.php';
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail = new PHPMailer();
+            $mail->IsSMTP();  // telling the class to use SMTP
+            $mail->SMTPDebug = false;
+            $mail->Mailer = "smtp";
+            $mail->CharSet = "UTF-8";
+            $mail->Encoding = "base64";
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = gethostbyname('smtp.gmail.com');
+            $mail->Port = 465;                                    // Send using SMTP
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'projeto.pata2019@gmail.com';                     // SMTP username
+            $mail->Password   = 'laravel58';       
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );                        // SMTP password
+            //$Mail->Priority = 1;
+
+        
+            //Recipients
+            $mail->setFrom('projeto.pata2019@gmail.com', 'Projeto PATA');
+            $mail->addAddress($email_usuario);     // Add a recipient
+            
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $assunto;
+            $mail->Body    = $mensagem;
+                   
+            $mail->send();
+            //echo 'Message has been sent';
+        } catch (Exception $e) {
+            //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
 

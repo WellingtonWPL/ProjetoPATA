@@ -23,7 +23,7 @@ class CreateMotivosDenunciaTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('cod_motivo_denuncia');
-            $table->text('descricao');
+            $table->text('descricao_denuncia');
 
             $table->unique(["cod_motivo_denuncia"], 'cod_motivo_denuncia_UNIQUE');
         });

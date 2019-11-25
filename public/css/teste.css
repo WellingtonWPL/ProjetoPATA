@@ -27,14 +27,17 @@ fieldset {
   }
   
   /* Fieldset Cores */
-  #cores{
-    float: right;
-    padding: 5px;
-    padding-left: 5px;
-    width: 155px;
+  #title_cor{
+    color: white;
   }
 
-  #botao{
-    height:25px;
-    width:25px;
+  #cores{
+    float: right;
+    padding: 2px;
+    padding-left: 5px;
+    width: 200px;
+  }
+
+  #botao{ 
+    height:20px;
   }
