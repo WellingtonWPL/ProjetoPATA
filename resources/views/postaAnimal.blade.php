@@ -143,15 +143,23 @@ $cod_usuario = $url[1];
                     </div>
 
                 </div>
-
-                {{-- DATA NASCIMENTO --}}
-                <div class="form-group">
-                    <b>Data de Nascimento</b>  <br>
-                    <input class="form-control" type="date" name="dataNascimento" value="dataNascimento" id="dataN" required>
-                    <div class="col-sm-12 alert alert-danger" id="div_erro_dataN" style="display: none; margin-top: 20px;">
-                            Informe a data de nascimento do animal.
+                <div class="row form-group">
+                    <div class="form-group col-md-6">
+                        <b>Data de Nascimento</b>  <br>
+                        <input class="form-control" type="date" name="dataNascimento" value="dataNascimento" id="dataN" required>
+                        <div class="col-sm-12 alert alert-danger" id="div_erro_dataN" style="display: none; margin-top: 20px;">
+                                Informe a data de nascimento do animal.
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <br>
+                        <div class="form-group">
+                                <input type="checkbox" id="data_n" name="data_n" value="data_n">Nascimento indefinido<br>
+                        </div>
                     </div>
                 </div>
+
+
 
                 {{-- DESCRIÇÃO --}}
                 <div class="form-group">
@@ -224,6 +232,12 @@ $cod_usuario = $url[1];
 
 
 <script type="text/javascript">
+
+    document.getElementById('data_n').onchange = function() {
+        document.getElementById('dataN').disabled = this.checked;
+    }
+
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -293,7 +307,11 @@ $cod_usuario = $url[1];
         e.preventDefault();
         var erro = 0;
         var nome = $("input[name=nome]").val();
-        var dataN = $("input[name=dataNascimento]").val();
+        if(document.getElementById('data_n').checked){
+            var dataN = null;
+        }else{
+            var dataN = $("input[name=dataNascimento]").val();
+        }
         var sexo = document.getElementsByName('sexo');
         for(i = 0; i < sexo.length; i++){
             if(sexo[i].checked){

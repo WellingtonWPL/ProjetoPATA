@@ -14,6 +14,7 @@
 // redirecionamento para a home
 
 use App\Http\Controllers\DenunciaController;
+use App\Http\Controllers\SolicitacaoController;
 
 Route::get('/', function () {
     return redirect('home/');
@@ -58,7 +59,7 @@ Route::get('/postagem/{cod_postagem}/avaliar_adotante', function($cod_postagem){
 Route::post('/postagem/{cod_postagem}/avaliar_adotante', 'SolicitacaoController@avaliarAdotante');
 
 
-
+Route::get('/postagem/{cod_postagem}/excluir', 'PostagemController@excluirPostagem');
 
 Route::get('lista', 'ListaController@mostrar');
 Route::post('lista/{pagina}', 'ListaController@pesquisa');

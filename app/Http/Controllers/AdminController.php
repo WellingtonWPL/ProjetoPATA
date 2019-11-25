@@ -49,7 +49,7 @@ class AdminController extends Controller
             $i++;
             // dd(FotoPostagem::where('cod_postagem', $denuncia->cod_postagem_)->first());
         }
-        // dd($fotoPI);
+        // dd($fotoPI); 
 
         return view('vizualizaDenunciaAdmin', compact('denunciasDP', 'denunciasPI', 'fotoDP', "fotoPI"));
 

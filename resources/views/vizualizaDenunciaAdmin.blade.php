@@ -6,9 +6,9 @@
 @section('conteudo')
 
 @php
-// dd($foto);
+// // dd($foto);
 
-// dd($fotoDP);
+//  dd($fotoDP);
 $i=0;$j=0;
 @endphp
 
@@ -21,13 +21,13 @@ $i=0;$j=0;
           aria-controls="collapseOne">
           Denucia Pendente
         </button>
-      </h5>
-    </div>
+    </h5>
+</div>
+{{-- {{dd('dsa')}} --}}
 
     <div id="collapseOne" class="collapse show"
-      aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-
+    aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body">
         @foreach ($denunciasDP as $denuncia)
         @if ($denuncia->finalizada=="nao")
 
@@ -76,6 +76,7 @@ $i=0;$j=0;
 
             <div>
               @if ($fotoDP[$i]==NULL)
+
               <img id="foto-postagem"
                 src="{{url('img/animal_sem_foto.png')}}"
                 class="img-fluid rounded">
@@ -194,7 +195,7 @@ $i=0;$j=0;
                       class="img-fluid rounded">
                     @else
                     <img id="foto-postagem"
-                      src="{{url($fotoPI[$i]->link_foto_postagem)}}"
+                      src="{{url($fotoPI[$j]->link_foto_postagem)}}"
                       class="img-fluid rounded">
                     @endif
                   </div>

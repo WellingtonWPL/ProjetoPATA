@@ -16,7 +16,7 @@ use vendor\autoload;
 class SolicitacaoController extends Controller
 {
     public function solicitar($cod_postagem){
-    
+
         //  dd($_POST);
 
 
@@ -27,6 +27,10 @@ class SolicitacaoController extends Controller
 
         $solicitacao->cod_usuario_solicitante = $usuario->cod_usuario;
         $solicitacao->cod_postagem = $cod_postagem;
+
+        $postagem=PostagemDoAnimal::where('cod_postagem', $cod_postagem)->first();
+        // dd()
+        $usuario = Usuario::where('cod_usuario', $postagem->cod_usuario_postagem)->first();
 
         $solicitacao->save();
         $assunto = 'Solicitação de Adoção';
@@ -163,7 +167,7 @@ class SolicitacaoController extends Controller
             $mail->Port = 465;                                    // Send using SMTP
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
             $mail->Username   = 'projeto.pata2019@gmail.com';                     // SMTP username
-            $mail->Password   = 'laravel58';       
+            $mail->Password   = 'laravel58';
             $mail->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
@@ -173,16 +177,16 @@ class SolicitacaoController extends Controller
             );                        // SMTP password
             //$Mail->Priority = 1;
 
-        
+
             //Recipients
             $mail->setFrom('projeto.pata2019@gmail.com', 'Projeto PATA');
             $mail->addAddress($email_usuario);     // Add a recipient
-            
+
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $assunto;
             $mail->Body    = $mensagem;
-                   
+
             $mail->send();
             //echo 'Message has been sent';
         } catch (Exception $e) {

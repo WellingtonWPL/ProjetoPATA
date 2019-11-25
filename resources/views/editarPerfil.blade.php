@@ -115,6 +115,7 @@
     @php
         //  dd($usuario->descricao);
     @endphp
+    <br>
     <div class="form-group">
         Descrição pessoal
         <textarea name="desc" class="form-control"  rows="5" value = " "
