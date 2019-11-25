@@ -286,9 +286,10 @@
     <br>
 
     @if(count($postagens)==0)
-    <div style="text-align: center">
-
-        <b> Nenhuma postagem encontrada... </b>
+    <div style="text-align: center" class="card">
+        <div class="card-body">
+            <b> Nenhuma postagem encontrada... </b>
+        </div>
     </div>
 
     @else

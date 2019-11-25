@@ -1,6 +1,7 @@
 @php
     use \App\Http\Controllers\ListaController;
     use \App\Http\Controllers\PerfilController;
+    use \App\Http\Controllers\PostagemController;
 
     // declaração usada para ver se o animal pode ser adotado
     $adotado= False;
@@ -81,7 +82,14 @@
                 @endif
 
                 <b>Nome:</b>  {{$postagem->nome_animal}} <br>
-                <b>Sexo:</b>  {{$postagem->sexo}} <br>
+                <b>Sexo:</b> 
+                @if ($postagem->sexo == "macho")
+                    Macho<br>
+                @elseif ($postagem->sexo == "femea")
+                    Fêmea<br>
+                @else
+                    Indefinido<br>
+                @endif
 
                 <b>Idade:</b>
                 @php
@@ -97,6 +105,9 @@
                     echo (int) $idade." anos<br>";
                 }
             }
+        else{
+            echo 'Indefinido<br>';
+        }
             @endphp
         <b>Porte:</b> {{$postagem->tipo_porte}} <br>
         <b>Dono da postagem: </b> <a href="{{url('/perfil/'.$postagem->cod_usuario_postagem)}}">{{$postagem->nome}}</a><br>
@@ -179,7 +190,10 @@
     <div class="container-fluid">
         <h2>Descrição</h2>
         <p>
-            {{$postagem->descricao}}
+            @php
+                $descricao = PostagemController::getDescricaoAnimal($postagem->cod_postagem);   
+            @endphp
+            {{$descricao}}
 
         </p>
     </div>

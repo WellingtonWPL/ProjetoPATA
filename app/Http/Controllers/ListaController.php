@@ -68,11 +68,11 @@ class ListaController extends Controller
             ->get();
         // dd($coiso);]
         // dd($numPaginas);
-        $estados = Estado::all()->sortBy('sigla_estado');
+        $estados = Estado::all()->sortBy('nome_estado');
         $cidades = Cidade::all()->sortBy('nome_cidade');
         // dd($cidades);
 
-        $especies = Especie::orderBy('cod_especie')->get();
+        $especies = Especie::orderBy('nome_especie')->get();
         // dd($postagens);
         return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas'));
     }
@@ -271,10 +271,10 @@ class ListaController extends Controller
         $query = $aux;
 
 
-        $estados = Estado::all()->sortBy('sigla_estado');
+        $estados = Estado::all()->sortBy('nome_estado');
         $cidades = Cidade::all()->sortBy('nome_cidade');
         //  dd($cidades);
-        $especies = Especie::orderBy('cod_especie')->get();
+        $especies = Especie::orderBy('nome_especie')->get();
         // dd('das');
 
         $pesquisa = true;
@@ -464,10 +464,10 @@ class ListaController extends Controller
 
 
 
-        $estados = Estado::all()->sortBy('sigla_estado');
+        $estados = Estado::all()->sortBy('nome_estado');
         $cidades = Cidade::all()->sortBy('nome_cidade');
         //  dd($cidades);
-        $especies = Especie::orderBy('cod_especie')->get();
+        $especies = Especie::orderBy('nome_especie')->get();
         // dd('das');
 
         $pesquisa = true;
@@ -496,7 +496,7 @@ class ListaController extends Controller
 
 
         $query = $r->Query;
-        $estados = Estado::all()->sortBy('sigla_estado');
+        $estados = Estado::all()->sortBy('nome_estado');
         $cidades = Cidade::all()->sortBy('nome_cidade');
         //  dd($cidades);
         $especies = Especie::orderBy('cod_especie')->get();

@@ -116,7 +116,7 @@ use \app\Http\Controllers\ListaController;
                         @if(isset($_GET['estado'] ) && $_GET['estado']==$estado->cod_estado)
                             selected
                         @endif>
-                            {{$estado->sigla_estado}}
+                            {{$estado->nome_estado}} - {{$estado->sigla_estado}}
                     </option>
                     @endforeach
                 </select>
@@ -196,6 +196,40 @@ use \app\Http\Controllers\ListaController;
                         for="exampleCheck1">mais 3 anos</label>
                 </div>
             </div>
+            {{-- <div class="col">
+                    Sexo
+                    <div class="form-check">
+                        <input type="checkbox"
+                            class="form-check-input" name="macho"
+                            value="macho"
+                            @if (isset($_GET['macho']))
+                                checked
+                            @endif
+                            >
+                        <label class="form-check-label"
+                            for="exampleCheck1">Macho</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox"
+                            class="form-check-input" name="femea"
+                            value="femea"
+                            @if (isset($_GET['femea']))
+                                checked
+                            @endif>
+                        <label class="form-check-label"
+                            for="exampleCheck1">Fêmea</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox"
+                            class="form-check-input" name="indefinido"
+                            value="indefinido"
+                            @if (isset($_GET['Indefinido']))
+                            checked
+                        @endif>
+                        <label class="form-check-label"
+                            for="exampleCheck1">Indefinido</label>
+                    </div>
+                </div> --}}
 
             <div class="col">
                 Porte

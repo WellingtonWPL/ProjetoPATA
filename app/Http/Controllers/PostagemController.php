@@ -57,6 +57,15 @@ class PostagemController extends Controller
 		return view('postagemAnimal', ['postagem'=>$postagem, 'foto'=> $foto]);
 	}
 
+
+	public static function getDescricaoAnimal($cod_postagem){
+		$postagem = new PostagemDoAnimal();
+		$aux = $postagem::where('cod_postagem', $cod_postagem)->first();
+		
+		return $aux->descricao;
+
+
+	}
 	public function inserirPostagem(Request $data){
 
 		$usuario = Auth::user();

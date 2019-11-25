@@ -198,9 +198,9 @@ class PerfilController extends Controller
         $cidades = Cidade::orderBy('cod_cidade')->get();
         $estados = Estado::orderBy('sigla_estado')->get();
 
-        $cidade=Cidade::where('cod_estado', $usuario->cod_cidade)->first();
+        $cidade=Cidade::where('cod_cidade', $usuario->cod_cidade)->first();
+        // dd($cidade);
         $cod_estado = $cidade->cod_estado;
-        // dd($cod_estado);
         return view('editarPerfil', compact('usuario', 'estados', 'cidades', 'cod_estado'));
 
     }

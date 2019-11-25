@@ -71,7 +71,7 @@ class DenunciaController extends Controller
             //dd($usuario->email);
             $this->enviaEmail($usuario->email, $assunto, $mensagem);
         }
-        return view('sucesso', ['msg'=>"Denuncia realizada com sucesso"]);
+        return view('sucesso', ['msg'=>"Denúncia realizada com sucesso"]);
 
 
     }

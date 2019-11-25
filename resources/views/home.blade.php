@@ -9,6 +9,17 @@
       width: 50%;
       float: right;
       color: aliceblue;
+      text-shadow: 
+        -1px -1px 0px #000,
+         0px -1px 0px #000,
+         1px -1px 0px #000,
+        -1px  0px 0px #000,
+         1px  0px 0px #000,
+        -1px  1px 0px #000,
+         0px  1px 0px #000,
+         1px  1px 0px #000;
+      /* border-radius: 10%;  */
+      /* background-color: green; */
   }
   .card-body{
     background-image: url('img/cachorro_home.jpg');
@@ -38,7 +49,7 @@
 
                         <div id="texto-card">
 
-                            <p>o <b>Projeto PATA</b> tem o intuito de possibilitar a adoção de todos os animais que precisam de um lar, sem distinção de raça ou especie</p>
+                            <p>O <b>Projeto PATA</b> tem o intuito de possibilitar a adoção de todos os animais que precisam de um lar, sem distinção de raça ou espécie.</p>
                         </div>
                     </div>
                     <a href="/lista" class="btn btn-primary btn-lg rounded-pill mt-5">Conheça os animais cadastrados!</a>
