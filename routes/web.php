@@ -64,7 +64,7 @@ Route::get('/postagem/{cod_postagem}/excluir', 'PostagemController@excluirPostag
 Route::get('lista', 'ListaController@mostrar');
 Route::post('lista/{pagina}', 'ListaController@pesquisa');
 Route::get('lista/{pagina}', 'ListaController@mostrarPagina');
-Route::get('lista_filtro/{pagina}', "ListaController@listaFiltro");
+Route::get('lista_filtro/{pagina}', "ListaController@listaFiltro")->name('listaFiltro');
 // Route::post('lista', 'ListaController@pesquisa');
 
 

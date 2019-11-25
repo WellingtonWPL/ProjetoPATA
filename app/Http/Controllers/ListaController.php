@@ -46,9 +46,9 @@ class ListaController extends Controller
 
     public function mostrarPagina($pagina)
     {
-        // $postagens = PostagemDoAnimal::all();
-        // // $porte = Porte::all();
-        $numPostagens = \DB::table('Postagem_do_animal')
+        $postagens = PostagemDoAnimal::all();
+        // $porte = Porte::all();
+        $numPostagens = \DB::table('Postagem_do_animal')->where('listagem_postagem','sim')
             ->count();
 
         $numPaginas = intval($numPostagens / 10) + 1;
@@ -74,7 +74,16 @@ class ListaController extends Controller
 
         $especies = Especie::orderBy('nome_especie')->get();
         // dd($postagens);
-        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas'));
+        $primeira = 1;
+        $prox = $pagina+1;
+        $ant = $pagina-1;
+        $ultima = $numPaginas;
+        // $postagens = \DB::select($query);
+        
+
+        // 'prox','primeira','ant','ultima'
+
+        return view('listaAnimais', compact('prox','primeira','ant','ultima',   'postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas'));
     }
 
     public static function calcIdade($data)
@@ -100,189 +109,191 @@ class ListaController extends Controller
      posteriormente pude ver que ela por ser mais bem feita usando models ou o \DB
      mas por enquando esta funcionando
     */
-    public function pesquisa(Request $r, $pagina)
-    {
+    // public function pesquisa(Request $r, $pagina)
+    // {
 
-        $numPostagens = \DB::table('Postagem_do_animal')
-            ->count();
+    //     $numPostagens = \DB::table('Postagem_do_animal')
+    //         ->count();
 
-        $numPaginas = intval($numPostagens / 10) + 1;
+    //     $numPaginas = intval($numPostagens / 10) + 1;
 
-        if ($pagina > $numPaginas) {
-            return redirect("lista/" . $numPaginas);
-        }
-        if ($pagina < 1) {
-            return redirect("lista/1");
-        }
-
-
-        // dd(($_POST));
+    //     if ($pagina > $numPaginas) {
+    //         return redirect("lista/" . $numPaginas);
+    //     }
+    //     if ($pagina < 1) {
+    //         return redirect("lista/1");
+    //     }
 
 
-        $query = 'SELECT * FROM Postagem_do_animal
-                INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte
-                INNER JOIN Usuario on Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
-                inner join Cidade on Cidade.cod_cidade = Usuario.cod_cidade
-                ';
-
-        //ver se tem algo setado para colocar o where
-        if (
-            $_POST['pesquisa'] != ''          ||
-            $_POST['cidade'] != "Selecione"   ||
-            $_POST['especie'] != "Selecione"  ||
-            isset($_POST['pequeno']) ||
-            isset($_POST['medio']) ||
-            isset($_POST['grande']) ||
-            isset($_POST['0-1']) ||
-            isset($_POST['1-3']) ||
-            isset($_POST['3+'])
-
-        ) {
-            $query .= ' where ';
-        }
-
-        if ($_POST['pesquisa'] != '') {
-
-            $aux = explode(' ', $_POST['pesquisa']);
-            foreach ($aux as $palavra) {
-                $query .= 'Postagem_do_animal.nome_animal like \'%' . (string) $palavra . '%\' or
-                Postagem_do_animal.descricao like\'%'
-                    . (string) $palavra .
-                    '%\' or ';
-            }
-
-            $query = substr($query, 0, -3);
-        }
-        // dd($r->cidade!='Selecione');
-        if ($_POST['cidade'] != "cidade" && $_POST['pesquisa'] != '') {
-            $query .= ' and ';
-        }
+    //     // dd(($_POST));
 
 
+    //     $query = 'SELECT * FROM Postagem_do_animal
+    //             INNER JOIN Porte ON Postagem_do_animal.cod_porte = Porte.cod_porte
+    //             INNER JOIN Usuario on Usuario.cod_usuario = Postagem_do_animal.cod_usuario_postagem
+    //             inner join Cidade on Cidade.cod_cidade = Usuario.cod_cidade
+    //             ';
 
-        if ($_POST['cidade'] != "cidade") {
-            $query .= 'Cidade.cod_cidade = ' . $_POST['cidade'];
-        }
+    //     //ver se tem algo setado para colocar o where
+    //     if (
+    //         $_POST['pesquisa'] != ''          ||
+    //         $_POST['cidade'] != "Selecione"   ||
+    //         $_POST['especie'] != "Selecione"  ||
+    //         isset($_POST['pequeno']) ||
+    //         isset($_POST['medio']) ||
+    //         isset($_POST['grande']) ||
+    //         isset($_POST['0-1']) ||
+    //         isset($_POST['1-3']) ||
+    //         isset($_POST['3+'])
 
-        if (($_POST['cidade'] != "cidade" || $r->pesquisa != '') && $_POST['especie'] != "Selecione") {
-            $query .= ' and  ';
-        }
+    //     ) {
+    //         $query .= ' where ';
+    //     }
 
+    //     if ($_POST['pesquisa'] != '') {
 
-        if ($_POST['especie'] != "Selecione") {
-            $query .= 'cod_especie = ' . $_POST['especie'];
-        }
-        if (($_POST['cidade'] != "cidade" ||
-                $_POST['especie'] != "Selecione" ||
-                $_POST['pesquisa'] != '')
-            && ((isset($_POST['pequeno']) ||
-                isset($_POST['medio']) ||
-                isset($_POST['grande'])))
+    //         $aux = explode(' ', $_POST['pesquisa']);
+    //         foreach ($aux as $palavra) {
+    //             $query .= 'Postagem_do_animal.nome_animal like \'%' . (string) $palavra . '%\' or
+    //             Postagem_do_animal.descricao like\'%'
+    //                 . (string) $palavra .
+    //                 '%\' or ';
+    //         }
 
-        ) {
-
-            // dd($_POST['cidade']=="Selecione" );
-            // dd($_POST['especie']=="Selecione" );
-            // dd($_POST['pesquisa']!='');
-
-            //  dd($_POST['cidade']!="Selecione" ||
-            //  $_POST['especie']!="Selecione" ||
-            //  $_POST['pesquisa']!='' );
-            $query .= " and   ";
-        }
-        //
-
-        if ((isset($_POST['pequeno']) ||
-            isset($_POST['medio']) ||
-            isset($_POST['grande']))) {
-            $query .= " ( ";
-        }
-
-
-        if (isset($_POST['pequeno'])) {
-            $query .= "Postagem_do_animal.cod_porte = 1 or";
-        }
-        if (isset($_POST['medio'])) {
-            $query .= " Postagem_do_animal.cod_porte = 2 or";
-        }
-        if (isset($_POST['grande'])) {
-            $query .= " Postagem_do_animal.cod_porte = 3 or";
-        }
+    //         $query = substr($query, 0, -3);
+    //     }
+    //     // dd($r->cidade!='Selecione');
+    //     if ($_POST['cidade'] != "cidade" && $_POST['pesquisa'] != '') {
+    //         $query .= ' and ';
+    //     }
 
 
 
-        if (isset($_POST['pequeno']) || isset($_POST['medio']) || isset($_POST['grande'])) {
-            $query = substr($query, 0, -3);
-            $query .= " )";
-        }
+    //     if ($_POST['cidade'] != "cidade") {
+    //         $query .= 'Cidade.cod_cidade = ' . $_POST['cidade'];
+    //     }
+
+    //     if (($_POST['cidade'] != "cidade" || $r->pesquisa != '') && $_POST['especie'] != "Selecione") {
+    //         $query .= ' and  ';
+    //     }
 
 
-        //calculo datas
-        $hoje = '' . date('Y') . '-' . date('m') . '-' . date('d');
+    //     if ($_POST['especie'] != "Selecione") {
+    //         $query .= 'cod_especie = ' . $_POST['especie'];
+    //     }
+    //     if (($_POST['cidade'] != "cidade" ||
+    //             $_POST['especie'] != "Selecione" ||
+    //             $_POST['pesquisa'] != '')
+    //         && ((isset($_POST['pequeno']) ||
+    //             isset($_POST['medio']) ||
+    //             isset($_POST['grande'])))
 
-        $umAnoAntes = '' . (date('Y') - 1) . '-' . date('m') . '-' . date('d');
-        $tresAnosAntes = '' . (date('Y') - 3) . '-' . date('m') . '-' . date('d');
-        // dd($_POST);
+    //     ) {
 
-        if (
-            $_POST['pesquisa'] != ''          ||
-            $_POST['cidade'] != "cidade"   ||
-            $_POST['especie'] != "Selecione"  ||
-            isset($_POST['pequeno']) ||
-            isset($_POST['medio']) ||
-            isset($_POST['grande'])
-            // && (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))
-        ) {
-            if ((isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))) {
-                $query .= '  and  ';
-            }
-        }
-        if (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+'])) {
-            $query .= ' (  ';
-        }
-        if (isset($_POST['0-1'])) {
-            $query .= '   nascimento >= \'' . $umAnoAntes . '\' AND nascimento <= \'' . $hoje . '\'';
-        }
+    //         // dd($_POST['cidade']=="Selecione" );
+    //         // dd($_POST['especie']=="Selecione" );
+    //         // dd($_POST['pesquisa']!='');
 
+    //         //  dd($_POST['cidade']!="Selecione" ||
+    //         //  $_POST['especie']!="Selecione" ||
+    //         //  $_POST['pesquisa']!='' );
+    //         $query .= " and   ";
+    //     }
+    //     //
 
-        if (isset($_POST['1-3'])) {
-            if (isset($_POST['0-1'])) {
-                $query .= ' or ';
-            }
-            $query .= ' nascimento >= \'' . $tresAnosAntes . '\' AND nascimento <= \'' . $umAnoAntes . '\'';
-        }
-        if (isset($_POST['3+'])) {
-            if (isset($_POST['0-1']) || isset($_POST['1-3'])) {
-                $query .= ' or ';
-            }
-            $query .= '  nascimento <= \'' . $tresAnosAntes . '\'';
-        }
-
-        if (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+'])) {
-            $query .= ' )  ';
-        }
-
-        // dd($query);
-        // >skip(($pagina-1 )*10)->take(10)
-        $aux = $query;
-        $query .= "  LIMIT 10 OFFSET " . (($pagina - 1) * 10);
-        $postagens = \DB::select($query);
-
-        $query = $aux;
+    //     if ((isset($_POST['pequeno']) ||
+    //         isset($_POST['medio']) ||
+    //         isset($_POST['grande']))) {
+    //         $query .= " ( ";
+    //     }
 
 
-        $estados = Estado::all()->sortBy('nome_estado');
-        $cidades = Cidade::all()->sortBy('nome_cidade');
-        //  dd($cidades);
-        $especies = Especie::orderBy('nome_especie')->get();
-        // dd('das');
-
-        $pesquisa = true;
-        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa', 'query'));
-    }
+    //     if (isset($_POST['pequeno'])) {
+    //         $query .= "Postagem_do_animal.cod_porte = 1 or";
+    //     }
+    //     if (isset($_POST['medio'])) {
+    //         $query .= " Postagem_do_animal.cod_porte = 2 or";
+    //     }
+    //     if (isset($_POST['grande'])) {
+    //         $query .= " Postagem_do_animal.cod_porte = 3 or";
+    //     }
 
 
 
+    //     if (isset($_POST['pequeno']) || isset($_POST['medio']) || isset($_POST['grande'])) {
+    //         $query = substr($query, 0, -3);
+    //         $query .= " )";
+    //     }
+
+
+    //     //calculo datas
+    //     $hoje = '' . date('Y') . '-' . date('m') . '-' . date('d');
+
+    //     $umAnoAntes = '' . (date('Y') - 1) . '-' . date('m') . '-' . date('d');
+    //     $tresAnosAntes = '' . (date('Y') - 3) . '-' . date('m') . '-' . date('d');
+    //     // dd($_POST);
+
+    //     if (
+    //         $_POST['pesquisa'] != ''          ||
+    //         $_POST['cidade'] != "cidade"   ||
+    //         $_POST['especie'] != "Selecione"  ||
+    //         isset($_POST['pequeno']) ||
+    //         isset($_POST['medio']) ||
+    //         isset($_POST['grande'])
+    //         // && (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))
+    //     ) {
+    //         if ((isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+']))) {
+    //             $query .= '  and  ';
+    //         }
+    //     }
+    //     if (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+'])) {
+    //         $query .= ' (  ';
+    //     }
+    //     if (isset($_POST['0-1'])) {
+    //         $query .= '   nascimento >= \'' . $umAnoAntes . '\' AND nascimento <= \'' . $hoje . '\'';
+    //     }
+
+
+    //     if (isset($_POST['1-3'])) {
+    //         if (isset($_POST['0-1'])) {
+    //             $query .= ' or ';
+    //         }
+    //         $query .= ' nascimento >= \'' . $tresAnosAntes . '\' AND nascimento <= \'' . $umAnoAntes . '\'';
+    //     }
+    //     if (isset($_POST['3+'])) {
+    //         if (isset($_POST['0-1']) || isset($_POST['1-3'])) {
+    //             $query .= ' or ';
+    //         }
+    //         $query .= '  nascimento <= \'' . $tresAnosAntes . '\'';
+    //     }
+
+    //     if (isset($_POST['0-1']) || isset($_POST['1-3']) || isset($_POST['3+'])) {
+    //         $query .= ' )  ';
+    //     }
+
+    //     // dd($query);
+    //     // >skip(($pagina-1 )*10)->take(10)
+    //     $aux = $query;
+    //     $query .= "  LIMIT 10 OFFSET " . (($pagina - 1) * 10);
+    //     $postagens = \DB::select($query);
+
+    //     $query = $aux;
+
+
+    //     $estados = Estado::all()->sortBy('nome_estado');
+    //     $cidades = Cidade::all()->sortBy('nome_cidade');
+    //     //  dd($cidades);
+    //     $especies = Especie::orderBy('nome_especie')->get();
+    //     // dd('das');
+    //     dd($numPaginas);
+    //     $primeira = 1;
+    //     $prox = $pagina+1;
+    //     $ant = $pagina-1;
+    //     $ultima = $numPaginas;
+
+    //     $pesquisa = true;
+    //     return view('listaAnimais', compact('prox','primeira','ant','ultima', 'postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa', 'query'));
+    // }
 
 
     public function listaFiltro(Request $r, $pagina)
@@ -444,11 +455,17 @@ class ListaController extends Controller
         // dd($query);
         // >skip(($pagina-1 )*10)->take(10)
         $postagens = \DB::select($query);
-
-        $numPaginas = count($postagens)/10;
+        $numPaginas=0;
+        foreach ($postagens as $postagem){
+            if($postagem->listagem_postagem == 'sim'){
+                $numPaginas++;
+            }
+        }
+        $numPaginas = $numPaginas/10;
         $numPaginas=intval($numPaginas)+1;
         $query .= "  LIMIT 10 OFFSET " . (($pagina - 1) * 10);
         $postagens = \DB::select($query);
+        // dd($numPaginas);
 
         // $numPaginas = count($postagens)/10;
         // if ($pagina > $numPaginas) {
@@ -471,39 +488,53 @@ class ListaController extends Controller
         // dd('das');
 
         $pesquisa = true;
-        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa'));
+
+        $pesquisa = true;
+        $primeira = 1;
+        $prox = $pagina+1;
+        $ant = $pagina-1;
+        $ultima = $numPaginas;
+
+        // dd($prox);
+        return view('listaAnimais', compact('prox','primeira','ant','ultima', 'postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa', 'query'));
+        // return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa'));
 
 
 
         //============================
-        $numPostagens = \DB::table('Postagem_do_animal')
-            ->count();
+        // $numPostagens = \DB::table('Postagem_do_animal')
+        //     ->count();
 
-        $numPaginas = intval($numPostagens / 10) + 1;
+        // $numPaginas = intval($numPostagens / 10) + 1;
 
-        if ($pagina > $numPaginas) {
-            return redirect("lista/" . $numPaginas);
-        }
-        if ($pagina < 1) {
-            return redirect("lista/1");
-        }
+        // if ($pagina > $numPaginas) {
+        //     return redirect("lista/" . $numPaginas);
+        // }
+        // if ($pagina < 1) {
+        //     return redirect("lista/1");
+        // }
 
-        // dd('bhjbjk,.');
+        // // dd('bhjbjk,.');
+        // // $query = $r->Query;
+
+        // $query .= "  LIMIT 10 OFFSET " . (($pagina - 1) * 10);
+        // $postagens = \DB::select($query);
+
+
         // $query = $r->Query;
+        // $estados = Estado::all()->sortBy('nome_estado');
+        // $cidades = Cidade::all()->sortBy('nome_cidade');
+        // //  dd($cidades);
+        // $especies = Especie::orderBy('cod_especie')->get();
 
-        $query .= "  LIMIT 10 OFFSET " . (($pagina - 1) * 10);
-        $postagens = \DB::select($query);
+        // $pesquisa = true;
+        // $primeira = 1;
+        // $prox = $pagina+1;
+        // $ant = $pagina-1;
+        // $ultima = $numPaginas;
 
-
-        $query = $r->Query;
-        $estados = Estado::all()->sortBy('nome_estado');
-        $cidades = Cidade::all()->sortBy('nome_cidade');
-        //  dd($cidades);
-        $especies = Especie::orderBy('cod_especie')->get();
-
-        $pesquisa = true;
-
-        return view('listaAnimais', compact('postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa', 'query'));
+        // dd($prox);
+        // return view('listaAnimais', compact('prox','primeira','ant','ultima', 'postagens', 'cidades', 'estados', 'especies', 'pagina', 'numPaginas', 'pesquisa', 'query'));
     }
 
     public static function buscaLocal($cod)

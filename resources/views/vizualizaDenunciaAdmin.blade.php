@@ -1,4 +1,6 @@
 @php
+use App\Http\Controllers\PostagemController;
+// use \app\Http\Controllers\ListaController;
     // dd($denunciasDP);
 @endphp
 @extends('template')
@@ -95,10 +97,11 @@ $i=0;$j=0;
           <div class="col">
             @php
                 // dd($denuncia);
+                // getDescricaoAnimal($cod_postagem)
             @endphp
             <div>
             <b>Descrição:</b>
-              {{$denuncia->descricao}}
+              {{PostagemController::getDescricaoAnimal($denuncia->cod_postagem_denunciada)}}
             </div>
             <div>
                 @if($denuncia->sexo=='femea')

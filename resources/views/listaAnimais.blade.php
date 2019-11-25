@@ -3,13 +3,15 @@
 //  dd($postagens==null);
 
 $url =explode ( '/' ,$_SERVER["REQUEST_URI"]) ;
-if(isset($url[3])){
 
-    $primeira = 'lista_filtro/1/'.$url[3];
-    $prox = 'lista_filtro/'.($pagina+1).'/'.$url[3];
-    $ant = 'lista_filtro/'.($pagina-1).'/'.$url[3];
-    $ultima = 'lista_filtro/'.$numPaginas.'/'.$url[3];
-}
+//dd($_GET);
+// if(isset($url[3])){
+
+//     $primeira = 'lista_filtro/1/'.$url[3];
+//     $prox = 'lista_filtro/'.($pagina+1).'/'.$url[3];
+//     $ant = 'lista_filtro/'.($pagina-1).'/'.$url[3];
+//     $ultima = 'lista_filtro/'.$numPaginas.'/'.$url[3];
+// }
 
 // dd(intval($numPaginas)+1);
 // if ($pagina > $numPaginas) {
@@ -18,7 +20,7 @@ if(isset($url[3])){
 // if ($pagina < 1) {
 //     return redirect($primeira);
 // }
-
+// dd($ant);
 
 use \app\Http\Controllers\ListaController;
 
@@ -87,7 +89,7 @@ use \app\Http\Controllers\ListaController;
    <div class="card-body">
 
 
-<form action="/lista_filtro/1/" method="GET">
+<form action="{{route('listaFiltro', ['pagina'=>1])}}" method="GET">
     @csrf
     {{-- <div class="col"> --}}
     {{-- <div class="input-group-prepend"> --}}
@@ -304,10 +306,10 @@ use \app\Http\Controllers\ListaController;
     <div class="row">
 
         @if ($pagina != 1)
-            <a style="margin-right:1em" href = "{{ url('/')}}/{{$primeira}} ">
+            <a style="margin-right:1em" href = "{{ route('listaFiltro', ['pagina' => $primeira]+ $_GET)}} ">
                 <button class="btn btn-sm"> Primeira </button>
             </a>
-            <a style="margin-right:1em" href = "{{url('/')}}/{{$ant}}">
+            <a style="margin-right:1em" href = "{{ route('listaFiltro', ['pagina' => $ant]+ $_GET)}}">
                 <button class="btn btn-sm"> < </button>
             </a>
 
@@ -328,10 +330,14 @@ use \app\Http\Controllers\ListaController;
                 <button class="btn btn-sm" type="submit"> > </button>
                 {{-- <input type="hidden" name="Query" value="{{$query}}">
             </form> --}}
-            <a style="margin-right:1em" href = "{{ url('/')}}/{{$prox}}">
+
+            @php
+                
+            @endphp
+            <a style="margin-right:1em" href = "{{ route('listaFiltro', ['pagina' => $prox]+ $_GET)}}">
                 <button class="btn btn-sm"> > </button>
             </a>
-            <a style="margin-right:1em" href = "{{ url('/')}}/{{$ultima}}">
+            <a style="margin-right:1em" href = "{{ route('listaFiltro', ['pagina' => $ultima]+ $_GET)}}">
                 <button class="btn btn-sm"> Ultima </button>
             {{-- </a>
             <a style="margin-left:1em" href="{{url("lista/".$numPaginas)}}">
